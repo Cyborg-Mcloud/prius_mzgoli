@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+		xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.designge.priusdriver"
+	    versionCode="15" 
+        version   = "1.0.1"
+		package="com.designge.priusdriver"
+		>
+    <name>Prius Driver</name>
+	<icon src="taxi.png" />
+
+    <platform name="android">
+        <preference name="android-minSdkVersion" value="18" />
+        <allow-intent href="market:*" />
+    </platform>
+
+	<access origin="*" />
+<allow-intent href="*" />
+<allow-navigation href="*" />
+
+<platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+	<preference name="target-device" value="handset" /> 
+
+	<preference name="phonegap-version" value="cli-5.2.0" /> 
+<!--	<preference name="orientation" value="landscape" />-->
+	<preference name="orientation" value="portrait" />
+
+	<preference name="webviewbounce" value="false" />  
+	<preference name="DisallowOverscroll" value="true" />
+	<preference name="fullscreen" value="true" />
+	<preference name="keepRunning" value="true" />
+	<preference name="exit-on-suspend" value="false" />
+    <description>
+     Prius Taxi Driver App 
+    </description>
+	
+
+    <author href="http://design.ge" email="uabashidze@gmail.com">
+        Cyborg-Mcloud
+    </author>
+
+ 
+    <!--<preference name="loglevel" value="DEBUG" />-->
+    <!--
+      <preference name="splashscreen" value="resourceName" />
+      <preference name="backgroundColor" value="0xFFF" />
+      <preference name="loadUrlTimeoutValue" value="20000" />
+      <preference name="InAppBrowserStorageEnabled" value="true" />
+      <preference name="disallowOverscroll" value="true" />
+    -->
+
+  
+    <!-- Deprecated plugins element. Remove in 3.0 -->
+    <plugins>
+
+    </plugins>
+	<feature name="http://api.phonegap.com/1.0/geolocation"/>
+	<feature name="http://api.phonegap.com/1.0/device" />
+
+	<feature name="http://api.phonegap.com/1.0/network"/>
+
+<!--<feature name="http://api.phonegap.com/1.0/file"/>
+<feature name="http://api.phonegap.com/1.0/filetransfer"/>-->
+<!--	<feature name="FileTransfer" value="org.apache.cordova.FileTransfer" />-->
+
+	<feature name="App">
+	  <param name="android-package" value="com.designge.locage"/>
+	</feature>
+	<!--
+<feature name="NetworkStatus">
+    <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    <param name="ios-package" value="CDVConnection" />
+</feature>
+
+<feature name="Geolocation">
+    <param name="android-package" value="org.apache.cordova.geolocation" />
+    <param name="ios-package" value="CDVLocation" />
+</feature>
+
+-->
+
+<!--	<feature name="http://api.phonegap.com/1.0/file" />-->
+
+
+<gap:plugin name="cordova-plugin-whitelist" source="npm" />
+	<gap:plugin name="com.simplec.plugins.powermanagement" />
+	<gap:plugin name="org.apache.cordova.geolocation" />
+	<gap:plugin name="org.apache.cordova.file" />
+	<gap:plugin name="org.apache.cordova.network-information" />
+	<gap:plugin name="org.apache.cordova.file-transfer"  />
+	
+	
+<!--
+	<gap:platform name="ios" />
+	<gap:platform name="android" />
+	<gap:platform name="winphone" />-->
+
+
+
+<preference name="Orientation" value="portrait" />
+
+</widget>

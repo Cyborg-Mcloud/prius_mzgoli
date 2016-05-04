@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Security-Policy" content="img-src * 'self' data:; default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+  <head>
+
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Prius Taxi Driver</title>
+
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="io.js"></script>
+<script type="text/javascript" charset="utf-8" src="func.js"></script>
+	
+
+<script type="text/javascript" charset="utf-8">
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+var myid=0;
+
+var wlon=44.7689831;
+var wlat=41.7089554;
+var MyUser="nouser";
+var MyPass="nopass";
+var MyZoom=17;
+
+var MyLat;
+var MyLong;
+var MyAlt;
+var MyHead;
+var MySpeed;
+var MyAcc;
+var started;
+started=0;
+
+function onBackKeyDown() 
+	{
+	if (curwindow==1)
+		{
+		show_map();
+		}
+	}
+
+function onMenuDown() 
+	{
+	if (curwindow==0)
+		{
+		show_settings();
+		}
+	}
+
+
+function onSearchDown() 
+	{
+	if (myself==0)
+		{
+		setme();
+		}
+	}
+
+function onVolumeDown()
+	{
+	zoomme(-1);
+	}
+
+function onVolumeUp()
+	{
+	zoomme(1);
+	}
+
+var dataex=0;
+
+var xtile;
+var ytile;
+
+var mousex;
+var mousey;
+var omousex;
+var omousey;
+	
+var sx;
+var sy;
+
+var canacX;
+var canacY;
+var inter='none';
+
+var inpause=0;
+
+sx=getscreenw();
+sy=getscreenh();
+var myself=0;
+
+
+var gamehttp;
+if (window.XMLHttpRequest) {gamehttp=new XMLHttpRequest();}
+else if (window.ActiveXObject) {gamehttp=new ActiveXObject('Microsoft.XMLHTTP');}
+else {alert('Your browser does not support XMLHTTP!');}
+gamehttp.onreadystatechange=update_data;
+
+
+var userids = new Array();
+var usernames = new Array();
+var userlongs = new Array();
+var userlats = new Array();
+var useralts = new Array();
+var userspeeds = new Array();
+var userheads = new Array();
+var userlasts = new Array();
+
+
+var cache_ignore=0;
+var cache_ignore_wifi=1;
+
+
+var cur_down_i=0;
+var cur_down_ii=0;
+var down_complete=1;
+var check_complete=1;
+var file_downing=0;
+var LT_finished=0;
+var watchID = null;
+// ------------------------------
+function onDeviceReady() 
+	{
+
+	console.log("device ready, checking connection");
+	checkConnection();
+
+	document.addEventListener("pause", onPause, false);
+	//document.addEventListener("backbutton", onBackKeyDown, false);
+	//document.addEventListener("menubutton", onMenuDown, false);
+	//document.addEventListener("searchbutton", onSearchDown, false);
+	document.addEventListener("volumedownbutton", onVolumeDown, false);
+	document.addEventListener("volumeupbutton", onVolumeUp, false);
+
+	console.log("device ready, getting position");
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true});
+	var opts = { timeout: 30000, enableHighAccuracy: true};
+	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
+	document.addEventListener("resume", onResume, false);
+	
+	console.log("device ready, dealing with record file");
+	
+	checkIfFileExists("locdata.txt");
+
+	if(dataex==1)
+		{
+		ReadData();
+		}
+	
+	if (dataex==0 || myid==0)	
+		{
+		
+		myid=Math.floor(Math.random()*100000000);
+		
+		WriteData();
+		}	
+
+
+
+	if (started==0)	
+		{
+		Start();
+		}
+	setmypos();
+	}
+// ------------------------
+
+function MainProg()
+	{
+	console.log("main prog");
+	if (started==1)
+		{	
+		UpData();
+		console.log("up data");
+		if (myself==1 && inpause==0)
+			{
+			console.log("myself=1 and inpause=0, setting wlongebi");
+			wlon=MyLong;
+			wlat=MyLat;
+			setmypos();
+			}
+			
+
+		setTimeout("MainProg();",500);
+
+		}
+	}
+
+
+function update_data()
+	{		
+	if(gamehttp.readyState == 4)
+		{
+		mr=gamehttp.responseText;
+		if (mr!="")
+			{
+			console.log("data received from server: "+mr);
+			if (mr=="register")		
+				{
+				//alert("Please Register Your User at\n\r http://design.ge/geotaxi/");
+			//	started=0;
+			//	document.getElementById('mainb').innerHTML="START";
+				Start();
+				//alert("please REGISTER at website: www.design.ge/mytaxi");
+				}
+			else
+				{
+				users.length=0;
+				a=mr.split("|");
+				for (i=0;i<(a.length-1);i++ )
+					{
+					if (a[i]!="")
+						{
+						
+						b=a[i].split(";");
+						
+						var curid=b[0];
+
+						if ( document.getElementById("user_"+curid)==null)
+							{
+							document.getElementById("users").innerHTML+="<div id='user_"+curid+"'  style='position:absolute; left:0px; top:0px; color:red; font-size:12px; font-weight:bold;'><div style='position:absolute; left:-16px; top:-16px; width:32px; height:32px;'><img src='taxizm.png'></div></div>"; //&nbsp;&nbsp;"+b[1]+"
+							}
+						userids[i]=curid;
+						usernames[i]=b[1];
+						userlats[i]=parseFloat(b[2]);
+						userlongs[i]=parseFloat(b[3]);
+						useralts[i]=parseFloat(b[4]);
+						userspeeds[i]=parseFloat(b[5]);
+						userheads[i]=parseFloat(b[6]);
+						userlasts[i]=parseInt(b[7]);
+						}
+					}
+				var tdata=a[a.length-1];
+
+				if (inpause==0)	{DrawUsers();}
+
+
+				}
+			}
+		}
+	}
+
+function UpData()
+	{
+
+	if (MyUser!="nouser")
+		{    
+		url="http://design.ge/geotaxi/taxi.php?uname="+MyUser+"&pass="+MyPass+"&lat="+MyLat+"&long="+MyLong+"&alt="+MyAlt+"&head="+MyHead+"&speed="+MySpeed+"&passive="+inpause;		
+		}
+	else
+		{
+		url="http://design.ge/geotaxi/taxi.php?passive="+inpause;
+		}
+	console.log("upload: "+url);
+//	document.getElementById('erorebi').innerHTML="uname="+MyUser+"&pass="+MyPass+"&lat="+MyLat+"&long="+MyLong+"&alt="+MyAlt+"&head="+MyHead+"&speed="+MySpeed;
+	gamehttp.open('GET',url,true);
+	gamehttp.send(null);
+	
+	
+	}
+
+function Start()
+	{
+	console.log("Start / END");
+	if (started==0)
+		{started=1;  MainProg();}  // document.getElementById('mainb').innerHTML="STOP";
+	else
+		{started=0;} //  document.getElementById('mainb').innerHTML="START";
+
+	}
+
+function onPause()
+	{
+		console.log("on pause");
+//	if (started==0) 
+		//{
+			started=0;
+	clearWatch();
+	//}
+	WriteData();
+	inpause=1;
+	}
+
+function onResume() 
+	{
+	console.log("on resume");
+	inpause=0;
+	if (started==0)
+		{
+		checkConnection();
+	
+		var opts = { timeout: 30000, enableHighAccuracy: true};
+		watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
+	
+		if (MyUser!="nouser")	{Start();}
+		}
+
+	//checkIfFileExists("locdata.txt");
+	//if (dataex==0)
+	//	{WriteData();}	
+
+	//ReadData();
+	//setmypos();
+	//DrawUsers();
+	}
+
+
+function onSuccess(position) 
+	{
+console.log("on success");
+		
+	var element = document.getElementById('geopos');
+	element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                            'Longitude: '          + position.coords.longitude             + '<br />';
+                            //'Altitude: '           + position.coords.altitude              + '<br />' +
+                            //'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                            //'Heading: '            + position.coords.heading               + '<br />' +
+                            //'Speed: '              + position.coords.speed                 + '<br />';
+	MyLat=position.coords.latitude ;
+	MyLong=position.coords.longitude ;
+	MyAlt=position.coords.altitude ;
+	MyHead=position.coords.heading ;
+	MySpeed=position.coords.speed ;
+	MyAcc=position.coords.accuracy;
+
+	wlon=MyLong;
+	wlat=MyLat;
+console.log("on succ, sett long");
+
+	if (started==0 && MyUser!="nouser")	{Start();}
+
+	setmypos();
+//	document.getElementById('geopos_short').innerHTML="<table width=100% cellspacing=0><tr><td>Accuracy: "+MyAcc+"</td><td>Altitude: "+MyAlt+"</td></tr></table>";
+	
+    }
+
+   
+ 
+function getpos()
+	{
+		console.log("get pos");
+	document.getElementById('geopos').innerHTML="Finding geolocation...";
+	 navigator.geolocation.getCurrentPosition(onSuccess, onError);
+	
+	}
+
+
+function onWatchSuccess(position) 
+	{
+
+console.log("on watch success");
+
+	MyLat=position.coords.latitude ;
+	MyLong=position.coords.longitude ;
+	MyAlt=position.coords.altitude ;
+	MyHead=position.coords.heading ;
+	MySpeed=position.coords.speed ;
+	MyAcc=position.coords.accuracy  ;
+	if (inpause==0)
+		{
+		var element = document.getElementById('geopos');
+		element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+							'Longitude: '          + position.coords.longitude             + '<br />';
+//							'Altitude: '           + position.coords.altitude              + '<br />' +
+//							'Accuracy: '           + position.coords.accuracy              + '<br />' +
+//							'Heading: '            + position.coords.heading               + '<br />' +
+//							'Speed: '              + position.coords.speed                 + '<br />';
+	
+		setmypos();	
+		document.getElementById('geopos_short').innerHTML="<table width=100% cellspacing=0><tr><td>Accuracy: "+MyAcc+"</td><td>Altitude: "+MyAlt+"</td></tr></table>";
+	
+		}
+	}
+
+    </script>
+  </head>
+  <style>
+	body {color:white; margin:0px; padding:0px;}
+	a {text-decoration:none; color:white;}
+  </style>
+  <body bgcolor=black>
+  				
+		<!--<div style='width:256px; height:256px; position:relative; position:absolute; left:0px; top:0px; z-index:99;' >
+			<img   id='myimg' style='width:256px; height:256px;'>
+			<div style='position:absolute; left:0px; top:0px; background-color:red; width:7px; height:7px;' id='persona'></div>
+		</div>-->
+
+	<div id='fanjara' style='position:relative; overflow:hidden; width:400px; height:600px;'>
+		
+<div  style='position:fixed; left:0px; top:0px; width:100%; height:50px; background-color:white; z-index:211; ' >
+	<div style='float:left;'><img src='but_info.png'></div>
+	<div id='infodiv' style='float:right; width:250px; border:1px solid red; color:Black;'></div>
+<!--	<div style='float:right;'><img src='but_register.png'></div>-->
+
+
+</div>
+		<!-- MAIN MAP -->
+<div id='charcho' style='position:fixed; left:0px; top:50px; width:365px; height:600px; border:1px solid red; z-index:1;' >
+		<div id='mainw' style='position:absolute; left:0px; top:0px; width:600px; height:600px; ' >
+			<div id='map' style='position:absolute; left:0px; top:0px; width:600px; height:600px; display:block; border:1px solid red;' >
+
+			</div>
+		</div>
+</div>
+		<!-- MOUSE OVER LAYER -->
+		<div id='mouser' style='position:absolute; left:0px;top:50px; width:400px; height:620px; z-index:250; border:1px solid red;' ontouchstart="mdown(event);" ontouchend="mup();"  ontouchmove="getmousecoord(event);">
+		</div>
+
+
+		<!--<div id='profile_div' style='position:absolute; left:0px; top:0px; width:600px; height:600px; z-index:252; background:URL(semitrans.png); visibility:hidden;'>
+			<table width=100% cellspacing=0 cellpadding=0 height=100% border=1>
+				<tr><td onmouseup='hide_profile();' onclick="hide_profile();" colspan=3></td></tr>
+				<tr><td onmouseup='hide_profile();' onclick="hide_profile();"></td>
+				<td>
+					<img src='http://design.ge/geotaxi/taxicar.jpg' width=100px><br>
+					&#4315;&#4304;&#4316;&#4325;&#4304;&#4316;&#4312;&#4321;&#32;&#4315;&#4317;&#4307;&#4308;&#4314;&#4312;: Mercedes<br>
+					მანქანის ფერი: მწვანე<br>
+					მძღოლი: ანდრო შველიძე<br>
+					<a href='Javascript: call_taxi()'>გამოძახება</a>
+				</td>
+				<td onmouseup='hide_profile();' onclick="hide_profile();"></td></tr>
+				<tr><td onmouseup='hide_profile();' onclick="hide_profile();" colspan=3></td></tr>
+				</table>
+		</div>-->
+		
+		<div id="geopos_short" style='width:100%; position:absolute; left:0px; top:50px; z-index:220; background-color:black; filter: alpha(opacity=50);
+			-moz-opacity: 0.5; -khtml-opacity: 0.5;  opacity: 0.5;'>Finding geolocation...</div>
+
+		<!--<a href='Javascript: Start();' id='mainb' style='position:absolute; left:25px; top:25px; background-color:green; color:white; font-weight:bold; width:200px; display:block; padding:5px; z-index:301; text-align:center;' >START</a>-->
+
+
+	
+	
+<a href='Javascript:zoomme(1);' style='position:fixed; bottom:85px; right:5px; margin:5px; z-index:252;'><img src='zoomin.png'></a>
+<a href='Javascript:zoomme(-1);'style='position:fixed; bottom:45px; right:5px; margin:5px; z-index:252;'><img src='zoomout.png'></a>
+<a href='Javascript: setme();' style='position:fixed; bottom:130px; right:5px; margin:5px; z-index:252; ' ><img id='cbut' src='centeroff.png'></a>
+<a href='Javascript: show_settings();' style='position:fixed; top:55px; right:5px; margin:5px; z-index:252;' ><img src='settings.png'></a>
+
+
+
+		<div id="bottom_menu" style='border:1px solid green; width:100%; position:fixed; bottom:0px; left:0px; height:41px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9;'>
+<a href='Javascript: status_change();' id='stat_but' style='border:1px solid gray; padding:5px; display:block;'>დაკავებული ვარ</a>
+		</div>
+
+	</div>
+
+	   			<!--<table width=100% cellpadding=0 cellspacing=0>
+			<tr><Td align=left><a href='Javascript:zoomme(1);' style='float:left; font-size:30px; margin:5px;'><img src='zoomin.png'></a></td>
+			<td align=center><a href='Javascript: setme();' style='margin:5px; ' ><img id='cbut' src='centeroff.png'></a></td>
+			<Td align=center><a href='Javascript: show_settings();' style='margin:5px;'><img src='settings.png'></a></td>
+			<td align=right><a href='Javascript:zoomme(-1);' style='float:right; margin:5px;   '><img src='zoomout.png'></a></td>
+			</table>-->
+
+
+
+
+	<div id='settings_sheet' style='visibility:hidden; position:absolute; left:0px; top:0px; padding:10px;'>
+		<br>
+		<div id='mydiv'></div>
+		<br>
+		<p id="geopos">Finding geolocation...</p>
+
+	<b>Map Type</b><br>
+	<select id='maptype' onChange='changemap();'>
+	<option value='1' >Open Street Map (fast)</option>
+	<option value='2'>Open Cycle Map (slow)</option>
+	<option value='3' selected>Google Sattelite (fast)</option>
+	<option value='4'>Google Hybrid (fast)</option>
+	<option value='5'>Google Terrain (fast)</option>
+	<option value='6'>Google BLACK Strange 1 (very fast)</option>
+	<option value='7'>Google BLACK Strange 2 (fast)</option>
+	<option value='8'>Wiki MAP (slow)</option>
+	<option value='9'>Watercolor Map (very slow)</option>
+	<option value='10'>Toner MAP (slow)</option>
+	</select>
+	<br><br>
+		<div id='erorebi'>Tilebi (zoom:16)</div>
+	
+		
+		<b>Profile Details</b>
+		<table>
+			<tr><td>User:</td><td> <input id='myname' name='myname' value='youuser' size=12></td></tr>
+			<tr><td>Pass:</td><td> <input id='mypass' name='mypass' value='yourpass' size=12></td>
+			<td rowspan=2><a style='' href='Javascript: saveuser();'><img src='save.png'></a></td></tr>
+		</table>
+		<br><br>
+		<input type='checkbox' id='ignor_cache' name='ignor_cache' onchange='cignore();'> Ignore Cache<br>
+		<input type='checkbox' id='ignor_cache_on_wifi' name='ignor_cache_on_wifi' onchange='cignorewifi();' checked> Ignore Cache on WiFi<br>
+
+	</div>
+
+
+<script>
+
+
+function cignore()
+	{
+	if (document.getElementById("ignor_cache").checked==true)
+		{	cache_ignore=1;	}
+	else
+		{	cache_ignore=0;	}
+	}
+
+function cignorewifi()
+	{
+	if (document.getElementById("ignor_cache_on_wifi").checked==true)
+		{	cache_ignore_wifi=1;	}
+	else
+		{	cache_ignore_wifi=0;	}
+	}
+
+function setme()
+	{
+		console.log("setme");
+	if(myself==0)
+		{myself=1; document.getElementById("cbut").src='centeron.png';}
+	else {myself=0;document.getElementById("cbut").src='centeroff.png';}
+
+	}
+
+document.getElementById("maptype").value=1;
+var curmap=1;
+
+function changemap()
+	{
+		console.log("change map");
+	curmap=document.getElementById("maptype").value;
+	oxt=0;oyt=0;
+	setmypos();
+	}
+
+var curwindow=0;
+
+function show_settings()
+	{
+
+	checkConnection();
+
+	curwindow=1;
+	document.getElementById("fanjara").style.visibility="hidden";
+	document.getElementById("settings_sheet").style.visibility="visible";
+	}
+
+
+function show_map()
+	{
+	curwindow=0;
+	document.getElementById("fanjara").style.visibility="visible";
+	document.getElementById("settings_sheet").style.visibility="hidden";
+	}
+
+
+function stopScrolling( touchEvent )
+			{ touchEvent.preventDefault(); }
+
+
+document.body.addEventListener( 'touchmove' , stopScrolling , false );
+var mcl="orange";
+
+
+function DrawUsers()
+	{
+
+	for (i=0;i<userids.length ;i++ )
+		{
+		curid=userids[i];
+
+		var x=long2pixel(userlongs[i], MyZoom);
+		var y=lat2pixel(userlats[i], MyZoom);
+	
+		var difx=Math.floor((x-xtile)*256);
+		var dify=Math.floor((y-ytile)*256);
+		difx=(256*(myw-1)/2)+difx-128;
+		dify=(256*(myh-1)/2)+dify-128;
+		
+		mcl="orange";
+		if (userlasts[i]<300)
+			{mcl="red";}
+		document.getElementById("user_"+curid).style.color=mcl;
+		document.getElementById("user_"+curid).style.left=difx+"px";
+		document.getElementById("user_"+curid).style.top=dify+"px";
+		document.getElementById("user_"+curid).innerHTML="<img src='taxizm.png' width='32px' height='32px' style='position:absolute; left:-16px; top:-16px;'>";//"X: "+difx+" Y: "+dify;
+
+		}
+	}
+
+
+
+function DrawHomePos()
+	{
+	console.log("drawing home pos");
+	var x=long2pixel(MyLong, MyZoom);
+	var y=lat2pixel(MyLat, MyZoom);
+
+	var difx=Math.floor((x-xtile)*256);
+	var dify=Math.floor((y-ytile)*256);
+	difx=(256*(myw-1)/2)+difx-128;
+	dify=(256*(myh-1)/2)+dify-128;
+	
+	document.getElementById("homepos").style.left=(difx-2)+"px";
+	document.getElementById("homepos").style.top=(dify-2)+"px";
+
+	}
+
+
+var but1=0;
+function mdown(event)
+	{
+
+	omousex=event.touches[0].pageX; omousey=event.touches[0].pageY;
+	console.log("mouse down: "+omousex+ " - "+omousey);
+	finx=0; sfiny=0;
+	but1=1;
+
+//	document.getElementById("mainb").innerHTML="X: "+omousex+" Y: "+omousey;
+	}
+
+var biji = new Array();
+biji[2]=2;
+biji[3]=7;
+biji[4]=12;
+biji[5]=25;
+biji[6]=45;
+biji[7]=90;
+biji[8]=200;
+biji[9]=360;
+biji[10]=700;
+biji[11]=1400;
+biji[12]=2900;
+biji[13]=5800;
+biji[14]=11500;
+biji[15]=23500;
+biji[16]=46500;
+biji[17]=93000;
+biji[18]=190000;
+
+var sfinx=0;
+var finy=0;
+function getmousecoord(event)
+	{
+console.log("get mouse coord");
+	if (but1==1)
+		{
+		mousex=event.touches[0].pageX; 
+		mousey=event.touches[0].pageY;
+	
+console.log("get mouse coord: "+mousex+" - "+mousey);
+
+		wlon=wlon+((omousex-mousex)/biji[MyZoom]);
+		wlat=wlat-((omousey-mousey)/(biji[MyZoom]*1.3));
+		omousex=mousex;
+		omousey=mousey;
+
+		//
+		setmypos();
+		DrawUsers();
+		}
+		
+	}
+
+function mup()
+	{
+		console.log("mouse up");
+	but1=0;
+	sfinx=0; sfiny=0;
+	check_user_click();
+	//document.getElementById("mainb").innerHTML="Up";
+	}
+
+
+var myw=Math.floor(sx/256)+2;
+var myh=Math.floor(sy/256)+2;
+
+if (myw/2==Math.floor(myw/2))
+	{myw++;}
+
+if (myh/2==Math.floor(myh/2))
+	{myh++;}
+
+
+
+document.getElementById("fanjara").style.width=sx+"px";
+document.getElementById("fanjara").style.height=sy+"px";
+
+document.getElementById("mouser").style.width=sx+"px";
+document.getElementById("mouser").style.height=sy+"px";
+
+
+var mywpx=(myw-1)*256;
+var myhpx=(myh-1)*256;
+
+document.getElementById("mainw").style.width=mywpx+"px";
+document.getElementById("mainw").style.height=myhpx+"px";
+console.log(" x: "+mywpx+ " Y: "+myhpx);
+document.getElementById("map").style.width=mywpx+"px";
+document.getElementById("map").style.height=myhpx+"px";
+document.getElementById("mainw").style.left=(-(mywpx-(sx))/2)+"px";
+document.getElementById("mainw").style.top=(-(myhpx-(sy))/2)+"px";
+
+canacX=(-(mywpx-(sx))/2);
+canacY=(-(myhpx-(sy))/2);
+
+console.log(" x: "+(-(mywpx-(sx))/2)+ " Y: "+(-(myhpx-(sy))/2));
+//document.getElementById("mainb").style.left=((sx-200)/2)+"px";
+
+
+function zoomme(sait)
+	{
+		console.log("zoome "+sait)
+	var cant=0;
+	if (sait>0 && MyZoom==18)
+		{cant=1;}
+	else if (sait<0 && MyZoom==2)
+		{cant=1;}
+	if (cant==0)
+		{	
+		MyZoom=Math.floor(MyZoom)+sait;
+	//	document.getElementById("mainb").innerHTML="Zoom: "+MyZoom;
+		setmypos();
+		DrawUsers();
+		}
+	}
+
+
+
+function saveuser()
+	{
+
+	MyUser=document.getElementById("myname").value;
+	MyPass=document.getElementById("mypass").value;
+
+	WriteData(); 
+	alert("user saved: "+MyUser);
+	if(started==0)
+		{
+		Start();
+		}
+	}
+
+
+var curx;
+var cury;
+var mymap=document.getElementById("map");
+mymap.innerHTML="";
+mymap.innerHTML+="<div id='users' style='position:absolute; left:0px; top:0px; border:1px solid red; z-index:101;'><div id='homepos' style='position:absolute; left:0px; top:0px; border:1px solid red; background-color:green; width:7px; height:7px; z-index:99;'></div></div>";
+
+for (i=0;i<myw ; i++)
+	{
+	curx=i-(myw-1)/2;
+	for (ii=0;ii<myh ;ii++ )
+		{
+		cury=ii-(myh-1)/2;
+		mymap.innerHTML+="<img id='img_"+i+"-"+ii+"' style='position:absolute; left:"+(i*256-128)+"px; top:"+(ii*256-128)+"px; width:256px; height:256px;'>";
+		}
+	}
+//mymap.innerHTML+="				<div style='position:absolute; background-color:red; width:5px; height:5px; left:300px; top:300px;'></div>";
+var oxt=0;
+var oyt=0;
+var tilef=0;
+
+var kartX;
+var kartY;
+
+function setmypos()
+	{
+ 
+	console.log("set my pos, zoom: "+MyZoom);
+
+	if (MyZoom>18 || MyZoom<1)
+		{
+			MyZoom=17;
+		}
+
+	var lon_deg=wlon; 
+	var lat_deg=wlat; 
+
+	xtile=long2tile(lon_deg, MyZoom);
+	ytile=lat2tile(lat_deg, MyZoom);
+
+	var x=long2pixel(lon_deg, MyZoom);
+	var y=lat2pixel(lat_deg, MyZoom);
+	
+	var difx=128-(x-xtile)*256;
+	var dify=128-(y-ytile)*256;
+	kartX=difx;
+	kartY=dify;
+
+	console.log("mypos: "+lon_deg+" / "+lat_deg+ " = "+difx+" / "+dify);
+
+	document.getElementById("map").style.left=difx+"px";
+	document.getElementById("map").style.top=dify+"px";
+	document.getElementById('geopos_short').innerHTML="X: "+difx+" Y: "+dify;
+	if (xtile!=oxt || oyt!=ytile)
+		{
+		oxt=xtile;
+		oyt=ytile;
+		cur_down_i=0;
+		cur_down_ii=-1;
+		down_complete=1;
+		check_complete=1;
+		file_downing=1;
+		LT_finished=0;
+		loadtiles();	
+		DrawHomePos();
+		}
+	document.getElementById("infodiv").innerHTML=wlon+ " / "+wlat;
+	}
+
+function check_user_click()
+	{
+	console.log("checking user click");
+	console.log((omousex-canacX-kartX) + " and " + (omousey-canacY-kartY));
+	for (i=0;i<userids.length ;i++ )
+		{
+		curid=userids[i];
+
+		var x=long2pixel(userlongs[i], MyZoom);
+		var y=lat2pixel(userlats[i], MyZoom);
+	
+		var difx=Math.floor((x-xtile)*256);
+		var dify=Math.floor((y-ytile)*256);
+		difx=(256*(myw-1)/2)+difx-128;
+		dify=(256*(myh-1)/2)+dify-128;
+		if ( (difx-16)<(omousex-canacX-kartX) && (omousex-canacX-kartX)<(difx+16) &&  (dify-16)<(omousey-canacY-kartY) && (omousey-canacY-kartY)<(dify+16) )
+			{
+			show_profile(i);
+			}
+		}
+	}
+
+function hide_profile()
+	{
+	document.getElementById("profile_div").style.visibility="hidden";
+	document.getElementById("mouser").style.visibility="visible";
+	curtaxi=-1;
+	}
+var curtaxi=-1;
+
+function show_profile(tid)
+	{
+	var curtaxi=tid;
+	document.getElementById("profile_div").style.visibility="visible";
+	document.getElementById("mouser").style.visibility="hidden";
+	}
+
+
+
+function loadtiles()
+	{
+	if (down_complete==1 && check_complete==1)
+		{
+		var A;
+
+		if (cur_down_ii>=(myh-1))
+			{
+			cur_down_ii=-1; cur_down_i++;
+			}
+
+		curx=cur_down_i-(myw-1)/2;
+	
+		if (cur_down_i<myw)
+			{
+			cur_down_ii++;
+			
+			cury=cur_down_ii-(myh-1)/2;
+		//	alert("checking: "+curmap+"_"+MyZoom+"_"+(xtile+curx)+"_"+(ytile+cury)+".png");
+			
+			A=(xtile+curx);	if (A<0) {A=0;}
+			mytile=curmap+"/"+MyZoom+"_"+A+"_"+(ytile+cury)+".png";
+
+			tilef=-1;
+			check_complete=0;down_complete=0;
+			checktile3(mytile);
+
+			}
+		else
+			{
+			// cikli dasrulda
+			LT_finished=1;
+			console.log("-------- dasrulda ----------");
+
+			
+			DrawHomePos();
+			}
+		}
+	else if (check_complete==1)
+		{
+		curx=cur_down_i-(myw-1)/2; cury=cur_down_ii-(myh-1)/2;
+		A=(xtile+curx);	if (A<0) {A=0;}
+		mytile=curmap+"/"+MyZoom+"_"+A+"_"+(ytile+cury)+".png";
+
+		//if (tilef==0 || cache_ignore==1 || (cache_ignore_wifi==1 && inter=="Wifi"))
+//			{
+		//	if (file_downing==1)
+		//		{
+				file_downing=0;
+				downtile(curmap, MyZoom, (xtile+curx), (ytile+cury), cur_down_i, cur_down_ii,1);
+				down_complete=1;
+				file_downing=1;
+		//		}
+//			}
+//		else
+//			{
+//			document.getElementById("img_"+cur_down_i+"-"+cur_down_ii).src="file:///storage/emulated/0/mytaxi/maps/"+mytile;
+//			document.getElementById("img_"+cur_down_i+"-"+cur_down_ii).alt=mytile;
+//			down_complete=1;
+//			file_downing=1;
+			
+//			DrawHomePos();
+//			}
+		}
+		
+	if (LT_finished==0)
+		{
+		setTimeout("loadtiles();",10);
+		}
+
+	}
+
+
+function downtile(smap, szoom, A, B, i, ii, retry)
+	{
+	if (A<0)
+		{A=0;}
+	if (B<0)
+		{B=0;}
+
+	if (smap==1)
+		{tilelink="http://tile.openstreetmap.org/"+szoom+"/"+A+"/"+B+".png";			}
+	else if (smap==2)
+		{tilelink="http://tile.opencyclemap.org/cycle/"+szoom+"/"+A+"/"+B+".png";			}
+	else if (smap==3)
+		{tilelink="http://mt3.google.com/vt/lyrs=s&x="+A+"&y="+B+"&z="+szoom;}
+	else if (smap==4)
+		{tilelink="http://mt3.google.com/vt/lyrs=p&x="+A+"&y="+B+"&z="+szoom;}
+	else if (smap==5)
+		{tilelink="http://mt3.google.com/vt/lyrs=t&x="+A+"&y="+B+"&z="+szoom;}
+	else if (smap==6)
+		{tilelink="http://mt3.google.com/vt/lyrs=h&x="+A+"&y="+B+"&z="+szoom;}
+	else if (smap==7)
+		{tilelink="http://mt3.google.com/vt/lyrs=r&x="+A+"&y="+B+"&z="+szoom;}
+	else if (smap==8)
+		{
+		s=A%4+(B%4)*4;
+		tilelink="http://i"+s+".wikimapia.org/?x="+A+"&y="+B+"&zoom="+szoom+"&m=h";
+		}
+	else if (smap==9)
+		{tilelink="http://tile.stamen.com/watercolor/"+szoom+"/"+A+"/"+B+".png";			}
+	else if (smap==10)
+		{tilelink="http://tile.stamen.com/toner/"+szoom+"/"+A+"/"+B+".png";			}	
+	tilename=smap+"/"+szoom+"_"+A+"_"+B+".png";
+
+	document.getElementById("img_"+i+"-"+ii).src=tilelink;
+	console.log("down tile: "+tilelink);
+
+	}
+
+ function fail(error) 
+	{
+    console.log(error.code);
+    }
+</script></body>
+</html>
