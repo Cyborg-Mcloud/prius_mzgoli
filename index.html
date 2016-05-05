@@ -184,7 +184,7 @@ function MainProg()
 			}
 			
 
-		//setTimeout("MainProg();",500);
+		setTimeout("MainProg();",500);
 
 		}
 	}
@@ -421,14 +421,14 @@ console.log("on watch success");
 
 </div>
 		<!-- MAIN MAP -->
-<div id='charcho' style='position:fixed; left:0px; top:50px; width:365px; height:600px; border:2px solid red; z-index:1;' >
-		<div id='mainw' style='position:absolute; left:0px; top:0px; width:600px; height:600px;  border:2px solid red; z-index:2;' >
-			<div id='map' style='position:absolute; left:0px; top:0px; width:600px; height:600px; display:block; border:2px solid green; z-index:3;' >
+<div id='charcho' style='position:fixed; left:0px; top:50px; width:365px; height:600px; z-index:1;' >
+		<div id='mainw' style='position:absolute; left:0px; top:0px; width:600px; height:600px;  z-index:2;' >
+			<div id='map' style='position:absolute; left:0px; top:0px; width:600px; height:600px; display:block; z-index:3;' >
 			
 				<div id='users' style='position:absolute; left:0px; top:0px; border:1px solid blue; z-index:101; '>
 					<div id='homepos' style='position:absolute; left:0px; top:0px; border:1px solid red; background-color:green; width:7px; height:7px; z-index:102;'></div>
-					<div id='call_marker'  style='position:absolute; left:0px; top:0px; color:red; font-size:12px; width:31px; height:50px;  z-index:103; border:1px solid red;'>
-						<div style='position:absolute; left:-16px; top:-50px; width:31px; height:50px; z-index:104; border:1px solid red;'>
+					<div id='call_marker'  style='position:absolute; left:0px; top:0px; color:red; font-size:12px; width:31px; height:50px;  z-index:103;'>
+						<div style='position:absolute; left:-16px; top:-50px; width:31px; height:50px; z-index:104; '>
 						<img src='call_marker.png'>
 						</div>
 					</div>
@@ -438,7 +438,7 @@ console.log("on watch success");
 		</div>
 </div>
 		<!-- MOUSE OVER LAYER -->
-		<div id='mouser' style='position:absolute; left:0px;top:50px; width:400px; height:620px; z-index:250; border:1px solid red;' ontouchstart="mdown(event);" ontouchend="mup();"  ontouchmove="getmousecoord(event);">
+		<div id='mouser' style='position:absolute; left:0px;top:50px; width:400px; height:620px; z-index:250; ' ontouchstart="mdown(event);" ontouchend="mup();"  ontouchmove="getmousecoord(event);">
 		</div>
 
 
@@ -473,14 +473,14 @@ console.log("on watch success");
 
 
 
-		<div id="bottom_menu" style='border:1px solid green; width:100%; position:fixed; bottom:0px; left:0px; height:50px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9;'>
+		<div id="bottom_menu" style='width:100%; position:fixed; bottom:0px; left:0px; height:50px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9;'>
 
 			<div id='no_call_screen'>
-				<a href='Javascript: status_change();' id='stat_but' style='border:1px solid gray; padding:5px; display:block;'>დაკავებული ვარ</a>
+				<a href='Javascript: status_change();' id='stat_but' style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black;'>დაკავებული ვარ</a>
 			</div>
 
 			<div id='new_call_screen' style='background-color:red; width:100%; display:none;'>
-				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block;'>გამოძახების მიღება</a>
+				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black;'>გამოძახების მიღება</a>
 			</div>
 
 		</div>
