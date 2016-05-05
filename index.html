@@ -184,7 +184,7 @@ function MainProg()
 			}
 			
 
-		setTimeout("MainProg();",500);
+		//setTimeout("MainProg();",500);
 
 		}
 	}
@@ -411,7 +411,7 @@ console.log("on watch success");
 			<div style='position:absolute; left:0px; top:0px; background-color:red; width:7px; height:7px;' id='persona'></div>
 		</div>-->
 
-	<div id='fanjara' style='position:relative; overflow:hidden; width:400px; height:600px;'>
+<div id='fanjara' style='position:relative; overflow:hidden; width:400px; height:600px;border:1px solid orange;'>
 		
 <div  style='position:fixed; left:0px; top:0px; width:100%; height:50px; background-color:white; z-index:211; ' >
 	<div style='float:left;'><img src='but_info.png'></div>
@@ -425,7 +425,7 @@ console.log("on watch success");
 		<div id='mainw' style='position:absolute; left:0px; top:0px; width:600px; height:600px; ' >
 			<div id='map' style='position:absolute; left:0px; top:0px; width:600px; height:600px; display:block; border:1px solid red;' >
 			
-				<div id='users' style='position:absolute; left:0px; top:0px; border:1px solid blue; z-index:101; display:none;'>
+				<div id='users' style='position:absolute; left:0px; top:0px; border:1px solid blue; z-index:101; '>
 					<div id='homepos' style='position:absolute; left:0px; top:0px; border:1px solid red; background-color:green; width:7px; height:7px; z-index:102;'></div>
 					<div id='call_marker'  style='position:absolute; left:0px; top:0px; color:red; font-size:12px; width:31px; height:50px;  z-index:103; border:1px solid red;'>
 						<div style='position:absolute; left:-16px; top:-50px; width:31px; height:50px; z-index:104; border:1px solid red;'>
@@ -466,24 +466,24 @@ console.log("on watch success");
 
 	
 	
-<a href='Javascript:zoomme(1);' style='position:fixed; bottom:85px; right:5px; margin:5px; z-index:252;'><img src='zoomin.png'></a>
-<a href='Javascript:zoomme(-1);'style='position:fixed; bottom:45px; right:5px; margin:5px; z-index:252;'><img src='zoomout.png'></a>
-<a href='Javascript: setme();' style='position:fixed; bottom:130px; right:5px; margin:5px; z-index:252; ' ><img id='cbut' src='centeroff.png'></a>
-<a href='Javascript: show_settings();' style='position:fixed; top:55px; right:5px; margin:5px; z-index:252;' ><img src='settings.png'></a>
+<a href='Javascript:zoomme(1);' style='position:fixed; bottom:85px; right:5px; margin:5px; z-index:252;  border:1px solid blue;'><img src='zoomin.png'></a>
+<a href='Javascript:zoomme(-1);'style='position:fixed; bottom:45px; right:5px; margin:5px; z-index:252; border:1px solid blue;'><img src='zoomout.png'></a>
+<a href='Javascript: setme();' style='position:fixed; bottom:130px; right:5px; margin:5px; z-index:252; border:1px solid blue;' ><img id='cbut' src='centeroff.png'></a>
+<a href='Javascript: show_settings();' style='position:fixed; top:55px; right:5px; margin:5px; z-index:252; border:1px solid blue;' ><img src='settings.png'></a>
 
 
 
-<div id="bottom_menu" style='border:1px solid green; width:100%; position:fixed; bottom:0px; left:0px; height:50px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9;'>
+		<div id="bottom_menu" style='border:1px solid green; width:100%; position:fixed; bottom:0px; left:0px; height:50px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9;'>
 
-	<div id='no_call_screen'>
-		<a href='Javascript: status_change();' id='stat_but' style='border:1px solid gray; padding:5px; display:block;'>დაკავებული ვარ</a>
-	</div>
+			<div id='no_call_screen'>
+				<a href='Javascript: status_change();' id='stat_but' style='border:1px solid gray; padding:5px; display:block;'>დაკავებული ვარ</a>
+			</div>
 
-	<div id='new_call_screen' style='background-color:red; width:100%;'>
-		<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block;'>გამოძახების მიღება</a>
-	</div>
+			<div id='new_call_screen' style='background-color:red; width:100%; display:none;'>
+				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block;'>გამოძახების მიღება</a>
+			</div>
 
-</div>
+		</div>
 
 	</div>
 

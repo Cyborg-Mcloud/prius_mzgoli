@@ -95,9 +95,9 @@ function checkIfFileExists(path)
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){fileSystem.root.getDirectory("mydriver/maps/9", {create: true, exclusive: false}, fileExists, fileDoesNotExist); } , getFSFail); 
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){fileSystem.root.getDirectory("mydriver/maps/10", {create: true, exclusive: false}, fileExists, fileDoesNotExist); } , getFSFail); 
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){fileSystem.root.getDirectory("mydriver/maps/dummy.html", {create: true, exclusive: false}, fileExists, fileDoesNotExist); } , getFSFail); 
-//	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){fileSystem.root.getFile("mydriver/"+path, { create: false }, fileExists, fileDoesNotExist);}, getFSFail); 
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){fileSystem.root.getFile("mydriver/"+path, { create: false }, fileExists, fileDoesNotExist);}, getFSFail); 
+//window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){ window.resolveLocalFileSystemURL("file:///storage/emulated/0/mydriver/" + path, fileExists1, fileDoesNotExist1);}, getFSFail); 
 
- window.resolveLocalFileSystemURL("file:///storage/emulated/0/mydriver/" + path, fileExists, fileDoesNotExist);
 
 	}
 
@@ -156,10 +156,12 @@ function notile()
 
 function fileExists(fileEntry)
 	{
-    dataex=1;
+		console.log("aris!");
+	dataex=1;
 	}
 function fileDoesNotExist()
 	{
+		console.log("ar arsebobda");
     dataex=0;
 	}
 function getFSFail(evt)
