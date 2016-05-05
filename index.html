@@ -144,19 +144,19 @@ function onDeviceReady()
 	
 	kc=checkIfFileExists("locdata.txt");
 
-	if(dataex==1)
-		{
-		console.log("reading data");
-		ReadData();
-		}
+//	if(dataex==1)
+//		{
+//		console.log("reading data");
+//		ReadData();
+//		}
 	
-	if (dataex==0 || myid==0)	
-		{
-		console.log("no data found");
-		myid=Math.floor(Math.random()*100000000);
-		
-		WriteData();
-		}	
+//	if (dataex==0 || myid==0)	
+//		{
+//		console.log("no data found");
+//		myid=Math.floor(Math.random()*100000000);
+//		
+//		WriteData();
+//		}	
 
 
 
@@ -411,7 +411,7 @@ console.log("on watch success");
 			<div style='position:absolute; left:0px; top:0px; background-color:red; width:7px; height:7px;' id='persona'></div>
 		</div>-->
 
-<div id='fanjara' style='position:relative; overflow:hidden; width:400px; height:600px;border:1px solid orange;'>
+<div id='fanjara' style='position:relative; overflow:hidden; width:400px; height:600px;border:1px solid orange; z-index:1;'>
 		
 <div  style='position:fixed; left:0px; top:0px; width:100%; height:50px; background-color:white; z-index:211; ' >
 	<div style='float:left;'><img src='but_info.png'></div>
@@ -421,9 +421,9 @@ console.log("on watch success");
 
 </div>
 		<!-- MAIN MAP -->
-<div id='charcho' style='position:fixed; left:0px; top:50px; width:365px; height:600px; border:1px solid red; z-index:1;' >
-		<div id='mainw' style='position:absolute; left:0px; top:0px; width:600px; height:600px; ' >
-			<div id='map' style='position:absolute; left:0px; top:0px; width:600px; height:600px; display:block; border:1px solid red;' >
+<div id='charcho' style='position:fixed; left:0px; top:50px; width:365px; height:600px; border:2px solid red; z-index:1;' >
+		<div id='mainw' style='position:absolute; left:0px; top:0px; width:600px; height:600px;  border:2px solid red;' >
+			<div id='map' style='position:absolute; left:0px; top:0px; width:600px; height:600px; display:block; border:2px solid green;' >
 			
 				<div id='users' style='position:absolute; left:0px; top:0px; border:1px solid blue; z-index:101; '>
 					<div id='homepos' style='position:absolute; left:0px; top:0px; border:1px solid red; background-color:green; width:7px; height:7px; z-index:102;'></div>
