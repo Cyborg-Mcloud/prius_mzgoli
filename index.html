@@ -500,7 +500,7 @@ console.log("on watch success");
 
 			<div id='no_call_screen' style='display:inline;'>
 			<center>
-				<a href='Javascript: status_change();' id='stat_but' style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black; width:150px;'>დაკავებული ვარ</a></center>
+				<a href='Javascript: status_change();'  style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black; width:150px;'><div id='stat_but'>დაკავებული ვარ</a></a></center>
 			</div>
 
 			<div id='new_call_screen' style='background-color:red; width:100%; display:none;'>
@@ -564,6 +564,7 @@ console.log("on watch success");
 
 function status_change()
 {
+	console.log("cur status: "+mystatus);
 	if (mystatus==0)
 		{mystatus=1;
 		document.getElementById("stat_but").innerHTML="განვთავისუფლდი";
@@ -572,7 +573,7 @@ function status_change()
 		{mystatus=0;
 		document.getElementById("stat_but").innerHTML="დაკავებული ვარ";
 		}
-
+	console.log("new status: "+mystatus);
 }
 
 function cignore()
