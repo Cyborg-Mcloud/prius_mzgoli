@@ -203,6 +203,8 @@ var calllat=0;
 var calllong=0;
 var callid=0;
 
+var ertxelmainc=0;
+
 function update_data()
 	{		
 	if(gamehttp.readyState == 4)
@@ -234,11 +236,15 @@ function update_data()
 					calllong=parseFloat(b[2]);	
 					document.getElementById("no_call_screen").style.display="none";
 					document.getElementById("new_call_screen").style.display="inline";
+					ertxelmainc=1;
 					}
 				else
 					{
-					document.getElementById("no_call_screen").style.display="inline";
+if (ertxelmainc==1)
+{	document.getElementById("no_call_screen").style.display="inline";
 					document.getElementById("new_call_screen").style.display="none"";
+}
+				
 					calllong=0;
 					calllat=0;
 					callid=0;
