@@ -175,7 +175,14 @@ function MainProg()
 		{	
 		UpData();
 		console.log("up data");
-		if (myself==1 && inpause==0)
+		if (callid>0 && inpause==0)
+			{
+			console.log("setting to call");
+			wlon=calllong;
+			wlat=calllat;
+			setmypos();
+			}
+		else if (myself==1 && inpause==0)
 			{
 			console.log("myself=1 and inpause=0, setting wlongebi");
 			wlon=MyLong;
@@ -232,6 +239,9 @@ function update_data()
 					{
 					document.getElementById("no_call_screen").style.display="inline";
 					document.getElementById("new_call_screen").style.display="none"";
+					calllong=0;
+					calllat=0;
+					callid=0;
 					}
 				if (inpause==0)	{DrawUsers();}
 
