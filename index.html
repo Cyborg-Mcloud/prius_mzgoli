@@ -142,7 +142,7 @@ function onDeviceReady()
 	
 	console.log("device ready, dealing with record file");
 	
-	checkIfFileExists("locdata.txt");
+	kc=checkIfFileExists("locdata.txt");
 
 	if(dataex==1)
 		{
@@ -152,7 +152,7 @@ function onDeviceReady()
 	
 	if (dataex==0 || myid==0)	
 		{
-		
+		console.log("no data found");
 		myid=Math.floor(Math.random()*100000000);
 		
 		WriteData();
