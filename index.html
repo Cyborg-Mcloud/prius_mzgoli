@@ -146,6 +146,7 @@ function onDeviceReady()
 
 	if(dataex==1)
 		{
+		console.log("reading data");
 		ReadData();
 		}
 	
@@ -223,7 +224,7 @@ function update_data()
 					var curid=b[0];
 					callid=curid;
 					calllat=parseFloat(b[1]);
-					callong=parseFloat(b[2]);	
+					calllong=parseFloat(b[2]);	
 					}
 				if (inpause==0)	{DrawUsers();}
 
@@ -424,7 +425,7 @@ console.log("on watch success");
 		<div id='mainw' style='position:absolute; left:0px; top:0px; width:600px; height:600px; ' >
 			<div id='map' style='position:absolute; left:0px; top:0px; width:600px; height:600px; display:block; border:1px solid red;' >
 			
-				<div id='users' style='position:absolute; left:0px; top:0px; border:1px solid red; z-index:252;'>
+				<div id='users' style='position:absolute; left:0px; top:0px; border:1px solid red; z-index:101;'>
 					<div id='homepos' style='position:absolute; left:0px; top:0px; border:1px solid red; background-color:green; width:7px; height:7px; z-index:99;'></div>
 					<div id='call_marker'  style='position:absolute; left:0px; top:0px; color:red; font-size:12px; font-weight:bold;'>
 						<div style='position:absolute; left:-16px; top:-50px; width:31px; height:50px;'>

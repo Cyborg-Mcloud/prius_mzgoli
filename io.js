@@ -70,6 +70,7 @@ function readAsText(file)
 
 		document.getElementById("myname").value=MyUser;
 		document.getElementById("mypass").value=MyPass;
+		console.log("data read finished");
 		};
 	reader.readAsText(file);
 	}
