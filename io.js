@@ -95,7 +95,10 @@ function checkIfFileExists(path)
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){fileSystem.root.getDirectory("mydriver/maps/9", {create: true, exclusive: false}, fileExists, fileDoesNotExist); } , getFSFail); 
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){fileSystem.root.getDirectory("mydriver/maps/10", {create: true, exclusive: false}, fileExists, fileDoesNotExist); } , getFSFail); 
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){fileSystem.root.getDirectory("mydriver/maps/dummy.html", {create: true, exclusive: false}, fileExists, fileDoesNotExist); } , getFSFail); 
-	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){fileSystem.root.getFile("mydriver/"+path, { create: false }, fileExists, fileDoesNotExist);}, getFSFail); 
+//	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){fileSystem.root.getFile("mydriver/"+path, { create: false }, fileExists, fileDoesNotExist);}, getFSFail); 
+
+ window.resolveLocalFileSystemURL("file:///storage/emulated/0/mydriver/" + path, fileExists, fileDoesNotExist);
+
 	}
 
 
