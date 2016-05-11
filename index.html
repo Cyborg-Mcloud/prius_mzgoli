@@ -561,6 +561,17 @@ console.log("on watch success");
 
 <script>
 
+function call_confirm()
+	{
+	if (callid>0)
+		{
+		url="http://design.ge/geotaxi/confirm.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
+			
+		console.log("upload: "+url);
+		gamehttp.open('GET',url,true);
+		gamehttp.send(null);
+		}
+	}
 
 function status_change()
 {
