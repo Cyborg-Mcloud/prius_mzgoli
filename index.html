@@ -185,12 +185,13 @@ function MainProg()
 		{	
 		UpData();
 	//	console.log("up data");
-		if (callid>0 && inpause==0)
+		if (callid>0 && inpause==0 && myself==1)
 			{
 			console.log("setting to call");
 			wlon=calllong;
 			wlat=calllat;
 			setmypos();
+			DrawUsers();
 			}
 		else if (myself==1 && inpause==0)
 			{
@@ -233,11 +234,14 @@ function update_data()
 					{
 					b=a[1].split(";");
 					curid=b[0];
+					if (callid!=curid && myself==0)
+						{
+						setme();
+						}
 					callid=curid;
 					calllat=parseFloat(b[1]);
 					calllong=parseFloat(b[2]);	
-					document.getElementById("no_call_screen").style.display="none";
-					document.getElementById("new_call_screen").style.display="inline";
+					set_status(101);
 					ertxelmainc=1;
 					mystatus=0;
 					}
@@ -246,19 +250,20 @@ function update_data()
 					mystatus=1;
 					b=a[1].split(";");
 					curid=b[0];
+					if (callid!=curid && myself==0)
+						{
+						setme();
+						}
 					callid=curid;
 					calllat=parseFloat(b[1]);
 					calllong=parseFloat(b[2]);	
+					set_status(1);
 					ertxelmainc=1;
 
 					}
 				else
 					{
-					if (ertxelmainc==1)
-						{	
-						document.getElementById("no_call_screen").style.display="inline";
-						document.getElementById("new_call_screen").style.display="none";
-						}
+					
 				
 					calllong=0;
 					calllat=0;
@@ -504,24 +509,31 @@ console.log("on watch success");
 
 
 	
-	
-<a href='Javascript:zoomme(1);' style='position:fixed; bottom:85px; right:5px; margin:5px; z-index:252; '><img src='zoomin.png'></a>
-<a href='Javascript:zoomme(-1);'style='position:fixed; bottom:45px; right:5px; margin:5px; z-index:252; '><img src='zoomout.png'></a>
-<a href='Javascript: setme();' style='position:fixed; bottom:130px; right:5px; margin:5px; z-index:252; ' ><img id='cbut' src='centeroff.png'></a>
-<a href='Javascript: show_settings();' style='position:fixed; top:55px; right:5px; margin:5px; z-index:252; ' ><img src='settings.png'></a>
+			
+		<a href='Javascript:zoomme(1);' style='position:fixed; bottom:85px; right:5px; margin:5px; z-index:252; '><img src='zoomin.png'></a>
+		<a href='Javascript:zoomme(-1);'style='position:fixed; bottom:45px; right:5px; margin:5px; z-index:252; '><img src='zoomout.png'></a>
+		<a href='Javascript: setme();' style='position:fixed; bottom:130px; right:5px; margin:5px; z-index:252; ' ><img id='cbut' src='centeroff.png'></a>
+		<a href='Javascript: show_settings();' style='position:fixed; top:55px; right:5px; margin:5px; z-index:252; ' ><img src='settings.png'></a>
 
 
 
 		<div id="bottom_menu" style='width:100%; position:fixed; bottom:0px; left:0px; height:50px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9;'>
 
 			<div id='no_call_screen' style='display:inline;'>
-			<center>
-				<a href='Javascript: status_change();' id='stat_but' style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black; width:150px;'>დაკავებული ვარ</a></center>
+				<center>
+				<a href='Javascript: status_change(0);' id='stat_but' style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black; width:150px;'>დაკავებული ვარ</a></center>
 			</div>
 
 			<div id='new_call_screen' style='background-color:red; width:100%; display:none;'>
-			<center>
+				<center>
 				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px;'>გამოძახების მიღება</a></center>
+			</div>
+
+			<div id='my_call_screen' style='background-color:red; width:100%; display:none;'>
+				<center>
+				<a href='Javascript: iArrived();' id='arrived_but' style='margin-left: 10px; float:left; border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px;'>მოვედი</a>
+				
+				</center>
 			</div>
 
 		</div>
@@ -576,7 +588,18 @@ console.log("on watch success");
 
 
 <script>
+function iArrived()
+	{
 
+	if (callid>0)
+		{
+		url="http://design.ge/geotaxi/arrived.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
+			
+		console.log("arrived upload: "+url);
+		gamehttp.open('GET',url,true);
+		gamehttp.send(null);
+		}
+	}
 function call_confirm()
 	{
 	if (callid>0)
@@ -589,19 +612,49 @@ function call_confirm()
 		}
 	}
 
-function status_change()
+function status_change(newstat)
 {
 	console.log("cur status: "+mystatus);
-	if (mystatus==0)
+	if (mystatus==0 && newstat==0)
 		{mystatus=2;
 		document.getElementById("stat_but").innerHTML="განვთავისუფლდი";
 		}
-	else if (mystatus==2)
+	else if (mystatus==2 && newstat==0)
 		{mystatus=0;
 		document.getElementById("stat_but").innerHTML="დაკავებული ვარ";
 		}
 	console.log("new status: "+mystatus);
 }
+
+var curdisp=0;
+
+function set_status(newstat)
+	{
+	if (newstat==0 && curdisp!=0)
+		{
+		if (ertxelmainc==1)
+			{	
+			document.getElementById("no_call_screen").style.display="inline";
+			document.getElementById("new_call_screen").style.display="none";
+			document.getElementById("my_call_screen").style.display="none";
+			curdisp=0;
+			}
+		}
+	else if (newstat==101 && curdisp!=101)
+		{
+		curdisp=101;
+		document.getElementById("no_call_screen").style.display="none";
+		document.getElementById("new_call_screen").style.display="inline";
+		document.getElementById("my_call_screen").style.display="none";
+		}
+	else if (newstat==1 && curdisp!=1)
+		{
+		curdisp=1;
+		document.getElementById("no_call_screen").style.display="none";
+		document.getElementById("new_call_screen").style.display="none";
+		document.getElementById("my_call_screen").style.display="inline";
+		}
+	}
 
 function cignore()
 	{
@@ -621,7 +674,7 @@ function cignorewifi()
 
 function setme()
 	{
-		console.log("setme");
+	console.log("setme");
 	if(myself==0)
 		{myself=1; document.getElementById("cbut").src='centeron.png';}
 	else {myself=0;document.getElementById("cbut").src='centeroff.png';}
