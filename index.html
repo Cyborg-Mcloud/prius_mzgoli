@@ -742,13 +742,23 @@ function set_status(newstat)
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
 		document.getElementById("my_call_screen").style.display="none";
-		document.getElementById("user_wait_screen").style.display="inline";
+		document.getElementById("user_wait_screen").style.display="none";
 		document.getElementById("user_pay_screen").style.display="none";
 
 		}
 	else if (newstat==4 && curdisp!=4)
 		{
 		curdisp=4;
+		document.getElementById("no_call_screen").style.display="none";
+		document.getElementById("new_call_screen").style.display="none";
+		document.getElementById("my_call_screen").style.display="none";
+		document.getElementById("user_wait_screen").style.display="inline";
+		document.getElementById("user_pay_screen").style.display="none";
+
+		}
+	else if (newstat==5 && curdisp!=5)
+		{
+		curdisp=5;
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
 		document.getElementById("my_call_screen").style.display="none";
