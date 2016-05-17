@@ -261,6 +261,54 @@ function update_data()
 					ertxelmainc=1;
 
 					}
+				else if (a[0]=="waiting")
+					{
+					mystatus=3;
+					b=a[1].split(";");
+					curid=b[0];
+					if (callid!=curid && myself==0)
+						{
+						setme();
+						}
+					callid=curid;
+					calllat=parseFloat(b[1]);
+					calllong=parseFloat(b[2]);	
+					set_status(3);
+					ertxelmainc=1;
+
+					}
+				else if (a[0]=="usercoming")
+					{
+					mystatus=4;
+					b=a[1].split(";");
+					curid=b[0];
+					if (callid!=curid && myself==0)
+						{
+						setme();
+						}
+					callid=curid;
+					calllat=parseFloat(b[1]);
+					calllong=parseFloat(b[2]);	
+					set_status(4);
+					ertxelmainc=1;
+
+					}
+				else if (a[0]=="moving")
+					{
+					mystatus=5;
+					b=a[1].split(";");
+					curid=b[0];
+					if (callid!=curid && myself==0)
+						{
+						setme();
+						}
+					callid=curid;
+					calllat=parseFloat(b[1]);
+					calllong=parseFloat(b[2]);	
+					set_status(5);
+					ertxelmainc=1;
+
+					}
 				else
 					{
 					
@@ -524,14 +572,30 @@ console.log("on watch success");
 				<a href='Javascript: status_change(0);' id='stat_but' style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black; width:150px;'>დაკავებული ვარ</a></center>
 			</div>
 
-			<div id='new_call_screen' style='background-color:red; width:100%; display:none;'>
+			<div id='new_call_screen' style=' width:100%; display:none;'>
 				<center>
 				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px;'>გამოძახების მიღება</a></center>
 			</div>
 
-			<div id='my_call_screen' style='background-color:red; width:100%; display:none;'>
+			<div id='my_call_screen' style=' width:100%; display:none;'>
 				<center>
 				<a href='Javascript: iArrived();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px;'>მოვედი</a>
+				
+				</center>
+			</div>
+
+			<div id='user_wait_screen' style=' width:100%; display:none;'>
+				<center>
+				<a href='Javascript: user_met();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px;'>ჩავისვი</a>
+				
+				</center>
+			</div>
+
+			<div id='user_pay_screen' style='position:fixed; bottom:0px; left:0px; height:100px;background-color:white; width:420px; display:none; color:black;'>
+				<center>
+				თანხა: <input type='text' id='mytanxa' size=4><br>
+				<a href='Javascript: userpay(1);' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px;'>ქეში</a> &nbsp; &nbsp; &nbsp;
+				<a href='Javascript: userpay(2);' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:blue; color:white; width:200px;'>ბარათი</a>
 				
 				</center>
 			</div>
@@ -588,6 +652,18 @@ console.log("on watch success");
 
 
 <script>
+
+function user_met()
+{
+	if (callid>0)
+		{
+		url="http://design.ge/geotaxi/usermet.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
+			
+		console.log("usermet upload: "+url);
+		gamehttp.open('GET',url,true);
+		gamehttp.send(null);
+		}
+}
 function iArrived()
 	{
 
@@ -637,6 +713,8 @@ function set_status(newstat)
 			document.getElementById("no_call_screen").style.display="inline";
 			document.getElementById("new_call_screen").style.display="none";
 			document.getElementById("my_call_screen").style.display="none";
+			document.getElementById("user_wait_screen").style.display="none";
+			document.getElementById("user_pay_screen").style.display="none";
 			curdisp=0;
 			}
 		}
@@ -646,6 +724,8 @@ function set_status(newstat)
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="inline";
 		document.getElementById("my_call_screen").style.display="none";
+		document.getElementById("user_wait_screen").style.display="none";
+		document.getElementById("user_pay_screen").style.display="none";
 		}
 	else if (newstat==1 && curdisp!=1)
 		{
@@ -653,7 +733,30 @@ function set_status(newstat)
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
 		document.getElementById("my_call_screen").style.display="inline";
+		document.getElementById("user_wait_screen").style.display="none";
+		document.getElementById("user_pay_screen").style.display="none";
 		}
+	else if (newstat==3 && curdisp!=3)
+		{
+		curdisp=3;
+		document.getElementById("no_call_screen").style.display="none";
+		document.getElementById("new_call_screen").style.display="none";
+		document.getElementById("my_call_screen").style.display="none";
+		document.getElementById("user_wait_screen").style.display="inline";
+		document.getElementById("user_pay_screen").style.display="none";
+
+		}
+	else if (newstat==4 && curdisp!=4)
+		{
+		curdisp=4;
+		document.getElementById("no_call_screen").style.display="none";
+		document.getElementById("new_call_screen").style.display="none";
+		document.getElementById("my_call_screen").style.display="none";
+		document.getElementById("user_wait_screen").style.display="none";
+		document.getElementById("user_pay_screen").style.display="inline";
+
+		}
+		
 	}
 
 function cignore()
