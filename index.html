@@ -593,9 +593,15 @@ console.log("on watch success");
 
 			<div id='user_pay_screen' style='position:fixed; bottom:0px; left:0px; height:100px;background-color:white; width:420px; display:none; color:black;'>
 				<center>
-				თანხა: <input type='text' id='mytanxa' size=4><br>
+				<table>
+				<Tr><td>
+				თანხა: <input type='text' id='mytanxa' size=4>
+				</td>
+				<td>
 				<a href='Javascript: userpay(1);' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:70px;'>ქეში</a> &nbsp; &nbsp; &nbsp;
 				<a href='Javascript: userpay(2);' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:blue; color:white; width:70px;'>ბარათი</a>
+				</td>
+				</tr></table>
 				
 				</center>
 			</div>
@@ -652,6 +658,21 @@ console.log("on watch success");
 
 
 <script>
+
+function userpay(pmethod)
+{
+	if (callid>0)
+		{
+		tanxa=document.getElementById("mytanxa").value;
+		document.getElementById("mytanxa").value="";
+		url="http://design.ge/geotaxi/pay.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid+"&pmethod="+pmethod+"&amount="+tanxa;
+			
+		console.log("usermet upload: "+url);
+		gamehttp.open('GET',url,true);
+		gamehttp.send(null);
+		}
+}
+
 
 function user_met()
 {
