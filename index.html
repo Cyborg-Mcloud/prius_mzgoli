@@ -505,13 +505,10 @@ console.log("on watch success");
 
 <div id='fanjara' style='position:relative; overflow:hidden; width:400px; height:600px; z-index:1;'>
 		
-<div  style='position:fixed; left:0px; top:0px; width:100%; height:50px; background-color:white; z-index:211; ' >
+<!--<div  style='position:fixed; left:0px; top:0px; width:100%; height:50px; background-color:white; z-index:211; ' >
 	<div style='float:left; z-index:212;'><img src='but_info.png'></div>
 	<div id='infodiv' style='float:right; width:250px; color:Black; z-index:212;'></div>
-<!--	<div style='float:right;'><img src='but_register.png'></div>-->
-
-
-</div>
+</div>-->
 		<!-- MAIN MAP -->
 <div id='charcho' style='position:fixed; left:0px; top:50px; width:365px; height:600px; z-index:1;' >
 		<div id='mainw' style='position:absolute; left:0px; top:0px; width:600px; height:600px;  z-index:2;' >
@@ -565,7 +562,7 @@ console.log("on watch success");
 
 
 
-		<div id="bottom_menu" style='width:100%; position:fixed; bottom:0px; left:0px; height:50px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9;'>
+		<div id="bottom_menu" style='width:100%; position:fixed; top:0px; left:0px; height:50px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9; width:100%;'>
 
 			<div id='no_call_screen' style='display:inline;'>
 				<center>
@@ -591,15 +588,15 @@ console.log("on watch success");
 				</center>
 			</div>
 
-			<div id='user_pay_screen' style='position:fixed; bottom:0px; left:0px; height:100px;background-color:white; width:100%; display:none; color:black;'>
+			<div id='user_pay_screen' style='position:fixed; top:0px; left:0px; height:100px;background-color:white; width:100%; display:none; color:black;'>
 				<center>
-				<table width=100%>
+				<table >
 				<Tr><td>
 				თანხა: <input type='text' id='mytanxa' size=4>
 				</td>
 				<td>
-				<a href='Javascript: userpay(1);' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:70px;'>ქეში</a> &nbsp; &nbsp; &nbsp;
-				<a href='Javascript: userpay(2);' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:blue; color:white; width:70px;'>ბარათი</a>
+				<a href='Javascript: userpay(1);' id='arrived_but' style='float:left; border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:70px;'>ქეში</a> &nbsp; &nbsp; &nbsp;
+				<a href='Javascript: userpay(2);' id='arrived_but' style='float:right; border:1px solid gray; padding:5px; display:block; background-color:blue; color:white; width:70px;'>ბარათი</a>
 				</td>
 				</tr></table>
 				
