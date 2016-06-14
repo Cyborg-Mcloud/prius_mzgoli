@@ -388,6 +388,7 @@ function Start()
 	}
 
 var pauza_chartulia=0;
+
 function onPause()
 	{
 	console.log("on pause");
@@ -398,16 +399,21 @@ function onPause()
 		started=0;
 		clearWatch();
 		inpause=1;
+	WriteData();
 		}
 	//}
-	WriteData();
+
 	
 	}
 
 function onResume() 
 	{
 	console.log("on resume");
-	inpause=0;
+	if (inpause==1)
+		{
+		inpause=0;
+		}
+
 	if (started==0)
 		{
 		checkConnection();
@@ -1108,7 +1114,7 @@ function setmypos()
 		loadtiles();	
 		DrawHomePos();
 		}
-	document.getElementById("infodiv").innerHTML=wlon+ " / "+wlat;
+	//document.getElementById("infodiv").innerHTML=wlon+ " / "+wlat;
 	}
 
 function check_user_click()
