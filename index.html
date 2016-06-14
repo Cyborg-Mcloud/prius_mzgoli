@@ -387,16 +387,21 @@ function Start()
 
 	}
 
+var pauza_chartulia=0;
 function onPause()
 	{
-		console.log("on pause");
+	console.log("on pause");
 //	if (started==0) 
 		//{
-			started=0;
-	clearWatch();
+	if (pauza_chartulia==1)
+		{
+		started=0;
+		clearWatch();
+		inpause=1;
+		}
 	//}
 	WriteData();
-	inpause=1;
+	
 	}
 
 function onResume() 
