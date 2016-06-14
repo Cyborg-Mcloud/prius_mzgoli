@@ -381,9 +381,10 @@ function Start()
 	{
 	console.log("Start / END");
 	if (started==0)
-		{started=1;  MainProg();}  // document.getElementById('mainb').innerHTML="STOP";
-	else
-		{started=0;} //  document.getElementById('mainb').innerHTML="START";
+		{
+			started=1;  MainProg();}  // document.getElementById('mainb').innerHTML="STOP";
+	//else
+//		{started=0;} //  document.getElementById('mainb').innerHTML="START";/
 
 	}
 
@@ -396,7 +397,7 @@ function onPause()
 		//{
 	if (pauza_chartulia==1)
 		{
-		started=0;
+		//started=0;
 		clearWatch();
 		inpause=1;
 	WriteData();
