@@ -311,7 +311,10 @@ function update_data()
 					}
 				else
 					{
-					
+					if (curdisp!=0)
+						{
+						set_status(0);
+						}
 				
 					calllong=0;
 					calllat=0;
@@ -497,7 +500,7 @@ console.log("on watch success");
 //							'Speed: '              + position.coords.speed                 + '<br />';
 	
 		setmypos();	
-		document.getElementById('geopos_short').innerHTML="<table width=100% cellspacing=0><tr><td>Accuracy: "+MyAcc+"</td><td>Altitude: "+MyAlt+"</td></tr></table>";
+//		document.getElementById('geopos_short').innerHTML="<table width=100% cellspacing=0><tr><td>Accuracy: "+MyAcc+"</td><td>Altitude: "+MyAlt+"</td></tr></table>";
 	
 		}
 	}
@@ -559,8 +562,8 @@ console.log("on watch success");
 				</table>
 		</div>-->
 		
-		<div id="geopos_short" style='width:100%; position:absolute; left:0px; top:50px; z-index:220; background-color:black; filter: alpha(opacity=50);
-			-moz-opacity: 0.5; -khtml-opacity: 0.5;  opacity: 0.5;'>Finding geolocation...</div>
+	<!--	<div id="geopos_short" style='width:100%; position:absolute; left:0px; top:50px; z-index:220; background-color:black; filter: alpha(opacity=50);
+			-moz-opacity: 0.5; -khtml-opacity: 0.5;  opacity: 0.5;'>Finding geolocation...</div>-->
 
 		<!--<a href='Javascript: Start();' id='mainb' style='position:absolute; left:25px; top:25px; background-color:green; color:white; font-weight:bold; width:200px; display:block; padding:5px; z-index:301; text-align:center;' >START</a>-->
 
@@ -574,41 +577,43 @@ console.log("on watch success");
 
 
 
-		<div id="bottom_menu" style='width:100%; position:fixed; top:0px; left:0px; height:50px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9; width:100%;'>
+		<div id="bottom_menu" style='width:100%; position:fixed; top:0px; left:0px; height:90px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9; width:100%;'>
+		<Br>
 
 			<div id='no_call_screen' style='display:inline;'>
 				<center>
-				<a href='Javascript: status_change(0);' id='stat_but' style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black; width:150px;'>დაკავებული ვარ</a></center>
+				<a href='Javascript: status_change(0);' id='stat_but' style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black; width:150px; font-size:14px;'>დაკავებული ვარ</a></center>
 			</div>
 
 			<div id='new_call_screen' style=' width:100%; display:none;'>
 				<center>
-				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px;'>გამოძახების მიღება</a></center>
+				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:14px;'>გამოძახების მიღება</a></center>
 			</div>
 
 			<div id='my_call_screen' style=' width:100%; display:none;'>
 				<center>
-				<a href='Javascript: iArrived();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px;'>მოვედი</a>
+				<a href='Javascript: iArrived();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:14px;'>მოვედი</a>
 				
 				</center>
 			</div>
 
 			<div id='user_wait_screen' style=' width:100%; display:none;'>
 				<center>
-				<a href='Javascript: user_met();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px;'>ჩავისვი</a>
+				<a href='Javascript: user_met();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:14px;'>ჩავისვი</a>
 				
 				</center>
 			</div>
 
-			<div id='user_pay_screen' style='position:fixed; top:0px; left:0px; height:100px;background-color:white; width:100%; display:none; color:black;'>
+			<div id='user_pay_screen' style='position:fixed; top:0px; left:0px; height:150px;background-color:white; width:100%; display:none; color:black;'>
+			<Br>
 				<center>
 				<table >
-				<Tr><td>
-				თანხა: <input type='text' id='mytanxa' size=4>
+				<Tr><td style=' font-size:14px;'>
+				თანხა: <input type='text' id='mytanxa' size=4 style=' font-size:14px;'>
 				</td>
 				<td>
-				<a href='Javascript: userpay(1);' id='arrived_but' style='float:left; border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:70px;'>ქეში</a> &nbsp; &nbsp; &nbsp;
-				<a href='Javascript: userpay(2);' id='arrived_but' style='float:right; border:1px solid gray; padding:5px; display:block; background-color:blue; color:white; width:70px;'>ბარათი</a>
+				<a href='Javascript: userpay(1);' id='arrived_but' style='float:left; border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:70px; font-size:14px;'>ქეში</a> &nbsp; &nbsp; &nbsp;
+				<a href='Javascript: userpay(2);' id='arrived_but' style='float:right; border:1px solid gray; padding:5px; display:block; background-color:blue; color:white; width:70px; font-size:14px;'>ბარათი</a>
 				</td>
 				</tr></table>
 				
@@ -634,8 +639,6 @@ console.log("on watch success");
 		<div id='mydiv'></div>
 		<br>
 		<p id="geopos">Finding geolocation...</p>
-		<Br>
-		<a href='Javascript: show_map();'>Back</a>
 
 	<b>Map Type</b><br>
 	<select id='maptype' onChange='changemap();'>
@@ -650,6 +653,9 @@ console.log("on watch success");
 	<option value='9'>Watercolor Map (very slow)</option>
 	<option value='10'>Toner MAP (slow)</option>
 	</select>
+		<Br>
+		<a href='Javascript: show_map();'>Back</a>
+
 	<br><br>
 		<div id='erorebi'>Tilebi (zoom:16)</div>
 	
@@ -1101,7 +1107,7 @@ function setmypos()
 
 	document.getElementById("map").style.left=difx+"px";
 	document.getElementById("map").style.top=dify+"px";
-	document.getElementById('geopos_short').innerHTML="X: "+difx+" Y: "+dify;
+//	document.getElementById('geopos_short').innerHTML="X: "+difx+" Y: "+dify;
 	if (xtile!=oxt || oyt!=ytile)
 		{
 		oxt=xtile;
