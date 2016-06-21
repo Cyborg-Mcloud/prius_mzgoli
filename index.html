@@ -128,7 +128,7 @@ var wehavecall=0;
 var calllat=0;
 var calllong=0;
 var callid=0;
-
+var txt_addr="";
 var ertxelmainc=0;
 // ------------------------------
 function onDeviceReady() 
@@ -241,6 +241,7 @@ function update_data()
 					callid=curid;
 					calllat=parseFloat(b[1]);
 					calllong=parseFloat(b[2]);	
+					txt_addr=b[3];
 					set_status(101);
 					ertxelmainc=1;
 					mystatus=0;
@@ -257,6 +258,7 @@ function update_data()
 					callid=curid;
 					calllat=parseFloat(b[1]);
 					calllong=parseFloat(b[2]);	
+					txt_addr=b[3];
 					set_status(1);
 					ertxelmainc=1;
 
@@ -273,6 +275,7 @@ function update_data()
 					callid=curid;
 					calllat=parseFloat(b[1]);
 					calllong=parseFloat(b[2]);	
+					txt_addr=b[3];
 					set_status(3);
 					ertxelmainc=1;
 
@@ -288,7 +291,8 @@ function update_data()
 						}
 					callid=curid;
 					calllat=parseFloat(b[1]);
-					calllong=parseFloat(b[2]);	
+					calllong=paseFloat(b[2]);
+					txt_addr=b[3];
 					set_status(4);
 					ertxelmainc=1;
 
@@ -305,6 +309,7 @@ function update_data()
 					callid=curid;
 					calllat=parseFloat(b[1]);
 					calllong=parseFloat(b[2]);	
+										txt_addr=b[3];
 					set_status(5);
 					ertxelmainc=1;
 
@@ -315,7 +320,7 @@ function update_data()
 						{
 						set_status(0);
 						}
-				
+				txt_addr="";
 					calllong=0;
 					calllat=0;
 					callid=0;
@@ -570,54 +575,57 @@ console.log("on watch success");
 
 	
 			
-		<a href='Javascript:zoomme(1);' style='position:fixed; bottom:85px; left:5px; margin:5px; z-index:252; '><img src='zoomin.png'></a>
-		<a href='Javascript:zoomme(-1);'style='position:fixed; bottom:45px; left:5px; margin:5px; z-index:252; '><img src='zoomout.png'></a>
-		<a href='Javascript: setme();' style='position:fixed; bottom:130px; left:5px; margin:5px; z-index:252; ' ><img id='cbut' src='centeroff.png'></a>
-		<a href='Javascript: show_settings();' style='position:fixed; top:55px; left:5px; margin:5px; z-index:252; ' ><img src='settings.png'></a>
+<a href='Javascript:zoomme(1);' style='position:fixed; bottom:85px; left:5px; margin:5px; z-index:252; '><img src='zoomin.png'></a>
+<a href='Javascript:zoomme(-1);'style='position:fixed; bottom:45px; left:5px; margin:5px; z-index:252; '><img src='zoomout.png'></a>
+<a href='Javascript: setme();' style='position:fixed; bottom:130px; left:5px; margin:5px; z-index:252; ' ><img id='cbut' src='centeroff.png'></a>
+<a href='Javascript: show_settings();' style='position:fixed; top:55px; left:5px; margin:5px; z-index:252; ' ><img src='settings.png'></a>
 
 
 
-		<div id="bottom_menu" style='width:100%; position:fixed; top:0px; left:0px; height:90px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9; width:100%;'>
+<div id="bottom_menu" style='width:100%; position:fixed; top:0px; left:0px; height:90px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9; width:100%;'>
 		<Br>
+<div style='position:absolute; right:10px; top:10px; font-size:14px; font-weight:Bold;' id='qucha_txt'></div>
 
 			<div id='no_call_screen' style='display:inline;'>
 				<center>
-				<a href='Javascript: status_change(0);' id='stat_but' style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black; width:150px; font-size:14px;'>დაკავებული ვარ</a></center>
+				<a href='Javascript: status_change(0);' id='stat_but' style='border:1px solid gray; padding:5px; display:block; background-color:white; color:black; width:150px; font-size:14px;'>თავისუფალი ვარ</a>
+				</center>
 			</div>
 
 			<div id='new_call_screen' style=' width:100%; display:none;'>
-				<center>
-				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:14px;'>გამოძახების მიღება</a></center>
+				
+				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:14px;'>გამოძახების მიღება</a>
 			</div>
 
 			<div id='my_call_screen' style=' width:100%; display:none;'>
-				<center>
+
 				<a href='Javascript: iArrived();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:14px;'>მოვედი</a>
 				
-				</center>
+				
 			</div>
 
 			<div id='user_wait_screen' style=' width:100%; display:none;'>
-				<center>
+				
+				
 				<a href='Javascript: user_met();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:14px;'>ჩავისვი</a>
 				
-				</center>
+				
 			</div>
 
 			<div id='user_pay_screen' style='position:fixed; top:0px; left:0px; height:150px;background-color:white; width:100%; display:none; color:black;'>
 			<Br>
-				<center>
+
 				<table >
 				<Tr><td style=' font-size:14px;'>
-				თანხა: <input type='text' id='mytanxa' size=4 style=' font-size:14px;'>
+				თანხა: <input type='number' id='mytanxa' size=4 style=' font-size:16px;'>
 				</td>
 				<td>
-				<a href='Javascript: userpay(1);' id='arrived_but' style='float:left; border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:70px; font-size:14px;'>ქეში</a> &nbsp; &nbsp; &nbsp;
-				<a href='Javascript: userpay(2);' id='arrived_but' style='float:right; border:1px solid gray; padding:5px; display:block; background-color:blue; color:white; width:70px; font-size:14px;'>ბარათი</a>
+				<a href='Javascript: userpay(1);' id='arrived_but' style='float:left; border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:70px; font-size:16px;'>ქეში</a> &nbsp; &nbsp; &nbsp;
+				<a href='Javascript: userpay(2);' id='arrived_but' style='float:right; border:1px solid gray; padding:5px; display:block; background-color:blue; color:white; width:70px; font-size:16px;'>ბარათი</a>
 				</td>
 				</tr></table>
 				
-				</center>
+
 			</div>
 
 		</div>
@@ -736,11 +744,13 @@ function status_change(newstat)
 	console.log("cur status: "+mystatus);
 	if (mystatus==0 && newstat==0)
 		{mystatus=2;
-		document.getElementById("stat_but").innerHTML="განვთავისუფლდი";
+		document.getElementById("stat_but").innerHTML="დაკავებული ვარ";
+document.getElementById("stat_but").style.backgroundColor="red";
 		}
 	else if (mystatus==2 && newstat==0)
 		{mystatus=0;
-		document.getElementById("stat_but").innerHTML="დაკავებული ვარ";
+		document.getElementById("stat_but").innerHTML="თავისუფალი ვარ";
+		document.getElementById("stat_but").style.backgroundColor="white";
 		}
 	console.log("new status: "+mystatus);
 }
@@ -758,6 +768,8 @@ function set_status(newstat)
 			document.getElementById("my_call_screen").style.display="none";
 			document.getElementById("user_wait_screen").style.display="none";
 			document.getElementById("user_pay_screen").style.display="none";
+			document.getElementById("qucha_txt").innerHTML="";
+			
 			curdisp=0;
 			}
 		}
@@ -769,6 +781,7 @@ function set_status(newstat)
 		document.getElementById("my_call_screen").style.display="none";
 		document.getElementById("user_wait_screen").style.display="none";
 		document.getElementById("user_pay_screen").style.display="none";
+		document.getElementById("qucha_txt").innerHTML=txt_addr;
 		}
 	else if (newstat==1 && curdisp!=1)
 		{
@@ -778,6 +791,7 @@ function set_status(newstat)
 		document.getElementById("my_call_screen").style.display="inline";
 		document.getElementById("user_wait_screen").style.display="none";
 		document.getElementById("user_pay_screen").style.display="none";
+		document.getElementById("qucha_txt").innerHTML=txt_addr;
 		}
 	else if (newstat==3 && curdisp!=3)
 		{
@@ -787,6 +801,7 @@ function set_status(newstat)
 		document.getElementById("my_call_screen").style.display="none";
 		document.getElementById("user_wait_screen").style.display="none";
 		document.getElementById("user_pay_screen").style.display="none";
+		document.getElementById("qucha_txt").innerHTML=txt_addr;
 
 		}
 	else if (newstat==4 && curdisp!=4)
@@ -797,6 +812,7 @@ function set_status(newstat)
 		document.getElementById("my_call_screen").style.display="none";
 		document.getElementById("user_wait_screen").style.display="inline";
 		document.getElementById("user_pay_screen").style.display="none";
+		document.getElementById("qucha_txt").innerHTML=txt_addr;
 
 		}
 	else if (newstat==5 && curdisp!=5)
@@ -807,6 +823,7 @@ function set_status(newstat)
 		document.getElementById("my_call_screen").style.display="none";
 		document.getElementById("user_wait_screen").style.display="none";
 		document.getElementById("user_pay_screen").style.display="inline";
+		document.getElementById("qucha_txt").innerHTML=txt_addr;
 
 		}
 		
