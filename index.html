@@ -740,22 +740,22 @@ function call_confirm()
 	}
 
 function status_change(newstat)
-{
+	{
 	console.log("cur status: "+mystatus);
 	if (mystatus==0 && newstat==0)
 		{mystatus=2;
 		document.getElementById("stat_but").innerHTML="დაკავებული ვარ";
-document.getElementById("stat_but").style.backgroundColor="red";
-document.getElementById("stat_but").style.color="white";
+		document.getElementById("stat_but").style.backgroundColor="red";
+		document.getElementById("stat_but").style.color="white";
 		}
 	else if (mystatus==2 && newstat==0)
 		{mystatus=0;
 		document.getElementById("stat_but").innerHTML="თავისუფალი ვარ";
 		document.getElementById("stat_but").style.backgroundColor="white";
-				document.getElementById("stat_but").style.color="green";
+		document.getElementById("stat_but").style.color="green";
 		}
 	console.log("new status: "+mystatus);
-}
+	}
 
 var curdisp=0;
 
