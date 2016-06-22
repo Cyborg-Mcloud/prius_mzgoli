@@ -145,29 +145,14 @@ function onDeviceReady()
 	document.addEventListener("volumeupbutton", onVolumeUp, false);
 
 	console.log("device ready, getting position");
-	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true});
-	var opts = { timeout: 30000, enableHighAccuracy: true};
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: false,  maximumAge:0});
+	var opts = { timeout: 5000, enableHighAccuracy: false, maximumAge:0};
 	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
 	document.addEventListener("resume", onResume, false);
 	
 	console.log("device ready, dealing with record file");
 	
 	kc=checkIfFileExists("locdata.txt");
-
-//	if(dataex==1)
-//		{
-//		console.log("reading data");
-//		ReadData();
-//		}
-	
-//	if (dataex==0 || myid==0)	
-//		{
-//		console.log("no data found");
-//		myid=Math.floor(Math.random()*100000000);
-//		
-//		WriteData();
-//		}	
-
 
 
 	if (started==0)	
@@ -450,10 +435,7 @@ console.log("on success");
 	var element = document.getElementById('geopos');
 	element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
                             'Longitude: '          + position.coords.longitude             + '<br />';
-                            //'Altitude: '           + position.coords.altitude              + '<br />' +
-                            //'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                            //'Heading: '            + position.coords.heading               + '<br />' +
-                            //'Speed: '              + position.coords.speed                 + '<br />';
+
 	MyLat=position.coords.latitude ;
 	MyLong=position.coords.longitude ;
 	MyAlt=position.coords.altitude ;
@@ -467,27 +449,22 @@ console.log("on succ, sett long");
 
 	if (started==0 && MyUser!="nouser")	{Start();}
 
-	setmypos();
-//	document.getElementById('geopos_short').innerHTML="<table width=100% cellspacing=0><tr><td>Accuracy: "+MyAcc+"</td><td>Altitude: "+MyAlt+"</td></tr></table>";
-	
+	setmypos();	
     }
 
    
  
 function getpos()
 	{
-		console.log("get pos");
+	console.log("get pos");
 	document.getElementById('geopos').innerHTML="Finding geolocation...";
-	 navigator.geolocation.getCurrentPosition(onSuccess, onError);
-	
+	navigator.geolocation.getCurrentPosition(onSuccess, onError);
 	}
 
 
 function onWatchSuccess(position) 
 	{
-
-console.log("on watch success");
-
+	console.log("on watch success");
 	MyLat=position.coords.latitude ;
 	MyLong=position.coords.longitude ;
 	MyAlt=position.coords.altitude ;
@@ -499,14 +476,7 @@ console.log("on watch success");
 		var element = document.getElementById('geopos');
 		element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
 							'Longitude: '          + position.coords.longitude             + '<br />';
-//							'Altitude: '           + position.coords.altitude              + '<br />' +
-//							'Accuracy: '           + position.coords.accuracy              + '<br />' +
-//							'Heading: '            + position.coords.heading               + '<br />' +
-//							'Speed: '              + position.coords.speed                 + '<br />';
-	
-		setmypos();	
-//		document.getElementById('geopos_short').innerHTML="<table width=100% cellspacing=0><tr><td>Accuracy: "+MyAcc+"</td><td>Altitude: "+MyAlt+"</td></tr></table>";
-	
+		setmypos();		
 		}
 	}
 
@@ -1122,11 +1092,10 @@ function setmypos()
 	kartX=difx;
 	kartY=dify;
 
-	//console.log("mypos: "+lon_deg+" / "+lat_deg+ " = "+difx+" / "+dify);
 
 	document.getElementById("map").style.left=difx+"px";
 	document.getElementById("map").style.top=dify+"px";
-//	document.getElementById('geopos_short').innerHTML="X: "+difx+" Y: "+dify;
+	console.log("xtile "+oxt + " - " + xtile +", ytile "+oyt + " - " + ytile);
 	if (xtile!=oxt || oyt!=ytile)
 		{
 		oxt=xtile;
@@ -1140,7 +1109,6 @@ function setmypos()
 		loadtiles();	
 		DrawHomePos();
 		}
-	//document.getElementById("infodiv").innerHTML=wlon+ " / "+wlat;
 	}
 
 function check_user_click()
