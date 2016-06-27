@@ -764,7 +764,8 @@ function set_status(newstat)
 			document.getElementById("user_wait_screen").style.display="none";
 			document.getElementById("user_pay_screen").style.display="none";
 			document.getElementById("qucha_txt").innerHTML="";
-		myaudio.stop();
+		myaudio.pause();
+		myaudio.currentTime = 0;
 			mystatus=0;
 			curdisp=0;
 			}
@@ -783,7 +784,8 @@ function set_status(newstat)
 		}
 	else if (newstat==1 && curdisp!=1)
 		{
-					myaudio.stop();
+		myaudio.pause();
+		myaudio.currentTime = 0;
 		curdisp=1;
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
@@ -795,7 +797,8 @@ function set_status(newstat)
 		}
 	else if (newstat==3 && curdisp!=3)
 		{
-					myaudio.stop();
+		myaudio.pause();
+		myaudio.currentTime = 0;
 		curdisp=3;
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
@@ -807,7 +810,8 @@ function set_status(newstat)
 		}
 	else if (newstat==4 && curdisp!=4)
 		{
-					myaudio.stop();
+		myaudio.pause();
+		myaudio.currentTime = 0;
 		curdisp=4;
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
@@ -819,7 +823,8 @@ function set_status(newstat)
 		}
 	else if (newstat==5 && curdisp!=5)
 		{
-					myaudio.stop();
+		myaudio.pause();
+		myaudio.currentTime = 0;
 		curdisp=5;
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
