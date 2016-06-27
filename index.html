@@ -1132,8 +1132,8 @@ function setmypos()
 		check_complete=1;
 		file_downing=1;
 		LT_finished=0;
-		loadtiles();	
 		DrawHomePos();
+		loadtiles();	
 		}
 	}
 
@@ -1251,6 +1251,7 @@ function loadtiles()
 
 function downtile(smap, szoom, A, B, i, ii, retry)
 	{
+
 	if (A<0)
 		{A=0;}
 	if (B<0)
@@ -1282,7 +1283,7 @@ function downtile(smap, szoom, A, B, i, ii, retry)
 	tilename=smap+"/"+szoom+"_"+A+"_"+B+".png";
 
 	document.getElementById("img_"+i+"-"+ii).src=tilelink;
-	//console.log("down tile: "+tilelink);
+	console.log("++ down tile: "+tilelink);
 
 	}
 
