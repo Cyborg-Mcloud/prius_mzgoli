@@ -14,6 +14,9 @@
 
 <script type="text/javascript" charset="utf-8">
 
+var myaudio = new Audio('call.mp3');
+myaudio.loop = true;
+
 document.addEventListener("deviceready", onDeviceReady, false);
 var mystatus=0;
 var myid=0;
@@ -555,7 +558,7 @@ function onWatchSuccess(position)
 
 <div id="bottom_menu" style='width:100%; position:fixed; top:0px; padding-top:10px; left:0px; height:90px; padding-left:20px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9; width:100%;'>
 		<Br>
-<div style='position:absolute; right:60px; top:25px; font-size:16px; font-weight:Bold;' id='qucha_txt'></div>
+		<div style='position:absolute; right:80px; top:25px; font-size:24px; font-weight:Bold;' id='qucha_txt'></div>
 
 			<div id='no_call_screen' style='display:inline;'>
 				<center>
@@ -761,6 +764,7 @@ function set_status(newstat)
 			document.getElementById("user_wait_screen").style.display="none";
 			document.getElementById("user_pay_screen").style.display="none";
 			document.getElementById("qucha_txt").innerHTML="";
+		myaudio.stop();
 			mystatus=0;
 			curdisp=0;
 			}
@@ -774,10 +778,12 @@ function set_status(newstat)
 		document.getElementById("user_wait_screen").style.display="none";
 		document.getElementById("user_pay_screen").style.display="none";
 		document.getElementById("qucha_txt").innerHTML=txt_addr;
+		myaudio.play();
 		mystatus=0;
 		}
 	else if (newstat==1 && curdisp!=1)
 		{
+					myaudio.stop();
 		curdisp=1;
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
@@ -789,6 +795,7 @@ function set_status(newstat)
 		}
 	else if (newstat==3 && curdisp!=3)
 		{
+					myaudio.stop();
 		curdisp=3;
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
@@ -800,6 +807,7 @@ function set_status(newstat)
 		}
 	else if (newstat==4 && curdisp!=4)
 		{
+					myaudio.stop();
 		curdisp=4;
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
@@ -811,6 +819,7 @@ function set_status(newstat)
 		}
 	else if (newstat==5 && curdisp!=5)
 		{
+					myaudio.stop();
 		curdisp=5;
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
