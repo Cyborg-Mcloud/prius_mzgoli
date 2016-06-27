@@ -558,7 +558,7 @@ function onWatchSuccess(position)
 
 <div id="bottom_menu" style='width:100%; position:fixed; top:0px; padding-top:10px; left:0px; height:90px; padding-left:20px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9; width:100%;'>
 		<Br>
-		<div style='position:absolute; right:80px; top:25px; font-size:24px; font-weight:Bold;' id='qucha_txt'></div>
+		<div style='position:absolute; right:80px; top:25px; font-size:28px; font-weight:Bold;' id='qucha_txt'></div>
 
 			<div id='no_call_screen' style='display:inline;'>
 				<center>
@@ -566,9 +566,8 @@ function onWatchSuccess(position)
 				</center>
 			</div>
 
-			<div id='new_call_screen' style=' width:100%; display:none;'>
-				
-				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:14px;'>გამოძახების მიღება</a>
+			<div id='new_call_screen' style=' width:100%; display:none; position:absolute; left:200px; top:200px;'>
+				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:green; color:white; padding:10px; font-size:24px;'>გამოძახების მიღება</a>
 			</div>
 
 			<div id='my_call_screen' style=' width:100%; display:none;'>
@@ -758,6 +757,7 @@ function set_status(newstat)
 		{
 		if (ertxelmainc==1)
 			{	
+						document.getElementById("bottom_menu").style.height='90px';
 			document.getElementById("no_call_screen").style.display="inline";
 			document.getElementById("new_call_screen").style.display="none";
 			document.getElementById("my_call_screen").style.display="none";
@@ -773,6 +773,7 @@ function set_status(newstat)
 	else if (newstat==101 && curdisp!=101)
 		{
 		curdisp=101;
+		document.getElementById("bottom_menu").style.height='100%';
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="inline";
 		document.getElementById("my_call_screen").style.display="none";
@@ -784,6 +785,7 @@ function set_status(newstat)
 		}
 	else if (newstat==1 && curdisp!=1)
 		{
+		document.getElementById("bottom_menu").style.height='90px';
 		myaudio.pause();
 		myaudio.currentTime = 0;
 		curdisp=1;
@@ -800,6 +802,7 @@ function set_status(newstat)
 		myaudio.pause();
 		myaudio.currentTime = 0;
 		curdisp=3;
+				document.getElementById("bottom_menu").style.height='90px';
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
 		document.getElementById("my_call_screen").style.display="none";
@@ -813,6 +816,7 @@ function set_status(newstat)
 		myaudio.pause();
 		myaudio.currentTime = 0;
 		curdisp=4;
+				document.getElementById("bottom_menu").style.height='90px';
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
 		document.getElementById("my_call_screen").style.display="none";
@@ -826,6 +830,7 @@ function set_status(newstat)
 		myaudio.pause();
 		myaudio.currentTime = 0;
 		curdisp=5;
+				document.getElementById("bottom_menu").style.height='90px';
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
 		document.getElementById("my_call_screen").style.display="none";
