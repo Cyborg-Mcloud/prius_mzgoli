@@ -200,7 +200,7 @@ function update_data()
 		mr=gamehttp.responseText;
 		if (mr!="")
 			{
-			console.log("data received from server: "+mr);
+			console.log("-- data received from server: "+mr);
 			if (mr=="register")		
 				{
 				//alert("Please Register Your User at\n\r http://design.ge/geotaxi/");
@@ -362,7 +362,7 @@ function UpData()
 		{
 		url="http://design.ge/geotaxi/taxi.php?passive="+inpause;
 		}
-	console.log("upload: "+url);
+	console.log("-- upload: "+url);
 //	document.getElementById('erorebi').innerHTML="uname="+MyUser+"&pass="+MyPass+"&lat="+MyLat+"&long="+MyLong+"&alt="+MyAlt+"&head="+MyHead+"&speed="+MySpeed;
 	gamehttp.open('GET',url,true);
 	gamehttp.send(null);
@@ -412,8 +412,8 @@ function onResume()
 		{
 		checkConnection();
 	
-		var opts = { timeout: 30000, enableHighAccuracy: true};
-		watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
+	var opts = { timeout: 5000, enableHighAccuracy: false, maximumAge:0};
+	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
 	
 		if (MyUser!="nouser")	{Start();}
 		}
@@ -465,6 +465,7 @@ function getpos()
 function onWatchSuccess(position) 
 	{
 	console.log("on watch success");
+
 	MyLat=position.coords.latitude ;
 	MyLong=position.coords.longitude ;
 	MyAlt=position.coords.altitude ;
@@ -655,17 +656,17 @@ function onWatchSuccess(position)
 
 function setori(ori)
 {
-
-if (ori==1)
-	{
-	var so = cordova.plugins.screenorientation;
-     so.setOrientation(so.Orientation.PORTRAIT);
-	}
-else
-	{
-	var so = cordova.plugins.screenorientation;
-     so.setOrientation(so.Orientation.LANDSCAPE);
-	}
+//
+//if (ori==1)
+//	{
+//	var so = cordova.plugins.screenorientation;
+//     so.setOrientation(so.Orientation.PORTRAIT);
+//	}
+//else
+//	{
+//	var so = cordova.plugins.screenorientation;
+//     so.setOrientation(so.Orientation.LANDSCAPE);
+//	}
 
 }
 
@@ -972,10 +973,13 @@ function getmousecoord(event)
 		mousex=event.touches[0].pageX; 
 		mousey=event.touches[0].pageY;
 	
-//console.log("get mouse coord: "+mousex+" - "+mousey);
+		
 
 		wlon=wlon+((omousex-mousex)/biji[MyZoom]);
 		wlat=wlat-((omousey-mousey)/(biji[MyZoom]*1.3));
+
+		console.log("get mouse coord: "+mousex+" - "+mousey+" | "+wlon+" / "+wlat);
+
 		omousex=mousex;
 		omousey=mousey;
 
@@ -1116,9 +1120,10 @@ function setmypos()
 
 	document.getElementById("map").style.left=difx+"px";
 	document.getElementById("map").style.top=dify+"px";
-	console.log("xtile "+oxt + " - " + xtile +", ytile "+oyt + " - " + ytile);
+
 	if (xtile!=oxt || oyt!=ytile)
 		{
+		console.log("pos updated, xtile "+oxt + " - " + xtile +", ytile "+oyt + " - " + ytile);
 		oxt=xtile;
 		oyt=ytile;
 		cur_down_i=0;
@@ -1134,24 +1139,24 @@ function setmypos()
 
 function check_user_click()
 	{
-	console.log("checking user click");
-	console.log((omousex-canacX-kartX) + " and " + (omousey-canacY-kartY));
-	for (i=0;i<userids.length ;i++ )
-		{
-		curid=userids[i];
-
-		var x=long2pixel(userlongs[i], MyZoom);
-		var y=lat2pixel(userlats[i], MyZoom);
-	
-		var difx=Math.floor((x-xtile)*256);
-		var dify=Math.floor((y-ytile)*256);
-		difx=(256*(myw-1)/2)+difx-128;
-		dify=(256*(myh-1)/2)+dify-128;
-		if ( (difx-16)<(omousex-canacX-kartX) && (omousex-canacX-kartX)<(difx+16) &&  (dify-16)<(omousey-canacY-kartY) && (omousey-canacY-kartY)<(dify+16) )
-			{
-			show_profile(i);
-			}
-		}
+//	console.log("checking user click "+(omousex-canacX-kartX) + " and " + (omousey-canacY-kartY));
+//	for (i=0;i<userids.length ;i++ )
+//		{
+//		curid=userids[i];
+//
+//		var x=long2pixel(userlongs[i], MyZoom);
+//		var y=lat2pixel(userlats[i], MyZoom);
+//	
+//		var difx=Math.floor((x-xtile)*256);
+//		var dify=Math.floor((y-ytile)*256);
+//		difx=(256*(myw-1)/2)+difx-128;
+//		dify=(256*(myh-1)/2)+dify-128;
+//
+//		if ( (difx-16)<(omousex-canacX-kartX) && (omousex-canacX-kartX)<(difx+16) &&  (dify-16)<(omousey-canacY-kartY) && //(omousey-canacY-kartY)<(dify+16) )
+//			{
+//			show_profile(i);
+//			}
+//		}
 	}
 
 function hide_profile()
