@@ -558,7 +558,7 @@ function onWatchSuccess(position)
 
 <div id="bottom_menu" style='width:100%; position:fixed; top:0px; padding-top:10px; left:0px; height:90px; padding-left:20px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9; width:100%;'>
 		<Br>
-		<div style='position:absolute; right:80px; top:25px; font-size:28px; font-weight:Bold;' id='qucha_txt'></div>
+		<div style='position:absolute; right:80px; top:25px; font-size:32px; font-weight:Bold;' id='qucha_txt'></div>
 
 			<div id='no_call_screen' style='display:inline;'>
 				<center>
@@ -567,7 +567,7 @@ function onWatchSuccess(position)
 			</div>
 
 			<div id='new_call_screen' style=' width:100%; display:none; position:absolute; left:150px; top:200px; '>
-				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:green; color:white; padding:10px; font-size:24px; width:250px; text-align:center; '>გამოძახების მიღება</a>
+				<a href='Javascript: call_confirm();' id='call_confirm' style='border:1px solid gray; padding:5px; display:block; background-color:green; color:white; padding:10px; font-size:28px; width:250px; text-align:center; '>გამოძახების მიღება</a>
 			</div>
 
 			<div id='my_call_screen' style=' width:100%; display:none;'>
@@ -644,8 +644,8 @@ function onWatchSuccess(position)
 		
 		<b>Profile Details</b>
 		<table>
-			<tr><td>User:</td><td> <input id='myname' name='myname' value='youuser' size=12></td></tr>
-			<tr><td>Pass:</td><td> <input id='mypass' name='mypass' value='yourpass' size=12></td>
+			<tr><td>User:</td><td> <input type='text' id='myname' name='myname' value='youuser' size=12></td></tr>
+			<tr><td>Pass:</td><td> <input type='password' id='mypass' name='mypass' value='yourpass' size=6></td>
 			<td rowspan=2><a style='' href='Javascript: saveuser();'><img src='save.png'></a></td></tr>
 		</table>
 		<br><br>
