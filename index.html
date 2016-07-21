@@ -168,10 +168,6 @@ function onDeviceReady()
 	}
 // ------------------------
 
-function doOnOrientationChange()
-  {
-
-  }
 
 function MainProg()
 	{
@@ -491,6 +487,17 @@ function onWatchSuccess(position)
 		}
 	}
 
+
+
+function doOnOrientationChange()
+  {
+
+
+
+	document.getElementById("fanjara").style.width="100%";
+	document.getElementById("fanjara").style.height="100%";
+	alert(window.orientation);
+  }
     </script>
   </head>
   <style>
