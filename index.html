@@ -147,6 +147,8 @@ function onDeviceReady()
 	document.addEventListener("volumedownbutton", onVolumeDown, false);
 	document.addEventListener("volumeupbutton", onVolumeUp, false);
 
+
+	window.addEventListener('orientationchange', doOnOrientationChange);
 	console.log("device ready, getting position");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: false,  maximumAge:0});
 	var opts = { timeout: 5000, enableHighAccuracy: false, maximumAge:0};
@@ -165,6 +167,11 @@ function onDeviceReady()
 	setmypos();
 	}
 // ------------------------
+
+function doOnOrientationChange()
+  {
+
+  }
 
 function MainProg()
 	{
