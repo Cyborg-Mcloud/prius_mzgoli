@@ -490,14 +490,22 @@ function onWatchSuccess(position)
 
 
 function doOnOrientationChange()
-  {
+	{
 
+	if (window.orientation==90 || window.orientation==-90)
+		{
+		document.getElementById("fanjara").style.width="600px";
+		document.getElementById("fanjara").style.height="400px";
+		}
 
+	else (window.orientation==0)
+		{
+		document.getElementById("fanjara").style.width="400px";
+		document.getElementById("fanjara").style.height="600px";
+		}
 
-	document.getElementById("fanjara").style.width="400px";
-	document.getElementById("fanjara").style.height="600px";
 	alert(window.orientation);
-  }
+	}
     </script>
   </head>
   <style>
