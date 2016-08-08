@@ -190,9 +190,10 @@ function MainProg()
 			wlon=MyLong;
 			wlat=MyLat;
 			setmypos();
+		DrawHomePos();
 			}
 			
-		DrawHomePos();
+
 		navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
 		setTimeout("MainProg();",500);
 	
@@ -437,7 +438,7 @@ function onResume()
 
 function onSuccess(position) 
 	{
-console.log("on success");
+	console.log("on success");
 		
 	var element = document.getElementById('geopos');
 	element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
@@ -452,11 +453,18 @@ console.log("on success");
 
 	wlon=MyLong;
 	wlat=MyLat;
-console.log("on succ, sett long");
+	console.log("on succ, sett long");
 
 	if (started==0 && MyUser!="nouser")	{Start();}
+	if (myself==1 && inpause==0)
+		{
+		setmypos();	
+		}
+	else
+		{
+		DrawHomePos();
+		}
 
-	setmypos();	
     }
 
    
@@ -1170,9 +1178,10 @@ function setmypos()
 		check_complete=1;
 		file_downing=1;
 		LT_finished=0;
-		DrawHomePos();
+//		DrawHomePos();
 		loadtiles();	
 		}
+	DrawHomePos();
 	}
 
 function check_user_click()
