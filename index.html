@@ -150,8 +150,8 @@ function onDeviceReady()
 
 	window.addEventListener('orientationchange', doOnOrientationChange);
 	console.log("device ready, getting position");
-	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: false,  maximumAge:0});
-	var opts = { timeout: 5000, enableHighAccuracy: false, maximumAge:0};
+	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
+	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
 	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
 	document.addEventListener("resume", onResume, false);
 	
@@ -193,7 +193,7 @@ function MainProg()
 			}
 			
 		DrawHomePos();
-		navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: false,  maximumAge:0});
+		navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
 		setTimeout("MainProg();",500);
 	
 		}
