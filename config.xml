@@ -58,6 +58,7 @@
     <plugins>
 
     </plugins>
+
 	<feature name="http://api.phonegap.com/1.0/geolocation"/>
 	<feature name="http://api.phonegap.com/1.0/device" />
 
@@ -100,7 +101,7 @@
 	<gap:platform name="winphone" />-->
 
 
-
-<preference name="Orientation" value="portrait" />
+<!--
+<preference name="Orientation" value="portrait" />-->
 
 </widget>
