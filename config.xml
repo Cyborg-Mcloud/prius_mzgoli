@@ -25,7 +25,7 @@
     </platform>
 	<preference name="target-device" value="handset" /> 
 
-	<preference name="phonegap-version" value="cli-6.3.0" /> 
+	<preference name="phonegap-version" value="cli-6.5.0" /> 
 <!--	<preference name="orientation" value="landscape" />
 	<preference name="orientation" value="landscape" />-->
 
@@ -88,11 +88,14 @@
 
 
 <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-	<gap:plugin name="com.simplec.plugins.powermanagement" />
-	<gap:plugin name="org.apache.cordova.geolocation" />
-	<gap:plugin name="org.apache.cordova.file" />
-	<gap:plugin name="org.apache.cordova.network-information" />
-	<gap:plugin name="org.apache.cordova.file-transfer"  />
+	<!--<gap:plugin name="com.simplec.plugins.powermanagement" />-->
+<gap:plugin name="cordova-plugin-powermanagement" source="npm" />
+	<gap:plugin name="cordova-plugin-geolocation" source="npm"/>
+	<gap:plugin name="cordova-plugin-file" source="npm"  />
+	<gap:plugin name="cordova-plugin-network-information"  source="npm"/>
+	<gap:plugin name="cordova-plugin-file-transfer"   source="npm"/>
+<!--	<gap:plugin name="de.appplant.cordova.plugin.local-notification-ios9-fix" spec="0.8.2" source="npm" />-->
+	<gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.4"  source="npm"/>
 	
 	
 <!--
