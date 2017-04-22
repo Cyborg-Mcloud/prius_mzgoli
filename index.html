@@ -903,8 +903,8 @@ function setme()
 	{
 	console.log("setme");
 
-	if(myself==0)
-		{myself=1; document.getElementById("cbut").src='center_sel.svg';}
+	if(myself!=1)
+		{myself=1; document.getElementById("cbut").src='center_sel.svg';document.getElementById("client_but").src='client_center.png';}
 	else {myself=0;document.getElementById("cbut").src='center.svg';}
 
 	}
@@ -914,8 +914,8 @@ function set_client()
 	{
 	console.log("setme");
 
-	if(myself==0)
-		{myself=2; document.getElementById("client_but").src='client_center.png';}
+	if(myself!=2)
+		{myself=2; document.getElementById("client_but").src='client_center.png';document.getElementById("cbut").src='center.svg';}
 	else {myself=0;document.getElementById("client_but").src='client_icon.png';}
 
 	}
