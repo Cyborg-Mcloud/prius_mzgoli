@@ -231,6 +231,7 @@ function update_data()
 				a=mr.split("|");
 				if (a[0]=="newcall")
 					{
+					document.getElementById("client_center").style.display="inline";
 					b=a[1].split(";");
 					curid=b[0];
 					if (callid!=curid && myself==0)
@@ -249,7 +250,7 @@ function update_data()
 					}
 				else if (a[0]=="yourcall")
 					{
-
+					document.getElementById("client_center").style.display="inline";
 					b=a[1].split(";");
 					curid=b[0];
 					if (callid!=curid && myself==0)
@@ -268,7 +269,7 @@ function update_data()
 					}
 				else if (a[0]=="waiting")
 					{
-
+					document.getElementById("client_center").style.display="inline";
 					b=a[1].split(";");
 					curid=b[0];
 					if (callid!=curid && myself==0)
@@ -287,7 +288,7 @@ function update_data()
 					}
 				else if (a[0]=="usercoming")
 					{
-
+					document.getElementById("client_center").style.display="inline";
 					b=a[1].split(";");
 					curid=b[0];
 					if (callid!=curid && myself==0)
@@ -307,6 +308,7 @@ function update_data()
 					}
 				else if (a[0]=="moving")
 					{
+					document.getElementById("client_center").style.display="none";
 					call_tel="";
 					b=a[1].split(";");
 					curid=b[0];
@@ -325,6 +327,7 @@ function update_data()
 					}
 				else
 					{
+					document.getElementById("client_center").style.display="none";
 					if (curdisp!=0)	{set_status(0);}
 					txt_addr="";
 					calllong=0;
@@ -596,7 +599,7 @@ function doOnOrientationChange()
 <a href='Javascript:zoomme(-1);'style='position:fixed; bottom:45px; left:5px; margin:5px; z-index:252; '><img src='zoomout.png'></a>
 <a href='Javascript: setme();' style='position:fixed; bottom:130px; left:5px; margin:5px; z-index:252; ' ><img id='cbut' src='center.svg' style='width:50px; height:50px;'></a>
 
-<a href='Javascript: set_client();' style='position:fixed; bottom:130px; right:5px; margin:5px; z-index:252; '  id='client_center' ><img id='client_but' src='client_icon.png'></a> <!--visibility:hidden-->
+<a href='Javascript: set_client();' style='position:fixed; bottom:130px; right:5px; margin:5px; z-index:252; '  id='client_center' style='display:none;'><img id='client_but' src='client_icon.png'></a> <!--visibility:hidden-->
 <a href='Javascript: show_settings();' style='position:fixed; top:45px; right:5px; margin:5px; z-index:252; ' ><img src='settings.png'></a> 
 
 
@@ -721,19 +724,23 @@ function userpay(pmethod)
 {
 	if (callid>0)
 		{
-		tanxa=document.getElementById("mytanxa").value;
-		document.getElementById("mytanxa").value="";
+		//tanxa=document.getElementById("mytanxa").value;
+		//document.getElementById("mytanxa").value="";
+		tanxa=0;
 		url="http://design.ge/geotaxi/pay.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid+"&pmethod="+pmethod+"&amount="+tanxa;
 			
 		console.log("usermet upload: "+url);
 		gamehttp.open('GET',url,true);
 		gamehttp.send(null);
-
+		document.getElementById("client_center").style.display="none";
 		callid=0;
 		mystatus=0;
 		calllat=0;
 		calllong=0;
+		call_tel="";
+		call_meters=0;
 		set_status(0);
+
 
 		}
 }
@@ -911,7 +918,7 @@ function setme()
 	console.log("setme");
 
 	if(myself!=1)
-		{myself=1; document.getElementById("cbut").src='center_sel.svg';document.getElementById("client_but").src='client_center.png';}
+		{myself=1; document.getElementById("cbut").src='center_sel.svg';document.getElementById("client_but").src='client_icon.png';}
 	else {myself=0;document.getElementById("cbut").src='center.svg';}
 
 	}
