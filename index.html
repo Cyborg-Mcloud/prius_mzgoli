@@ -318,8 +318,8 @@ function update_data()
 					calllong=parseFloat(b[2]);	
 					txt_addr=b[3];
 					call_meters=b[5];
-					document.getElementById("meters_txt").innerHTML=call_meters+" მეტრი";
-					document.getElementById("price_txt").innerHTML=(parseInt((call_meters/1000)*0.6*100)/100)+" მეტრი";
+					document.getElementById("meters_txt").innerHTML=parseInt(10*call_meters/1000)/10+" მეტრი";
+					document.getElementById("price_txt").innerHTML=(parseInt((call_meters/1000)*0.6*100)/100)+" ლარი";
 
 					set_status(5);
 					ertxelmainc=1;
@@ -726,7 +726,7 @@ function userpay(pmethod)
 		{
 		//tanxa=document.getElementById("mytanxa").value;
 		//document.getElementById("mytanxa").value="";
-		tanxa=0;
+		tanxa=parseInt((call_meters/1000)*0.6*100)/100;
 		url="http://design.ge/geotaxi/pay.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid+"&pmethod="+pmethod+"&amount="+tanxa;
 			
 		console.log("usermet upload: "+url);
@@ -740,8 +740,6 @@ function userpay(pmethod)
 		call_tel="";
 		call_meters=0;
 		set_status(0);
-
-
 		}
 }
 
