@@ -200,7 +200,7 @@ function MainProg()
 			
 
 		navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
-		setTimeout("MainProg();",500);
+		setTimeout("MainProg();",1000);
 	
 		}
 	}
@@ -250,6 +250,7 @@ function update_data()
 					}
 				else if (a[0]=="yourcall")
 					{
+					callconfirming=0;
 					document.getElementById("client_center").style.display="inline";
 					b=a[1].split(";");
 					curid=b[0];
@@ -269,6 +270,7 @@ function update_data()
 					}
 				else if (a[0]=="waiting")
 					{
+					callconfirming=0;
 					document.getElementById("client_center").style.display="inline";
 					b=a[1].split(";");
 					curid=b[0];
@@ -288,6 +290,7 @@ function update_data()
 					}
 				else if (a[0]=="usercoming")
 					{
+						callconfirming=0;
 					document.getElementById("client_center").style.display="inline";
 					b=a[1].split(";");
 					curid=b[0];
@@ -308,6 +311,7 @@ function update_data()
 					}
 				else if (a[0]=="moving")
 					{
+						callconfirming=0;
 					document.getElementById("client_center").style.display="none";
 					call_tel="";
 					b=a[1].split(";");
@@ -327,6 +331,7 @@ function update_data()
 					}
 				else
 					{
+						callconfirming=0;
 					document.getElementById("client_center").style.display="none";
 					if (curdisp!=0)	{set_status(0);}
 					txt_addr="";
@@ -767,10 +772,12 @@ function iArrived()
 		gamehttp.send(null);
 		}
 	}
+var callconfirming=0;
 function call_confirm()
 	{
 	if (callid>0)
 		{
+		callconfirming=1;
 		url="http://design.ge/geotaxi/confirm.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
 			
 		console.log("upload: "+url);
