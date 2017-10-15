@@ -217,11 +217,11 @@ function update_data()
 			console.log("-- data received from server: "+mr);
 			if (mr=="register")		
 				{
-				//alert("Please Register Your User at\n\r http://design.ge/geotaxi/");
+				//alert("Please Register Your User at\n\r http://developer.design.ge/geotaxi/");
 			//	started=0;
 			//	document.getElementById('mainb').innerHTML="START";
 				Start();
-				//alert("please REGISTER at website: www.design.ge/mytaxi");
+				//alert("please REGISTER at website: www.developer.design.ge/mytaxi");
 				}
 			else
 				{
@@ -387,11 +387,11 @@ function UpData()
 
 	if (MyUser!="nouser")
 		{    
-		url="http://design.ge/geotaxi/taxi.php?uname="+MyUser+"&pass="+MyPass+"&lat="+MyLat+"&long="+MyLong+"&alt="+MyAlt+"&head="+MyHead+"&speed="+MySpeed+"&passive="+inpause+"&mstat="+mystatus+"&callid="+callid;		
+		url="http://developer.design.ge/geotaxi/taxi.php?uname="+MyUser+"&pass="+MyPass+"&lat="+MyLat+"&long="+MyLong+"&alt="+MyAlt+"&head="+MyHead+"&speed="+MySpeed+"&passive="+inpause+"&mstat="+mystatus+"&callid="+callid;		
 		}
 	else
 		{
-		url="http://design.ge/geotaxi/taxi.php?passive="+inpause;
+		url="http://developer.design.ge/geotaxi/taxi.php?passive="+inpause;
 		}
 	console.log("-- upload: "+url);
 //	document.getElementById('erorebi').innerHTML="uname="+MyUser+"&pass="+MyPass+"&lat="+MyLat+"&long="+MyLong+"&alt="+MyAlt+"&head="+MyHead+"&speed="+MySpeed;
@@ -581,7 +581,7 @@ function doOnOrientationChange()
 				<tr><td onmouseup='hide_profile();' onclick="hide_profile();" colspan=3></td></tr>
 				<tr><td onmouseup='hide_profile();' onclick="hide_profile();"></td>
 				<td>
-					<img src='http://design.ge/geotaxi/taxicar.jpg' width=100px><br>
+					<img src='http://developer.design.ge/geotaxi/taxicar.jpg' width=100px><br>
 					&#4315;&#4304;&#4316;&#4325;&#4304;&#4316;&#4312;&#4321;&#32;&#4315;&#4317;&#4307;&#4308;&#4314;&#4312;: Mercedes<br>
 					მანქანის ფერი: მწვანე<br>
 					მძღოლი: ანდრო შველიძე<br>
@@ -732,7 +732,7 @@ function userpay(pmethod)
 		//tanxa=document.getElementById("mytanxa").value;
 		//document.getElementById("mytanxa").value="";
 		tanxa=parseInt((call_meters/1000)*0.6*100)/100;
-		url="http://design.ge/geotaxi/pay.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid+"&pmethod="+pmethod+"&amount="+tanxa;
+		url="http://developer.design.ge/geotaxi/pay.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid+"&pmethod="+pmethod+"&amount="+tanxa;
 			
 		console.log("usermet upload: "+url);
 		gamehttp.open('GET',url,true);
@@ -753,7 +753,7 @@ function user_met()
 {
 	if (callid>0)
 		{
-		url="http://design.ge/geotaxi/usermet.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
+		url="http://developer.design.ge/geotaxi/usermet.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
 			
 		console.log("usermet upload: "+url);
 		gamehttp.open('GET',url,true);
@@ -765,7 +765,7 @@ function iArrived()
 
 	if (callid>0)
 		{
-		url="http://design.ge/geotaxi/arrived.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
+		url="http://developer.design.ge/geotaxi/arrived.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
 			
 		console.log("arrived upload: "+url);
 		gamehttp.open('GET',url,true);
@@ -778,7 +778,7 @@ function call_confirm()
 	if (callid>0)
 		{
 		callconfirming=1;
-		url="http://design.ge/geotaxi/confirm.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
+		url="http://developer.design.ge/geotaxi/confirm.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
 			
 		console.log("upload: "+url);
 		gamehttp.open('GET',url,true);
