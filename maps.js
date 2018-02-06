@@ -73,7 +73,7 @@ console.log("mere");
     });
     positionMarker = new google.maps.Marker({
         position: position,
-        map: map,
+        map: mymap,
         icon: gpsIcon,
         optimized: false
     });
@@ -151,13 +151,13 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
     directionsService.route(request, function (response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             var route = response.routes[0].legs[0];
-            addMarker(startMarker, map, getPosition(route.start_location), mymapgetBounds());
-            addMarker(endMarker, map, getPosition(route.end_location), mymapgetBounds());
+            addMarker(startMarker, mymap, getPosition(route.start_location), mymapgetBounds());
+            addMarker(endMarker, mymap, getPosition(route.end_location), mymapgetBounds());
             directionsDisplay.setDirections(response);
 
             directionsDisplay.setMap(map);
         } else {
-            addMarkers(map, [from_loc, to_loc], mymapgetBounds());
+            addMarkers(mymap, [from_loc, to_loc], mymapgetBounds());
         }
     });
 }
