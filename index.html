@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-<meta http-equiv="Content-Security-Policy" content="img-src * 'self' data:; default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+<meta http-equiv="Content-Security-Policy"
+      content="img-src * 'self' data:; default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com https://fonts.googleapis.com">
   <head>
 
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,8 +10,8 @@
 	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 
 	<script type="text/javascript" charset="utf-8" src="io.js"></script>
-<script type="text/javascript" charset="utf-8" src="func.js"></script>
-	
+	<script type="text/javascript" charset="utf-8" src="func.js"></script>
+	<script type="text/javascript" charset="utf-8" src="maps.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 
@@ -145,6 +146,9 @@ function onDeviceReady()
 	console.log("device ready, checking connection");
 	checkConnection();
 
+	req_loc_acc();
+	req_loc_auth();
+
 	document.addEventListener("pause", onPause, false);
 	//document.addEventListener("backbutton", onBackKeyDown, false);
 	//document.addEventListener("menubutton", onMenuDown, false);
@@ -163,13 +167,11 @@ function onDeviceReady()
 	console.log("device ready, dealing with record file");
 	
 	kc=checkIfFileExists("locdata.txt");
-
-
 	if (started==0)	
 		{
 		Start();
 		}
-	setmypos();
+	//setmypos();
 	}
 // ------------------------
 
@@ -557,48 +559,15 @@ function doOnOrientationChange()
 		<!-- MAIN MAP width:365px; height:600px;  -->
 <div id='charcho' style='position:absolute; left:1px; top:1px; border:1px solid red; width:100%; height:100%;z-index:1;' >
 		<div id='mainw' style='position:absolute; left:0px; top:0px; width:600px; height:600px; border:1px solid red; z-index:2;' >
-			<div id='map' style='position:absolute; left:0px; top:0px; width:600px; height:600px; display:block; z-index:3;' >
 			
-				<div id='users' style='position:absolute; left:0px; top:0px;  z-index:101; '>
-					<div id='homepos' style='position:absolute; left:0px; top:0px;  background-color:green; z-index:102;'><img src='car.svg' style='position:absolute; left:-15px; top:-15px; width:30px; height:30px;'></div>
-					<div id='call_marker'  style='position:absolute; left:0px; top:0px; color:red; font-size:12px; width:31px; height:50px;  z-index:103;'>
 
-							<img src='pin.svg'  style='position:absolute; left:-25px; top:-25px; width:50px; height:50px; z-index:104; '>
-
-					</div>
-				</div>
-
-			</div>
+			  <div id="gmap"  style='position:absolute; left:0px; top:0px; height:600px; width:365px; display:block;'></div>
 		</div>
+		 <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFY47FE__z9AvRLBoYG0T2XeOTiHdwzOQ&callback=initMap&language=ka&libraries=places"></script>
 </div>
-		<!-- MOUSE OVER LAYER -->
-		<div id='mouser' style='position:absolute; left:0px;top:50px; width:400px; height:620px; z-index:250; ' ontouchstart="mdown(event);" ontouchend="mup();"  ontouchmove="getmousecoord(event);">
-		</div>
-
-
-		<!--<div id='profile_div' style='position:absolute; left:0px; top:0px; width:600px; height:600px; z-index:252; background:URL(semitrans.png); visibility:hidden;'>
-			<table width=100% cellspacing=0 cellpadding=0 height=100% border=1>
-				<tr><td onmouseup='hide_profile();' onclick="hide_profile();" colspan=3></td></tr>
-				<tr><td onmouseup='hide_profile();' onclick="hide_profile();"></td>
-				<td>
-					<img src='http://developer.design.ge/geotaxi/taxicar.jpg' width=100px><br>
-					&#4315;&#4304;&#4316;&#4325;&#4304;&#4316;&#4312;&#4321;&#32;&#4315;&#4317;&#4307;&#4308;&#4314;&#4312;: Mercedes<br>
-					მანქანის ფერი: მწვანე<br>
-					მძღოლი: ანდრო შველიძე<br>
-					<a href='Javascript: call_taxi()'>გამოძახება</a>
-				</td>
-				<td onmouseup='hide_profile();' onclick="hide_profile();"></td></tr>
-				<tr><td onmouseup='hide_profile();' onclick="hide_profile();" colspan=3></td></tr>
-				</table>
-		</div>-->
-		
-	<!--	<div id="geopos_short" style='width:100%; position:absolute; left:0px; top:50px; z-index:220; background-color:black; filter: alpha(opacity=50);
-			-moz-opacity: 0.5; -khtml-opacity: 0.5;  opacity: 0.5;'>Finding geolocation...</div>-->
-
-		<!--<a href='Javascript: Start();' id='mainb' style='position:absolute; left:25px; top:25px; background-color:green; color:white; font-weight:bold; width:200px; display:block; padding:5px; z-index:301; text-align:center;' >START</a>-->
-
-
 	
+
 			
 <a href='Javascript:zoomme(1);' style='position:fixed; bottom:85px; left:5px; margin:5px; z-index:252; '><img src='zoomin.png'></a>
 <a href='Javascript:zoomme(-1);'style='position:fixed; bottom:45px; left:5px; margin:5px; z-index:252; '><img src='zoomout.png'></a>
@@ -608,6 +577,19 @@ function doOnOrientationChange()
 <a href='Javascript: show_settings();' style='position:fixed; top:45px; right:5px; margin:5px; z-index:252; ' ><img src='settings.png'></a> 
 
 
+
+  <div style='position:fixed; left:0px; top:0px; display:none; z-index:10000; height:20%; width:100%; color:red; font-weight:Bold; background:white;'
+       id='nogps'>
+    <Br><Br><Br>
+    <Center>ვერ ხერხდება GPS ლოკაცის მიღება</center>
+  </div>
+
+
+  <div style='position:fixed; left:0px; top:0px; display:none; z-index:10001; height:20%; width:100%; color:red; font-weight:Bold; background:white;'
+       id='myint'>
+    <Br><Br><Br>
+    <Center>ჩართეთ ინტერნეტ კავშირი</center>
+  </div>
 
 <div id="bottom_menu" style='width:100%; position:fixed; top:0px; padding-top:10px; left:0px; height:90px; padding-left:20px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.9; -khtml-opacity: 0.9;  opacity: 0.9; width:100%; '>
 		<Br>
@@ -1383,5 +1365,74 @@ function downtile(smap, szoom, A, B, i, ii, retry)
 	{
     console.log(error.code);
     }
+
+
+
+
+function onError(e) 
+	{
+		return;
+		console.log(e);
+		nogps++;
+		if (nogps > 1) {
+			document.getElementById("nogps").style.display = "inline";
+		}
+	 
+	}
+
+
+
+
+function onRequestSuccess( success)
+	{
+    console.log("Successfully requested accuracy "+success.message);
+	var k=success.message;
+	var b=k.split("agreed");
+	if (b.length>1)
+		{
+		// aplikaciis restarti tu motxovna gaxda sachiro da userma ok utxra
+		location.reload();
+		}
+	
+    }
+
+function onRequestFailure(error)
+	{
+    console.log("Accuracy request failed: error code="+error.code+"; error message="+error.message);
+	}
+
+function req_loc_acc()
+	{
+	var accuracy = 3;
+	var accuracyName  = "High Accuracy";
+	console.log("requesting acc");
+	cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+	}
+
+function req_loc_auth()
+	{
+	console.log("requesting auth");
+	cordova.plugins.diagnostic.isLocationAuthorized(function (authorized) {
+		if(!authorized)
+			{
+
+			cordova.plugins.diagnostic.requestLocationAuthorization(function (status) {
+				console.log("Requested location authorization: authorization was " + status);
+				 
+				}, onError, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
+			}
+		else
+			{
+			onError("App is already authorized to use location");
+			}
+		}, onError);
+	}
+
+
+function open_loc_settings()
+	{
+	cordova.plugins.diagnostic.switchToLocationSettings();
+	}
+
 </script></body>
 </html>
