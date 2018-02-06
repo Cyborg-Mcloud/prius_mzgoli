@@ -15,7 +15,7 @@ console.log("mylat: "+MyLat+", mylong: "+MyLong);
     var position = {lat: MyLat, lng: MyLong};
 
     map = new google.maps.Map(document.getElementById('gmap'), {
-        zoom: 18,
+        zoom: 16,
         center: position,
         zIndex: 70,
         fullscreenControl: false,
@@ -24,6 +24,7 @@ console.log("mylat: "+MyLat+", mylong: "+MyLong);
     });
 
 
+console.log("mere");
     dirRender = new google.maps.DirectionsRenderer({suppressMarkers: true});
     dirService = new google.maps.DirectionsService();
     START_ICON = {
@@ -62,6 +63,7 @@ console.log("mylat: "+MyLat+", mylong: "+MyLong);
 
 
     };
+	console.log("icons loaded");
     startMarker = new google.maps.Marker({
         icon: START_ICON,
         map: map
@@ -77,11 +79,10 @@ console.log("mylat: "+MyLat+", mylong: "+MyLong);
     });
 
     tempMarker = new google.maps.Marker();
+console.log("markers placed");
 
 
-
-    var card = document.getElementById('pac-card');
-    var input = document.getElementById('pac-input');
+  
 
     var strictBounds = document.getElementById('strict-bounds-selector');
 
