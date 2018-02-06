@@ -28,8 +28,8 @@ var MyUser="nouser";
 var MyPass="nopass";
 var MyZoom=17;
 
-var MyLat;
-var MyLong;
+var MyLat=44.7689831;
+var MyLong=41.7089554;
 var MyAlt;
 var MyHead;
 var MySpeed;
@@ -201,7 +201,7 @@ function MainProg()
 			}
 			
 
-		navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
+//		navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
 		setTimeout("MainProg();",1000);
 	
 		}
