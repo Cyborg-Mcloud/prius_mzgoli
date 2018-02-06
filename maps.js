@@ -79,7 +79,7 @@ console.log("mere");
     });
 
     tempMarker = new google.maps.Marker();
-console.log("markers placed");
+	console.log("markers placed");
 
 
   

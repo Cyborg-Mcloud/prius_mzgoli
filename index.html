@@ -182,8 +182,6 @@ function MainProg()
 		if (callid>0 && inpause==0 && myself==2)
 			{
 			console.log("setting to call");
-			wlon=calllong;
-			wlat=calllat;
 			setmypos();
 			DrawUsers();
 			}
@@ -201,6 +199,11 @@ function MainProg()
 	
 		}
 	}
+
+var call_dest_lat=0;
+var call_dest_long=0;
+var call_dest_addr="";
+
 
 var calltel="";
 var call_meters=0;
@@ -241,8 +244,16 @@ function update_data()
 					txt_addr=b[3];
 					call_tel="";
 					call_meters=0;
+
+					call_dest_lat=b[6];
+					call_dest_long=b[7];
+					call_dest_addr=b[8];
+					draw_markers();
 					set_status(101);
 					ertxelmainc=1;
+
+					
+
 
 					}
 				else if (a[0]=="yourcall")
@@ -261,8 +272,15 @@ function update_data()
 					txt_addr=b[3];
 					call_tel=b[4];
 					call_meters=b[5];
+					
+					call_dest_lat=b[6];
+					call_dest_long=b[7];
+					call_dest_addr=b[8];
+					draw_markers();
 					set_status(1);
 					ertxelmainc=1;
+
+					
 
 					}
 				else if (a[0]=="waiting")
@@ -281,6 +299,10 @@ function update_data()
 					txt_addr=b[3];
 					call_tel=b[4];
 					call_meters=b[5];
+					call_dest_lat=b[6];
+					call_dest_long=b[7];
+					call_dest_addr=b[8];
+					draw_markers();
 					set_status(3);
 					ertxelmainc=1;
 
@@ -301,8 +323,12 @@ function update_data()
 					txt_addr=b[3];
 					call_tel=b[4];
 					call_meters=b[5];
-					set_status(4);
 
+					call_dest_lat=b[6];
+					call_dest_long=b[7];
+					call_dest_addr=b[8];
+					draw_markers();
+					set_status(4);
 					ertxelmainc=1;
 
 					}
@@ -321,14 +347,17 @@ function update_data()
 					call_meters=b[5];
 					document.getElementById("meters_txt").innerHTML=parseInt(10*call_meters/1000)/10+" მეტრი";
 					document.getElementById("price_txt").innerHTML=(parseInt((call_meters/1000)*0.6*100)/100)+" ლარი";
-
+					call_dest_lat=b[6];
+					call_dest_long=b[7];
+					call_dest_addr=b[8];
+					draw_markers();
 					set_status(5);
 					ertxelmainc=1;
 
 					}
 				else
 					{
-						callconfirming=0;
+					callconfirming=0;
 					document.getElementById("client_center").style.display="none";
 					if (curdisp!=0)	{set_status(0);}
 					txt_addr="";
@@ -337,6 +366,10 @@ function update_data()
 					callid=0;
 					call_tel="";
 					call_meters=0;
+
+					call_dest_lat=0;
+					call_dest_long=0;
+					call_dest_addr="";
 					
 					}
 				if (inpause==0)	{DrawUsers();}
@@ -521,6 +554,20 @@ function onWatchSuccess(position)
 
 
 
+function draw_markers()
+	{
+	var myLatLng = {lat: calllat, lng: calllong};
+    startMarker.setPosition(myLatLng);
+	startMarker.setMap(mymap);
+
+	if (call_dest_lat>0)
+		{
+		var myLatLng = {lat: call_dest_lat, lng: call_dest_long};
+		endMarker.setPosition(myLatLng);
+		endMarker.setMap(mymap);
+		}
+	}
+
 function doOnOrientationChange()
 	{
 
@@ -670,8 +717,6 @@ function doOnOrientationChange()
 ეკრანის ორიენტაცია: <a href='Javascript: setori(1);'>ვერტიკალური</a> / <a href='Javascript: setori(2);'>ჰორიზონტალური</a>
 	<br><br>
 		<div id='erorebi'>Tilebi (zoom:16)</div>
-	
-		
 		<b>Profile Details</b>
 		<table>
 			<tr><td>User:</td><td> <input type='text' id='myname' name='myname' value='youuser' size=12></td></tr>
@@ -682,8 +727,6 @@ function doOnOrientationChange()
 		<input type='checkbox' id='ignor_cache' name='ignor_cache' onchange='cignore();'> Ignore Cache<br>
 		<input type='checkbox' id='ignor_cache_on_wifi' name='ignor_cache_on_wifi' onchange='cignorewifi();' checked> Ignore Cache on WiFi<br>
 	</div>
-
-
 <script>
 
 function setori(ori)
@@ -721,6 +764,9 @@ function userpay(pmethod)
 		calllong=0;
 		call_tel="";
 		call_meters=0;
+		call_dest_lat=0;
+		call_dest_long=0;
+		call_dest_addr="";
 		set_status(0);
 		}
 }
@@ -1021,9 +1067,8 @@ function setmypos()
     }
 	if (myself==1)
 		{
-
 		//mymap.setMyLocationEnabled(true);
-		mymap.setCenter(new google.maps.LatLng(MyLat,MyLong));
+		mymap.panTo(positionMarker.getPosition());
 		}
 
 
