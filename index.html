@@ -473,6 +473,9 @@ function onSuccess(position)
 	//wlat=MyLat;
 	console.log("on succ, sett long");
 
+	var latlng = new google.maps.LatLng(MyLat, MyLong);
+    positionMarker.setPosition(latlng);
+
 	if (started==0 && MyUser!="nouser")	{Start();}
 	if (myself==1 && inpause==0)
 		{
@@ -1022,7 +1025,7 @@ function setmypos()
     else {
         document.getElementById("myint").style.display = "none";
     }
-
+//map.setMyLocationEnabled(true);
 
     DrawHomePos();
 
