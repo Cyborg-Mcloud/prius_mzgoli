@@ -14,7 +14,7 @@ function initMap()
 	console.log("mylat: "+MyLat+", mylong: "+MyLong);
     var position = {lat: MyLat, lng: MyLong};
 
-    map = new google.maps.Map(document.getElementById('gmap'), {
+    mymap = new google.maps.Map(document.getElementById('gmap'), {
         zoom: 16,
         center: position,
         zIndex: 70,
@@ -117,7 +117,7 @@ function switchState() {
 
 function setLocation(marker, target) {
     target.setPosition(marker.getPosition());
-    map.panTo(target.getPosition());
+    mymappanTo(target.getPosition());
 
     if (marker === tempMarker || marker === positionMarker) {
         switchState();
@@ -151,13 +151,13 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
     directionsService.route(request, function (response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             var route = response.routes[0].legs[0];
-            addMarker(startMarker, map, getPosition(route.start_location), map.getBounds());
-            addMarker(endMarker, map, getPosition(route.end_location), map.getBounds());
+            addMarker(startMarker, map, getPosition(route.start_location), mymapgetBounds());
+            addMarker(endMarker, map, getPosition(route.end_location), mymapgetBounds());
             directionsDisplay.setDirections(response);
 
             directionsDisplay.setMap(map);
         } else {
-            addMarkers(map, [from_loc, to_loc], map.getBounds());
+            addMarkers(map, [from_loc, to_loc], mymapgetBounds());
         }
     });
 }
@@ -170,11 +170,11 @@ function addMarkers(map, markers, bounds) {
 }
 
 function addMarker(marker, map, position) {
-    var bounds = map.getBounds();
+    var bounds = mymapgetBounds();
     bounds.extend(position);
     marker.setPosition(position);
     marker.setMap(map);
-    map.fitBounds(bounds);
+    mymapfitBounds(bounds);
 }
 
 function addAndGetMarker(map, position, bounds, label, icon) 
@@ -189,10 +189,10 @@ function addAndGetMarker(map, position, bounds, label, icon)
     if (icon !== undefined) marker.setIcon(icon);
     console.log("addAndGetMarker: "+marker.position);
     marker.addListener('click', function () {
-        map.setOptions({zoom: map.zoom + 2, center: position});
+        mymapsetOptions({zoom: mymapzoom + 2, center: position});
     });
     // Automatically center the map fitting all markers on the screen
-    map.fitBounds(bounds);
+    mymapfitBounds(bounds);
 
 }
 
