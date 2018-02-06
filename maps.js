@@ -86,10 +86,6 @@ console.log("markers placed");
 
     var strictBounds = document.getElementById('strict-bounds-selector');
 
-
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
-    var autocomplete = new google.maps.places.Autocomplete(input);
-
    
 
 }
