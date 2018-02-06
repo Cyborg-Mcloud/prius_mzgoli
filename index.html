@@ -963,25 +963,6 @@ var mcl="orange";
 function DrawUsers()
 	{
 
-		var x=long2pixel(calllong, MyZoom);
-		var y=lat2pixel(calllat, MyZoom);
-	
-		var difx=Math.floor((x-xtile)*256);
-		var dify=Math.floor((y-ytile)*256);
-		difx=(256*(myw-1)/2)+difx-128;
-		dify=(256*(myh-1)/2)+dify-128;
-		
-//		mcl="orange";
-//		if (userlasts[i]<300)
-//			{mcl="red";}
-	//	document.getElementById("user_"+curid).style.color=mcl;
-
-	//console.log("draw call: "+difx+"px, "+dify+"px");
-		document.getElementById("call_marker").style.left=difx+"px";
-		document.getElementById("call_marker").style.top=dify+"px";
-		document.getElementById("call_marker").style.visibility="visible";
-	//	document.getElementById("call_marker").innerHTML="<img src='call_marker.png' width='31px' height='50px' style='position:absolute; left:-16px; top:-16px;'>";//"X: "+difx+" Y: "+dify;
-
 		
 	}
 
@@ -995,62 +976,9 @@ function DrawHomePos()
 
 
 var but1=0;
-function mdown(event)
-	{
-
-	omousex=event.touches[0].pageX; omousey=event.touches[0].pageY;
-	//console.log("mouse down: "+omousex+ " - "+omousey);
-	finx=0; sfiny=0;
-	but1=1;
-
-//	document.getElementById("mainb").innerHTML="X: "+omousex+" Y: "+omousey;
-	}
-
-var biji = new Array();
-biji[2]=2;
-biji[3]=7;
-biji[4]=12;
-biji[5]=25;
-biji[6]=45;
-biji[7]=90;
-biji[8]=200;
-biji[9]=360;
-biji[10]=700;
-biji[11]=1400;
-biji[12]=2900;
-biji[13]=5800;
-biji[14]=11500;
-biji[15]=23500;
-biji[16]=46500;
-biji[17]=93000;
-biji[18]=190000;
 
 var sfinx=0;
 var finy=0;
-function getmousecoord(event)
-	{
-//console.log("get mouse coord");
-	if (but1==1)
-		{
-		mousex=event.touches[0].pageX; 
-		mousey=event.touches[0].pageY;
-	
-		
-
-		wlon=wlon+((omousex-mousex)/biji[MyZoom]);
-		wlat=wlat-((omousey-mousey)/(biji[MyZoom]*1.3));
-
-		console.log("get mouse coord: "+mousex+" - "+mousey+" | "+wlon+" / "+wlat);
-
-		omousex=mousex;
-		omousey=mousey;
-
-		//
-		setmypos();
-		DrawUsers();
-		}
-		
-	}
 
 function mup()
 	{
@@ -1062,54 +990,10 @@ function mup()
 	}
 
 
-var myw=Math.floor(sx/256)+2;
-var myh=Math.floor(sy/256)+2;
-
-if (myw/2==Math.floor(myw/2))
-	{myw++;}
-
-if (myh/2==Math.floor(myh/2))
-	{myh++;}
-
 
 
 document.getElementById("fanjara").style.width=sx+"px";
 document.getElementById("fanjara").style.height=sy+"px";
-
-
-
-var mywpx=(myw-1)*256;
-var myhpx=(myh-1)*256;
-
-document.getElementById("mainw").style.width=mywpx+"px";
-document.getElementById("mainw").style.height=myhpx+"px";
-console.log(" x: "+mywpx+ " Y: "+myhpx);
-document.getElementById("mainw").style.left=(-(mywpx-(sx))/2)+"px";
-document.getElementById("mainw").style.top=(-(myhpx-(sy))/2)+"px";
-
-canacX=(-(mywpx-(sx))/2);
-canacY=(-(myhpx-(sy))/2);
-
-console.log(" x: "+(-(mywpx-(sx))/2)+ " Y: "+(-(myhpx-(sy))/2));
-//document.getElementById("mainb").style.left=((sx-200)/2)+"px";
-
-
-function zoomme(sait)
-	{
-		//console.log("zoome "+sait)
-	var cant=0;
-	if (sait>0 && MyZoom==18)
-		{cant=1;}
-	else if (sait<0 && MyZoom==2)
-		{cant=1;}
-	if (cant==0)
-		{	
-		MyZoom=Math.floor(MyZoom)+sait;
-	//	document.getElementById("mainb").innerHTML="Zoom: "+MyZoom;
-		setmypos();
-		DrawUsers();
-		}
-	}
 
 
 
@@ -1196,116 +1080,6 @@ function show_profile(tid)
 
 
 
-function loadtiles()
-	{
-	if (down_complete==1 && check_complete==1)
-		{
-		var A;
-
-		if (cur_down_ii>=(myh-1))
-			{
-			cur_down_ii=-1; cur_down_i++;
-			}
-
-		curx=cur_down_i-(myw-1)/2;
-	
-		if (cur_down_i<myw)
-			{
-			cur_down_ii++;
-			
-			cury=cur_down_ii-(myh-1)/2;
-		//	alert("checking: "+curmap+"_"+MyZoom+"_"+(xtile+curx)+"_"+(ytile+cury)+".png");
-			
-			A=(xtile+curx);	if (A<0) {A=0;}
-			mytile=curmap+"/"+MyZoom+"_"+A+"_"+(ytile+cury)+".png";
-
-			tilef=-1;
-			check_complete=0;down_complete=0;
-			checktile3(mytile);
-
-			}
-		else
-			{
-			// cikli dasrulda
-			LT_finished=1;
-			console.log("-------- dasrulda ----------");
-
-			
-			DrawHomePos();
-			}
-		}
-	else if (check_complete==1)
-		{
-		curx=cur_down_i-(myw-1)/2; cury=cur_down_ii-(myh-1)/2;
-		A=(xtile+curx);	if (A<0) {A=0;}
-		mytile=curmap+"/"+MyZoom+"_"+A+"_"+(ytile+cury)+".png";
-
-		//if (tilef==0 || cache_ignore==1 || (cache_ignore_wifi==1 && inter=="Wifi"))
-//			{
-		//	if (file_downing==1)
-		//		{
-				file_downing=0;
-				downtile(curmap, MyZoom, (xtile+curx), (ytile+cury), cur_down_i, cur_down_ii,1);
-				down_complete=1;
-				file_downing=1;
-		//		}
-//			}
-//		else
-//			{
-//			document.getElementById("img_"+cur_down_i+"-"+cur_down_ii).src="file:///storage/emulated/0/mydriver/maps/"+mytile;
-//			document.getElementById("img_"+cur_down_i+"-"+cur_down_ii).alt=mytile;
-//			down_complete=1;
-//			file_downing=1;
-			
-//			DrawHomePos();
-//			}
-		}
-		
-	if (LT_finished==0)
-		{
-		setTimeout("loadtiles();",10);
-		}
-
-	}
-
-
-function downtile(smap, szoom, A, B, i, ii, retry)
-	{
-
-	if (A<0)
-		{A=0;}
-	if (B<0)
-		{B=0;}
-
-	if (smap==1)
-		{tilelink="http://tile.openstreetmap.org/"+szoom+"/"+A+"/"+B+".png";			}
-	else if (smap==2)
-		{tilelink="http://tile.opencyclemap.org/cycle/"+szoom+"/"+A+"/"+B+".png";			}
-	else if (smap==3)
-		{tilelink="http://mt3.google.com/vt/lyrs=s&x="+A+"&y="+B+"&z="+szoom;}
-	else if (smap==4)
-		{tilelink="http://mt3.google.com/vt/lyrs=p&x="+A+"&y="+B+"&z="+szoom;}
-	else if (smap==5)
-		{tilelink="http://mt3.google.com/vt/lyrs=t&x="+A+"&y="+B+"&z="+szoom;}
-	else if (smap==6)
-		{tilelink="http://mt3.google.com/vt/lyrs=h&x="+A+"&y="+B+"&z="+szoom;}
-	else if (smap==7)
-		{tilelink="http://mt3.google.com/vt/lyrs=r&x="+A+"&y="+B+"&z="+szoom;}
-	else if (smap==8)
-		{
-		s=A%4+(B%4)*4;
-		tilelink="http://i"+s+".wikimapia.org/?x="+A+"&y="+B+"&zoom="+szoom+"&m=h";
-		}
-	else if (smap==9)
-		{tilelink="http://tile.stamen.com/watercolor/"+szoom+"/"+A+"/"+B+".png";			}
-	else if (smap==10)
-		{tilelink="http://tile.stamen.com/toner/"+szoom+"/"+A+"/"+B+".png";			}	
-	tilename=smap+"/"+szoom+"_"+A+"_"+B+".png";
-
-	document.getElementById("img_"+i+"-"+ii).src=tilelink;
-	console.log("++ down tile: "+tilelink);
-
-	}
 
  function fail(error) 
 	{

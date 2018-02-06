@@ -6,25 +6,12 @@ var startPosListener, endPosListener, selPosListener;
 
 function geocodeLocation(position, infoWindow, markerName) {
     console.log("geocodeLocation")
-    geocoder.geocode({
-        latLng: position
-    }, function (responses) {
-        console.log("geocodeLocation: "+ markerName )
-        if (responses && responses.length > 0) {
-            console.log(responses[0].formatted_address)
-            infoWindow.setContent(getInfoContent(responses[0].formatted_address));
-        } else {
-      //      infoWindow.setContent(getInfoContent(markerName));
-		  console.log("position not received");
-        }
-
-    });
 }
 
 function initMap() 
 	{
 
-
+console.log("mylat: "+MyLat+", mylong: "+MyLong);
     var position = {lat: MyLat, lng: MyLong};
 
     map = new google.maps.Map(document.getElementById('gmap'), {
@@ -36,7 +23,7 @@ function initMap()
         mapTypeControl: false,
     });
 
-    geocoder = new google.maps.Geocoder();
+
     dirRender = new google.maps.DirectionsRenderer({suppressMarkers: true});
     dirService = new google.maps.DirectionsService();
     START_ICON = {
@@ -88,19 +75,10 @@ function initMap()
         icon: gpsIcon,
         optimized: false
     });
-    infoWindow = new google.maps.InfoWindow({content: getInfoContent('')});
+
     tempMarker = new google.maps.Marker();
 
-    selPosListener = map.addListener('click', function (e) {
-        geocodeOnClick(e);
-       // infoWindow.open(map, tempMarker);
-    });
 
-	positionMarker.addListener('click', function () {
-      //  map.setOptions({zoom: map.zoom + 2, center: position});
-	   geocodeOnClick(e);
-    });
-    //setState(0);
 
     var card = document.getElementById('pac-card');
     var input = document.getElementById('pac-input');
@@ -117,26 +95,8 @@ function initMap()
 
 function geocodeOnClick(e) 
 	{
-    // infoWindow.close();
-	if (state==0)
-		{
-		startMarker.setPosition(e.latLng);
-		startMarker.setMap(map);
-		geocodeLocation(startMarker.getPosition(), infoWindow, 'startMarker');
-	    infoWindow.open(map, startMarker);
-		}
-	else if (state==1)
-		{
-		endMarker.setPosition(e.latLng);
-		endMarker.setMap(map);	
-		geocodeLocation(endMarker.getPosition(), infoWindow, 'endMarker');
-	    infoWindow.open(map, endMarker);
-		}    
-	}
 
-function getInfoContent(address) 
-	{
-    return "<div style='text-align: center; color:black'><div>" + address + "</div><br>";
+
 	}
 
 var state = 0;
