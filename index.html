@@ -1022,7 +1022,8 @@ function setmypos()
 	if (myself==1)
 		{
 
-		mymap.setMyLocationEnabled(true);
+		//mymap.setMyLocationEnabled(true);
+		mymap.setCenter(new google.maps.LatLng(MyLat,MyLong));
 		}
 
 
