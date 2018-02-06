@@ -154,7 +154,7 @@ function onDeviceReady()
 	console.log("device ready, getting position");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
 	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
-	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
+	watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
 	document.addEventListener("resume", onResume, false);
 	
 	console.log("device ready, dealing with record file");
@@ -187,10 +187,9 @@ function MainProg()
 		else if (myself==1 && inpause==0)
 			{
 	//		console.log("myself=1 and inpause=0, setting wlongebi");
-			wlon=MyLong;
-			wlat=MyLat;
+			
 			setmypos();
-			DrawHomePos();
+
 			}
 			
 
@@ -483,7 +482,7 @@ function onSuccess(position)
 		}
 	else if (inpause==0)	
 		{
-		DrawHomePos();
+
 		}
 
     }
@@ -961,14 +960,6 @@ function DrawUsers()
 	}
 
 
-
-function DrawHomePos()
-	{
-
-
-	}
-
-
 var but1=0;
 
 var sfinx=0;
@@ -1025,9 +1016,12 @@ function setmypos()
     else {
         document.getElementById("myint").style.display = "none";
     }
-//map.setMyLocationEnabled(true);
+	if (myself==1)
+		{
 
-    DrawHomePos();
+		map.setMyLocationEnabled(true);
+		}
+
 
  //   var myLatLng = {lat: MyLat, lng: MyLong};
    // positionMarker.setPosition(myLatLng);
