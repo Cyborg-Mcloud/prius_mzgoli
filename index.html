@@ -1131,19 +1131,6 @@ function saveuser()
 var curx;
 var cury;
 
-//mymap.innerHTML="";
-//mymap.innerHTML+="<div id='users' style='position:absolute; left:0px; top:0px; border:1px solid red; z-index:252;'><div id='homepos' style='position:absolute; left:0px; top:0px; border:1px solid red; background-color:green; width:7px; height:7px; z-index:99;'></div><div id='user_"+curid+"'  style='position:absolute; left:0px; top:0px; color:red; font-size:12px; font-weight:bold;'><div style='position:absolute; left:-16px; top:-16px; width:31px; height:50px;'><img src='call_marker.png'></div></div></div>";
-
-for (i=0;i<myw ; i++)
-	{
-	curx=i-(myw-1)/2;
-	for (ii=0;ii<myh ;ii++ )
-		{
-		cury=ii-(myh-1)/2;
-		mymap.innerHTML+="<img id='img_"+i+"-"+ii+"' style='position:absolute; left:"+(i*256-128)+"px; top:"+(ii*256-128)+"px; width:256px; height:256px;'>";
-		}
-	}
-//mymap.innerHTML+="				<div style='position:absolute; background-color:red; width:5px; height:5px; left:300px; top:300px;'></div>";
 var oxt=0;
 var oyt=0;
 var tilef=0;
