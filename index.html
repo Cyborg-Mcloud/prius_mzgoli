@@ -989,17 +989,7 @@ function DrawUsers()
 
 function DrawHomePos()
 	{
-	//console.log("drawing home pos");
-	var x=long2pixel(MyLong, MyZoom);
-	var y=lat2pixel(MyLat, MyZoom);
 
-	var difx=Math.floor((x-xtile)*256);
-	var dify=Math.floor((y-ytile)*256);
-	difx=(256*(myw-1)/2)+difx-128;
-	dify=(256*(myh-1)/2)+dify-128;
-	
-	document.getElementById("homepos").style.left=(difx-2)+"px";
-	document.getElementById("homepos").style.top=(dify-2)+"px";
 
 	}
 
@@ -1094,8 +1084,6 @@ var myhpx=(myh-1)*256;
 document.getElementById("mainw").style.width=mywpx+"px";
 document.getElementById("mainw").style.height=myhpx+"px";
 console.log(" x: "+mywpx+ " Y: "+myhpx);
-document.getElementById("map").style.width=mywpx+"px";
-document.getElementById("map").style.height=myhpx+"px";
 document.getElementById("mainw").style.left=(-(mywpx-(sx))/2)+"px";
 document.getElementById("mainw").style.top=(-(myhpx-(sy))/2)+"px";
 
@@ -1142,7 +1130,7 @@ function saveuser()
 
 var curx;
 var cury;
-var mymap=document.getElementById("map");
+
 //mymap.innerHTML="";
 //mymap.innerHTML+="<div id='users' style='position:absolute; left:0px; top:0px; border:1px solid red; z-index:252;'><div id='homepos' style='position:absolute; left:0px; top:0px; border:1px solid red; background-color:green; width:7px; height:7px; z-index:99;'></div><div id='user_"+curid+"'  style='position:absolute; left:0px; top:0px; color:red; font-size:12px; font-weight:bold;'><div style='position:absolute; left:-16px; top:-16px; width:31px; height:50px;'><img src='call_marker.png'></div></div></div>";
 
