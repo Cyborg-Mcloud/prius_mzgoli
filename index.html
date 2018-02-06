@@ -161,7 +161,7 @@ function onDeviceReady()
 	console.log("device ready, getting position");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
 	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
-	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
+//	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
 	document.addEventListener("resume", onResume, false);
 	
 	console.log("device ready, dealing with record file");
@@ -486,7 +486,6 @@ function onSuccess(position)
 		setmypos();	
 		}
 	else if (inpause==0)	
-
 		{
 		DrawHomePos();
 		}
@@ -1167,46 +1166,20 @@ var kartY;
 function setmypos()
 	{
  
-	console.log("set my pos "+wlon + " / " + wlat +", zoom: "+MyZoom);
-
-	if (MyZoom>18 || MyZoom<1)
-		{
-			MyZoom=17;
-		}
-
-	var lon_deg=wlon; 
-	var lat_deg=wlat; 
-
-	xtile=long2tile(lon_deg, MyZoom);
-	ytile=lat2tile(lat_deg, MyZoom);
-
-	var x=long2pixel(lon_deg, MyZoom);
-	var y=lat2pixel(lat_deg, MyZoom);
-	
-	var difx=128-(x-xtile)*256;
-	var dify=128-(y-ytile)*256;
-	kartX=difx;
-	kartY=dify;
+	 if (window.navigator.onLine == false) {
+        document.getElementById("myint").style.display = "inline";
+    }
+    else {
+        document.getElementById("myint").style.display = "none";
+    }
 
 
-	document.getElementById("map").style.left=difx+"px";
-	document.getElementById("map").style.top=dify+"px";
+    DrawHomePos();
 
-	if (xtile!=oxt || oyt!=ytile)
-		{
-		console.log("pos updated, xtile "+oxt + " - " + xtile +", ytile "+oyt + " - " + ytile);
-		oxt=xtile;
-		oyt=ytile;
-		cur_down_i=0;
-		cur_down_ii=-1;
-		down_complete=1;
-		check_complete=1;
-		file_downing=1;
-		LT_finished=0;
-//		DrawHomePos();
-		loadtiles();	
-		}
-	DrawHomePos();
+ //   var myLatLng = {lat: MyLat, lng: MyLong};
+   // positionMarker.setPosition(myLatLng);
+   
+    console.log("move main marker");
 	}
 
 function check_user_click()
