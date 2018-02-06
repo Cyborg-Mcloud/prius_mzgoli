@@ -66,10 +66,10 @@ console.log("mere");
 	console.log("icons loaded");
     startMarker = new google.maps.Marker({
         icon: START_ICON,
-        map: map
+        map: mymap
     });
     endMarker = new google.maps.Marker({
-        icon: END_ICON, map: map
+        icon: END_ICON, map: mymap
     });
     positionMarker = new google.maps.Marker({
         position: position,
