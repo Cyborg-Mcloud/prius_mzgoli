@@ -11,7 +11,7 @@ function geocodeLocation(position, infoWindow, markerName) {
 function initMap() 
 	{
 
-console.log("mylat: "+MyLat+", mylong: "+MyLong);
+	console.log("mylat: "+MyLat+", mylong: "+MyLong);
     var position = {lat: MyLat, lng: MyLong};
 
     map = new google.maps.Map(document.getElementById('gmap'), {
