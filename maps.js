@@ -100,7 +100,7 @@ function initMap()
       //  map.setOptions({zoom: map.zoom + 2, center: position});
 	   geocodeOnClick(e);
     });
-    setState(0);
+    //setState(0);
 
     var card = document.getElementById('pac-card');
     var input = document.getElementById('pac-input');
@@ -182,27 +182,17 @@ const SWITCH_TEXTS = ['დასაწყისის არჩევა', 'დ�
 
 function setState(newState)
 	{
-	//chooseLocation(state);
-
-    state = newState;
-    document.getElementById('switchButton').innerHTML = SWITCH_TEXTS[state];
-	if (state==0)
-		{
-		dirRender.setMap(null);
-		endMarker.setMap(null);
-		}
-	if (state==2)
-		{
-		calcRoute(startMarker.getPosition(), endMarker.getPosition(), dirService, dirRender);
-		}
+	
+	//	calcRoute(startMarker.getPosition(), endMarker.getPosition(), dirService, dirRender);
+	
 	}
 
 function switchState() {
     if (state === 1 && (startMarker.getPosition() === undefined || endMarker.getPosition() === undefined)) {
-        setState(0);
+//        setState(0);
         return;
     }
-    setState((state + 1) % 3);
+    //setState((state + 1) % 3);
 
 }
 
