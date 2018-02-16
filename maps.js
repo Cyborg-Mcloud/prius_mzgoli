@@ -82,7 +82,8 @@ console.log("mere");
 	console.log("markers placed");
 
 
-  
+   dirRender = new google.maps.DirectionsRenderer({suppressMarkers: true});
+    dirService = new google.maps.DirectionsService();
 
     var strictBounds = document.getElementById('strict-bounds-selector');
 
@@ -151,8 +152,8 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
     directionsService.route(request, function (response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             var route = response.routes[0].legs[0];
-            addMarker(startMarker, mymap, getPosition(route.start_location), mymapgetBounds());
-            addMarker(endMarker, mymap, getPosition(route.end_location), mymapgetBounds());
+          //  addMarker(startMarker, mymap, getPosition(route.start_location), mymapgetBounds());
+           // addMarker(endMarker, mymap, getPosition(route.end_location), mymapgetBounds());
             directionsDisplay.setDirections(response);
 
             directionsDisplay.setMap(map);
