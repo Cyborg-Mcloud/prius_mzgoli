@@ -156,7 +156,7 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
            // addMarker(endMarker, mymap, getPosition(route.end_location), mymapgetBounds());
             directionsDisplay.setDirections(response);
 
-            directionsDisplay.setMap(map);
+            directionsDisplay.setMap(mymap);
         } else {
             addMarkers(mymap, [from_loc, to_loc], mymapgetBounds());
         }
