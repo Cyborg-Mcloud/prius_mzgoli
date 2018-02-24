@@ -233,7 +233,7 @@ function update_data()
 					curid=b[0];
 					if (callid!=curid && myself==0)
 						{
-						setme();
+					//	setme();
 						}
 					callid=curid;
 					calllat=parseFloat(b[1]);
@@ -253,6 +253,7 @@ function update_data()
 						var startpos = {lat: calllat, lng: calllong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
 						calcRoute(startpos, endpos, dirService, dirRender);
+						myself=0;
 						}
 					}
 				else if (a[0]=="yourcall")
@@ -282,7 +283,7 @@ function update_data()
 						{
 						var startpos = {lat: calllat, lng: calllong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
-						calcRoute(startpos, endpos, dirService, dirRender);
+						//calcRoute(startpos, endpos, dirService, dirRender);
 						}
 					}
 				else if (a[0]=="waiting")
@@ -293,7 +294,7 @@ function update_data()
 					curid=b[0];
 					if (callid!=curid && myself==0)
 						{
-						setme();
+					//	setme();
 						}
 					callid=curid;
 					calllat=parseFloat(b[1]);
@@ -311,7 +312,7 @@ function update_data()
 						{
 						var startpos = {lat: calllat, lng: calllong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
-						calcRoute(startpos, endpos, dirService, dirRender);
+						//calcRoute(startpos, endpos, dirService, dirRender);
 						}
 					}
 				else if (a[0]=="usercoming")
@@ -322,7 +323,7 @@ function update_data()
 					curid=b[0];
 					if (callid!=curid && myself==0)
 						{
-						setme();
+					//	setme();
 						}
 					callid=curid;
 					calllat=parseFloat(b[1]);
@@ -341,7 +342,7 @@ function update_data()
 						{
 						var startpos = {lat: calllat, lng: calllong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
-						calcRoute(startpos, endpos, dirService, dirRender);
+					//	calcRoute(startpos, endpos, dirService, dirRender);
 						}
 					}
 				else if (a[0]=="moving")
@@ -369,7 +370,7 @@ function update_data()
 						{
 						var startpos = {lat: calllat, lng: calllong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
-						calcRoute(startpos, endpos, dirService, dirRender);
+						//calcRoute(startpos, endpos, dirService, dirRender);
 						}
 					}
 				else
@@ -387,7 +388,8 @@ function update_data()
 					call_dest_lat=0;
 					call_dest_long=0;
 					call_dest_addr="";
-
+					startMarker.setMap(null);
+					endMarker.setMap(null);
 					dirRender.setMap(null);
 					}
 				if (inpause==0)	{DrawUsers();}
