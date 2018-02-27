@@ -271,7 +271,7 @@ function update_data()
 					calllat=parseFloat(b[1]);
 					calllong=parseFloat(b[2]);	
 					txt_addr=b[3];
-					call_tel=b[4];
+					c=b[4];
 					call_meters=b[5];
 					
 					call_dest_lat=parseFloat(b[6]);
@@ -350,7 +350,7 @@ function update_data()
 					{
 						callconfirming=0;
 					document.getElementById("client_center").style.display="none";
-					call_tel="";
+
 					b=a[1].split(";");
 					curid=b[0];
 					if (callid!=curid && myself==0) {setme();}
@@ -359,6 +359,7 @@ function update_data()
 					calllong=parseFloat(b[2]);	
 					txt_addr=b[3];
 					call_meters=b[5];
+										call_tel=b[4];
 					document.getElementById("meters_txt").innerHTML=parseInt(10*call_meters/1000)/10+" მეტრი";
 					document.getElementById("price_txt").innerHTML=(sit_price+(parseInt((call_meters/1000)*kmprice*100)/100))+" ლარი";
 					call_dest_lat=parseFloat(b[6]);
