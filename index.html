@@ -203,7 +203,8 @@ function MainProg()
 var call_dest_lat=0;
 var call_dest_long=0;
 var call_dest_addr="";
-
+var sit_price=3;
+var kmprice=0.75;
 
 var calltel="";
 var call_meters=0;
@@ -359,7 +360,7 @@ function update_data()
 					txt_addr=b[3];
 					call_meters=b[5];
 					document.getElementById("meters_txt").innerHTML=parseInt(10*call_meters/1000)/10+" მეტრი";
-					document.getElementById("price_txt").innerHTML=(1+(parseInt((call_meters/1000)*0.75*100)/100))+" ლარი";
+					document.getElementById("price_txt").innerHTML=(sit_price+(parseInt((call_meters/1000)*kmprice*100)/100))+" ლარი";
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 					call_dest_addr=b[8];
