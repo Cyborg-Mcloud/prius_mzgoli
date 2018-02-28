@@ -218,7 +218,7 @@ function update_data()
 			console.log("-- data received from server: "+mr);
 			if (mr=="register")		
 				{
-				//alert("Please Register Your User at\n\r http://developer.design.ge/geotaxi/");
+				//alert("Please Register Your User at\n\r http://taxiprius.com.ge/");
 			//	started=0;
 			//	document.getElementById('mainb').innerHTML="START";
 				Start();
@@ -439,11 +439,11 @@ function UpData()
 
 	if (MyUser!="nouser")
 		{    
-		url="http://developer.design.ge/geotaxi/taxi.php?uname="+MyUser+"&pass="+MyPass+"&lat="+MyLat+"&long="+MyLong+"&alt="+MyAlt+"&head="+MyHead+"&speed="+MySpeed+"&passive="+inpause+"&mstat="+mystatus+"&callid="+callid;		
+		url="http://taxiprius.com.ge/taxi.php?uname="+MyUser+"&pass="+MyPass+"&lat="+MyLat+"&long="+MyLong+"&alt="+MyAlt+"&head="+MyHead+"&speed="+MySpeed+"&passive="+inpause+"&mstat="+mystatus+"&callid="+callid;		
 		}
 	else
 		{
-		url="http://developer.design.ge/geotaxi/taxi.php?passive="+inpause;
+		url="http://taxiprius.com.ge/taxi.php?passive="+inpause;
 		}
 	console.log("-- upload: "+url);
 //	document.getElementById('erorebi').innerHTML="uname="+MyUser+"&pass="+MyPass+"&lat="+MyLat+"&long="+MyLong+"&alt="+MyAlt+"&head="+MyHead+"&speed="+MySpeed;
@@ -778,7 +778,7 @@ function userpay(pmethod)
 		//tanxa=document.getElementById("mytanxa").value;
 		//document.getElementById("mytanxa").value="";
 		tanxa=1+parseInt((call_meters/1000)*0.75*100)/100;
-		url="http://developer.design.ge/geotaxi/pay.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid+"&pmethod="+pmethod+"&amount="+tanxa;
+		url="http://taxiprius.com.ge/pay.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid+"&pmethod="+pmethod+"&amount="+tanxa;
 			
 		console.log("usermet upload: "+url);
 		gamehttp.open('GET',url,true);
@@ -802,7 +802,7 @@ function user_met()
 {
 	if (callid>0)
 		{
-		url="http://developer.design.ge/geotaxi/usermet.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
+		url="http://taxiprius.com.ge/usermet.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
 			
 		console.log("usermet upload: "+url);
 		gamehttp.open('GET',url,true);
@@ -814,7 +814,7 @@ function iArrived()
 
 	if (callid>0)
 		{
-		url="http://developer.design.ge/geotaxi/arrived.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
+		url="http://taxiprius.com.ge/arrived.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
 			
 		console.log("arrived upload: "+url);
 		gamehttp.open('GET',url,true);
@@ -827,7 +827,7 @@ function call_confirm()
 	if (callid>0)
 		{
 		callconfirming=1;
-		url="http://developer.design.ge/geotaxi/confirm.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
+		url="http://taxiprius.com.ge/confirm.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid;
 			
 		console.log("upload: "+url);
 		gamehttp.open('GET',url,true);
