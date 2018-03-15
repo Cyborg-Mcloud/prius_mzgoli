@@ -242,7 +242,7 @@ function update_data()
 					txt_addr=b[3];
 
 					call_meters=0;
-call_tel=b[4];
+					call_tel=b[4];
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 					call_dest_addr=b[8];
@@ -275,6 +275,7 @@ call_tel=b[4];
 					c=b[4];
 					call_meters=b[5];
 					call_tel=b[4];
+					consol.log("call_tel: " +call_tel);
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 					call_dest_addr=b[8];
