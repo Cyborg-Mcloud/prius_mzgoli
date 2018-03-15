@@ -264,10 +264,6 @@ function update_data()
 					document.getElementById("client_center").style.display="inline";
 					b=a[1].split(";");
 					curid=b[0];
-					if (callid!=curid && myself==0)
-						{
-						setme();
-						}
 					callid=curid;
 					calllat=parseFloat(b[1]);
 					calllong=parseFloat(b[2]);	
@@ -279,8 +275,8 @@ function update_data()
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 					call_dest_addr=b[8];
-					draw_markers();
-					set_status(1);
+
+
 					ertxelmainc=1;
 					if (call_dest_lat>30)
 						{
@@ -288,6 +284,12 @@ function update_data()
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
 						//calcRoute(startpos, endpos, dirService, dirRender);
 						}
+					if (callid!=curid && myself==0)
+						{
+						setme();
+						}
+					draw_markers();
+					set_status(1);
 					}
 				else if (a[0]=="waiting")
 					{
@@ -308,8 +310,7 @@ function update_data()
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 				//	call_dest_addr=b[8];
-					draw_markers();
-					set_status(3);
+				
 					ertxelmainc=1;
 					if (call_dest_lat>30)
 						{
@@ -317,10 +318,12 @@ function update_data()
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
 						//calcRoute(startpos, endpos, dirService, dirRender);
 						}
+					draw_markers();
+					set_status(3);
 					}
 				else if (a[0]=="usercoming")
 					{
-						callconfirming=0;
+					callconfirming=0;
 					document.getElementById("client_center").style.display="inline";
 					b=a[1].split(";");
 					curid=b[0];
@@ -338,8 +341,7 @@ function update_data()
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 					//call_dest_addr=b[8];
-					draw_markers();
-					set_status(4);
+					
 					ertxelmainc=1;
 					if (call_dest_lat>30)
 						{
@@ -347,6 +349,8 @@ function update_data()
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
 					//	calcRoute(startpos, endpos, dirService, dirRender);
 						}
+					draw_markers();
+					set_status(4);
 					}
 				else if (a[0]=="moving")
 					{
@@ -355,7 +359,7 @@ function update_data()
 
 					b=a[1].split(";");
 					curid=b[0];
-					if (callid!=curid && myself==0) {setme();}
+
 					callid=curid;
 					calllat=parseFloat(b[1]);
 					calllong=parseFloat(b[2]);	
@@ -367,8 +371,7 @@ function update_data()
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 				//	call_dest_addr=b[8];
-					draw_markers();
-					set_status(5);
+					
 					ertxelmainc=1;
 					if (call_dest_lat>30)
 						{
@@ -376,6 +379,9 @@ function update_data()
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
 						//calcRoute(startpos, endpos, dirService, dirRender);
 						}
+					if (callid!=curid && myself==0) {setme();}
+					draw_markers();
+					set_status(5);
 					}
 				else
 					{
