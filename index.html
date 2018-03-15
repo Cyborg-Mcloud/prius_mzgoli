@@ -660,9 +660,9 @@ function doOnOrientationChange()
     <Center>ჩართეთ ინტერნეტ კავშირი</center>
   </div>
 
-<div id="bottom_menu" style='width:100%; position:fixed; top:0px; padding-top:10px; left:0px; height:120px; padding-left:20px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.5; -khtml-opacity: 0.5;  opacity: 0.5; width:100%; '>
+<div id="bottom_menu" style='width:100%; position:fixed; top:0px; padding-top:10px; left:0px; height:120px; padding-left:20px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.5; -khtml-opacity: 0.5;  opacity: 0.5; width:100%; text-align:left;'>
 		<Br>
-		<div style=' text-align:center; font-size:26px; font-weight:Bold; ' id='qucha_txt'></div>
+		<div style=' text-align:left; font-size:26px; font-weight:Bold; ' id='qucha_txt'></div>
 
 			<div id='no_call_screen' style='display:inline;'>
 				<center>
@@ -676,7 +676,7 @@ function doOnOrientationChange()
 
 			<div id='my_call_screen' style=' width:100%; display:none;'>
 
-				<a href='Javascript: iArrived();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:16px;'>მოვედი</a>
+				<a href='Javascript: iArrived();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:16px; -moz-opacity: 1; -khtml-opacity: 1;  opacity: 1; '>მოვედი</a>
 				
 				
 			</div>
@@ -684,7 +684,7 @@ function doOnOrientationChange()
 			<div id='user_wait_screen' style=' width:100%; display:none;'>
 				
 				
-				<a href='Javascript: user_met();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:16px;'>ჩავისვი</a>
+				<a href='Javascript: user_met();' id='arrived_but' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:200px; font-size:16px; -moz-opacity: 1; -khtml-opacity: 1;  opacity: 1; '>ჩავისვი</a>
 				
 				
 			</div>
@@ -864,7 +864,7 @@ function set_status(newstat)
 		{
 		if (ertxelmainc==1)
 			{	
-			document.getElementById("bottom_menu").style.height='150px';
+			document.getElementById("bottom_menu").style.height='180px';
 			document.getElementById("no_call_screen").style.display="inline";
 			document.getElementById("new_call_screen").style.display="none";
 			document.getElementById("my_call_screen").style.display="none";
@@ -894,7 +894,7 @@ function set_status(newstat)
 		}
 	else if (newstat==1 && curdisp!=1)
 		{
-		document.getElementById("bottom_menu").style.height='150px';
+		document.getElementById("bottom_menu").style.height='180px';
 		myaudio.pause();
 		myaudio.currentTime = 0;
 		curdisp=1;
@@ -913,7 +913,7 @@ function set_status(newstat)
 		myaudio.pause();
 		myaudio.currentTime = 0;
 		curdisp=3;
-		document.getElementById("bottom_menu").style.height='150px';
+		document.getElementById("bottom_menu").style.height='180px';
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
 		document.getElementById("my_call_screen").style.display="none";
@@ -928,7 +928,7 @@ function set_status(newstat)
 		myaudio.pause();
 		myaudio.currentTime = 0;
 		curdisp=4;
-		document.getElementById("bottom_menu").style.height='150px';
+		document.getElementById("bottom_menu").style.height='180px';
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
 		document.getElementById("my_call_screen").style.display="none";
@@ -943,7 +943,7 @@ function set_status(newstat)
 		myaudio.pause();
 		myaudio.currentTime = 0;
 		curdisp=5;
-		document.getElementById("bottom_menu").style.height='150px';
+		document.getElementById("bottom_menu").style.height='180px';
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
 		document.getElementById("my_call_screen").style.display="none";
