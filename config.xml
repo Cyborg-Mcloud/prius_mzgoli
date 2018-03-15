@@ -43,7 +43,7 @@
     <preference name="fullscreen" value="true"/>
     <preference name="keepRunning" value="true"/>
     <preference name="exit-on-suspend" value="false"/>
-	<preference name="Orientation" value="portrait"/>
+	<!--<preference name="Orientation" value="portrait"/>-->
 
     <description>
      Prius Taxi Driver App 
