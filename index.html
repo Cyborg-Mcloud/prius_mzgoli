@@ -886,8 +886,8 @@ function set_status(newstat)
 		document.getElementById("my_call_screen").style.display="none";
 		document.getElementById("user_wait_screen").style.display="none";
 		document.getElementById("user_pay_screen").style.display="none";
-		document.getElementById("qucha_txt").innerHTML=txt_addr+"<BR>მიმართულება:"+dest_addr+"<BR>"+call_tel;
-		console.log("1: "+txt_addr+"<BR>მიმართულება:"+dest_addr+"<BR>"+call_tel);
+		document.getElementById("qucha_txt").innerHTML=txt_addr+"<BR>მიმართულება:"+call_dest_addr+"<BR>"+call_tel;
+		console.log("1: "+txt_addr+"<BR>მიმართულება:"+call_dest_addr+"<BR>"+call_tel);
 		myaudio.play();
 		mystatus=0;
 		// shemosulia axali shekveta, irekeba zari
@@ -903,8 +903,8 @@ function set_status(newstat)
 		document.getElementById("my_call_screen").style.display="inline";
 		document.getElementById("user_wait_screen").style.display="none";
 		document.getElementById("user_pay_screen").style.display="none";
-		document.getElementById("qucha_txt").innerHTML=txt_addr+"<BR>მიმართულება:"+dest_addr+"<BR>"+call_tel;
-				console.log("2: "+txt_addr+"<BR>მიმართულება:"+dest_addr+"<BR>"+call_tel);
+		document.getElementById("qucha_txt").innerHTML=txt_addr+"<BR>მიმართულება:"+call_dest_addr+"<BR>"+call_tel;
+				console.log("2: "+txt_addr+"<BR>მიმართულება:"+call_dest_addr+"<BR>"+call_tel);
 		mystatus=1;
 		// shekveta migebulia
 		}
@@ -919,8 +919,8 @@ function set_status(newstat)
 		document.getElementById("my_call_screen").style.display="none";
 		document.getElementById("user_wait_screen").style.display="none";
 		document.getElementById("user_pay_screen").style.display="none";
-		document.getElementById("qucha_txt").innerHTML=txt_addr+"<BR>მიმართულება:"+dest_addr+"<BR>"+call_tel;
-				console.log("3: "+txt_addr+"<BR>მიმართულება:"+dest_addr+"<BR>"+call_tel);
+		document.getElementById("qucha_txt").innerHTML=txt_addr+"<BR>მიმართულება:"+call_dest_addr+"<BR>"+call_tel;
+				console.log("3: "+txt_addr+"<BR>მიმართულება:"+call_dest_addr+"<BR>"+call_tel);
 		mystatus=3;
 		}
 	else if (newstat==4 && curdisp!=4)
@@ -934,8 +934,8 @@ function set_status(newstat)
 		document.getElementById("my_call_screen").style.display="none";
 		document.getElementById("user_wait_screen").style.display="inline";
 		document.getElementById("user_pay_screen").style.display="none";
-		document.getElementById("qucha_txt").innerHTML=txt_addr+"<BR>მიმართულება:"+dest_addr+"<BR>"+call_tel;
-				console.log("4: "+txt_addr+"<BR>მიმართულება:"+dest_addr+"<BR>"+call_tel);
+		document.getElementById("qucha_txt").innerHTML=txt_addr+"<BR>მიმართულება:"+call_dest_addr+"<BR>"+call_tel;
+				console.log("4: "+txt_addr+"<BR>მიმართულება:"+call_dest_addr+"<BR>"+call_tel);
 		mystatus=4;
 		}
 	else if (newstat==5 && curdisp!=5)
@@ -949,8 +949,8 @@ function set_status(newstat)
 		document.getElementById("my_call_screen").style.display="none";
 		document.getElementById("user_wait_screen").style.display="none";
 		document.getElementById("user_pay_screen").style.display="inline";
-		document.getElementById("qucha_txt").innerHTML=txt_addr+"<BR>მიმართულება:"+dest_addr;
-				console.log("5: "+txt_addr+"<BR>მიმართულება:"+dest_addr+"<BR>"+call_tel);
+		document.getElementById("qucha_txt").innerHTML=txt_addr+"<BR>მიმართულება:"+call_dest_addr;
+				console.log("5: "+txt_addr+"<BR>მიმართულება:"+call_dest_addr+"<BR>"+call_tel);
 
 		mystatus=5;
 		// chavisvi, vmozraob
