@@ -306,7 +306,7 @@ function update_data()
 					call_meters=b[5];
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
-					call_dest_addr=b[8];
+				//	call_dest_addr=b[8];
 					draw_markers();
 					set_status(3);
 					ertxelmainc=1;
@@ -336,7 +336,7 @@ function update_data()
 
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
-					call_dest_addr=b[8];
+					//call_dest_addr=b[8];
 					draw_markers();
 					set_status(4);
 					ertxelmainc=1;
@@ -365,7 +365,7 @@ function update_data()
 					document.getElementById("price_txt").innerHTML=(sit_price+parseInt((call_meters/1000)*kmprice*100)/100 ) +" ლარი";
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
-					call_dest_addr=b[8];
+				//	call_dest_addr=b[8];
 					draw_markers();
 					set_status(5);
 					ertxelmainc=1;
