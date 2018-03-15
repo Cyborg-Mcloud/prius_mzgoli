@@ -689,16 +689,18 @@ function doOnOrientationChange()
 				
 			</div>
 
-			<div id='user_pay_screen' style='position:fixed; top:0px; left:0px; height:150px;background-color:white; width:100%; display:none; color:black;'>
+			<div id='user_pay_screen' style='position:fixed; top:0px; left:0px; height:90px;background-color:white; width:100%; display:none; color:black;'>
 			<Br>
 
-				<table>
-				<Tr><td style=' font-size:16px;'>
-				მანძილი: <span name='meters_txt' id='meters_txt' style=' font-size:16px;'></span> თანხა: <span style=' font-size:16px;'  name='price_txt' id='price_txt'></span> <!--<input type='number' id='mytanxa' size=4 style=' font-size:16px;'>-->
+				<table width=100%>
+				<Tr><td style=' font-size:24px;' align=center>
+				მანძილი: <span name='meters_txt' id='meters_txt' style=' font-size:24px;'></span> თანხა: <span style=' font-size:24px;'  name='price_txt' id='price_txt'></span> <!--<input type='number' id='mytanxa' size=4 style=' font-size:16px;'>-->
 				</td></tr>
 				<tr><td>
-				<a href='Javascript: userpay(1);' id='arrived_but' style='float:left; border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:70px; font-size:16px;'>ქეში</a> &nbsp; &nbsp; &nbsp;
-				<a href='Javascript: userpay(2);' id='arrived_but' style='float:right; border:1px solid gray; padding:5px; display:block; background-color:blue; color:white; width:70px; font-size:16px;'>ბარათი</a>
+				<a href='Javascript: userpay(1);' id='arrived_but' style='float:left; border:1px solid gray; padding:5px; display:block; background-color:green; color:white; width:70px; font-size:16px;'>დასრულება</a>
+				
+				<!--&nbsp; &nbsp; &nbsp;
+				<a href='Javascript: userpay(2);' id='arrived_but' style='float:right; border:1px solid gray; padding:5px; display:block; background-color:blue; color:white; width:70px; font-size:16px;'>ბარათი</a>-->
 				</td>
 				</tr></table>
 				
@@ -864,7 +866,7 @@ function set_status(newstat)
 		{
 		if (ertxelmainc==1)
 			{	
-			document.getElementById("bottom_menu").style.height='180px';
+			document.getElementById("bottom_menu").style.height='90px';
 			document.getElementById("bottom_menu").style.opacity = "0.9";
 			document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
 			
