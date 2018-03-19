@@ -27,6 +27,10 @@ document.addEventListener("deviceready", onDeviceReady, false);
 var mystatus=0;
 var myid=0;
 
+var last_last=41.7089554;
+var last_long=44.7689831;
+
+
 var wlon=44.7689831;
 var wlat=41.7089554;
 var MyUser="nouser";
@@ -166,8 +170,8 @@ function onDeviceReady()
 	window.addEventListener('orientationchange', doOnOrientationChange);
 	console.log("device ready, getting position");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
-	//var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
-	//watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
+	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
+	watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
 	document.addEventListener("resume", onResume, false);
 	window.addEventListener("deviceorientation", handleOrientation, true);
 
@@ -527,7 +531,7 @@ function onResume()
 		checkConnection();
 	
 	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
-//	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
+	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
 	
 		if (MyUser!="nouser")	{Start();}
 		}
@@ -557,10 +561,16 @@ function onSuccess(position)
 	MySpeed=position.coords.speed ;
 	MyAcc=position.coords.accuracy;
 
-	if (MyHead!=null && MyHead>0)
+		if (MyHead!=null && MyHead>0)
 		{
 		rotate_marker(MyHead);
 		}
+	else
+		{
+		MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
+		rotate_marker(MyHead);
+		}
+
 	//wlon=MyLong;
 	//wlat=MyLat;
 	console.log("on succ, sett long");
@@ -604,8 +614,13 @@ function onWatchSuccess(position)
 	MyHead=position.coords.heading ;
 	MySpeed=position.coords.speed ;
 	MyAcc=position.coords.accuracy  ;
-	if (MyHead>0 && MyHead>0)
+	if (MyHead!=null && MyHead>0)
 		{
+		rotate_marker(MyHead);
+		}
+	else
+		{
+		MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
 		rotate_marker(MyHead);
 		}
 
@@ -1298,6 +1313,17 @@ function trace(value)
 {
     console.log(value);
 }
+
+function calc_bearing(lat1, long1, lat2, long2)
+	{
+
+	var y = Math.sin(long2-long1) * Math.cos(lat2);
+	var x = Math.cos(lat1)*Math.sin(lat2) - Math.sin(lat1)*Math.cos(lat2)*Math.cos(long2-long1);
+	var brng = Math.atan2(y, x).toDegrees();
+console.log("bearing calc: "+brng+" / "+(brng*360/6.28)+" = "+ ( (brng*360/6.28+360) % 360 ) );
+	return (brng*360/6.28+360) % 360;
+
+	}
 
 </script></body>
 </html>
