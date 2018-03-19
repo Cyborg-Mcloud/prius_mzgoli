@@ -549,45 +549,48 @@ function onResume()
 function onSuccess(position) 
 	{
 	console.log(position);
+	var gaitvaliscine=0;
+	if (gaitvaliscine==1)
+		{
 		
-	var element = document.getElementById('geopos');
-	element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                            'Longitude: '          + position.coords.longitude             + '<br />';
+		var element = document.getElementById('geopos');
+		element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+								'Longitude: '          + position.coords.longitude             + '<br />';
 
-	MyLat=position.coords.latitude ;
-	MyLong=position.coords.longitude ;
-	MyAlt=position.coords.altitude ;
-	MyHead=position.coords.heading ;
-	MySpeed=position.coords.speed ;
-	MyAcc=position.coords.accuracy;
+		MyLat=position.coords.latitude ;
+		MyLong=position.coords.longitude ;
+		MyAlt=position.coords.altitude ;
+		MyHead=position.coords.heading ;
+		MySpeed=position.coords.speed ;
+		MyAcc=position.coords.accuracy;
 
-		if (MyHead!=null && MyHead>0)
-		{
-		rotate_marker(MyHead);
+			if (MyHead!=null && MyHead>0)
+			{
+			rotate_marker(MyHead);
+			}
+		else
+			{
+			MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
+			rotate_marker(MyHead);
+			}
+
+		//wlon=MyLong;
+		//wlat=MyLat;
+		console.log("on succ, sett long");
+
+		var latlng = new google.maps.LatLng(MyLat, MyLong);
+		positionMarker.setPosition(latlng);
+
+		if (started==0 && MyUser!="nouser")	{Start();}
+		if (myself==1 && inpause==0)
+			{
+			setmypos();	
+			}
+		else if (inpause==0)	
+			{
+
+			}
 		}
-	else
-		{
-		MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
-		rotate_marker(MyHead);
-		}
-
-	//wlon=MyLong;
-	//wlat=MyLat;
-	console.log("on succ, sett long");
-
-	var latlng = new google.maps.LatLng(MyLat, MyLong);
-    positionMarker.setPosition(latlng);
-
-	if (started==0 && MyUser!="nouser")	{Start();}
-	if (myself==1 && inpause==0)
-		{
-		setmypos();	
-		}
-	else if (inpause==0)	
-		{
-
-		}
-
     }
 
 
