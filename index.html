@@ -560,12 +560,13 @@ function onSuccess(position)
 		MyLat=position.coords.latitude ;
 		MyLong=position.coords.longitude ;
 		MyAlt=position.coords.altitude ;
-		MyHead=position.coords.heading ;
+		var newhead=position.coords.heading ;
 		MySpeed=position.coords.speed ;
 		MyAcc=position.coords.accuracy;
-console.log(MyLat+" | "+MyLong+" | "+MyHead);
-		if (MyHead!=null && MyHead>0)
+		console.log(MyLat+" | "+MyLong+" | "+newhead+ " : " + MyHead);
+		if (newhead!=null && newhead>0)
 			{
+			MyHead=newhead;
 			console.log("using own");
 			rotate_marker(MyHead);
 			}
@@ -622,11 +623,13 @@ function onWatchSuccess(position)
 	MyLat=position.coords.latitude ;
 	MyLong=position.coords.longitude ;
 	MyAlt=position.coords.altitude ;
-	MyHead=position.coords.heading ;
+	var newhead=position.coords.heading ;
 	MySpeed=position.coords.speed ;
-	MyAcc=position.coords.accuracy  ;
-	if (MyHead!=null && MyHead>0)
+	MyAcc=position.coords.accuracy;
+	console.log(MyLat+" | "+MyLong+" | "+newhead+ " : " + MyHead);
+	if (newhead!=null && newhead>0)
 		{
+		MyHead=newhead;
 		console.log("watch heading"+MyHead);
 		rotate_marker(MyHead);
 		}
