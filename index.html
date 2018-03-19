@@ -566,13 +566,16 @@ function onSuccess(position)
 console.log(MyLat+" | "+MyLong+" | "+MyHead);
 		if (MyHead!=null && MyHead>0)
 			{
-				console.log("using own");
+			console.log("using own");
 			rotate_marker(MyHead);
 			}
 		else
 			{
 				console.log("calculating");
 			MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
+			last_lat=MyLat;
+			last_long=MyLong;
+
 			rotate_marker(MyHead);
 			}
 
@@ -627,6 +630,9 @@ function onWatchSuccess(position)
 		{
 		MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
 		rotate_marker(MyHead);
+			last_lat=MyLat;
+			last_long=MyLong;
+
 		}
 
 	if (inpause==0)
