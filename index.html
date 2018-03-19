@@ -548,7 +548,7 @@ function onSuccess(position)
 	MySpeed=position.coords.speed ;
 	MyAcc=position.coords.accuracy;
 
-	if (MyHead>0)
+	if (MyHead!=null)
 		{
 		rotate_marker(MyHead);
 		}

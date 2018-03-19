@@ -115,7 +115,7 @@ function handleOrientation(event)
 
 	console.log("orientation alpha: "+alpha+" , heading: "+MyHead);
 	
-	if (MyHead>0)
+	if (MyHead!=null)
 		{
 		rotate_marker(MyHead);
 		}
