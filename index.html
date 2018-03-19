@@ -119,7 +119,9 @@ var down_complete=1;
 var check_complete=1;
 var file_downing=0;
 var LT_finished=0;
-var watchID = null;
+
+   var watchID = null;
+   var watchID2 = null;
 var mrot=0;
 
 
@@ -180,10 +182,7 @@ function onCompassSuccess(heading)
 	console.log(heading);
 	comp=parseInt(heading.magneticHeading*100)/100;
 	//document.getElementById("heading_div").innerHTML=parseInt(heading.magneticHeading);
-	if (MyHead==0)
-		{
-		rotate_marker(comp);
-		}
+	rotate_marker(comp);
     }
 
 
@@ -519,7 +518,7 @@ function onResume()
 		checkConnection();
 	
 	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
-	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
+//	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
 	
 		if (MyUser!="nouser")	{Start();}
 		}

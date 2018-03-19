@@ -107,12 +107,13 @@ console.log("mere");
 
 function handleOrientation(event) 
 	{
+	console.log(event);
 	var absolute = event.absolute;
 	var alpha    = event.alpha;
 	var beta     = event.beta;
 	var gamma    = event.gamma;
 
-	console.log("alpha: "+alpha+" , heading: "+MyHead);
+	console.log("orientation alpha: "+alpha+" , heading: "+MyHead);
 	
 	if (MyHead>0)
 		{
@@ -129,7 +130,7 @@ function handleOrientation(event)
 
 function rotate_marker(kutxe)
 	{
-		console.log("rotate marker: "+kutxe);
+	console.log("rotate marker: "+kutxe);
 	symicon={rotation: kutxe}
 	positionMarker.setIcon(symicon);
 	}
