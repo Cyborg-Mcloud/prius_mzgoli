@@ -55,28 +55,40 @@ console.log("mere");
         origin: new google.maps.Point(0, 0), // origin
         anchor: new google.maps.Point(25, 25) // anchor
     };
-    var gpsIcon = {
-        url: "resources/images/Clustericon.svg", // url
-        scaledSize: new google.maps.Size(30, 30), // size
-        origin: new google.maps.Point(0, 0), // origin
-        anchor: new google.maps.Point(29, 29) // anchor
 
+	symicon={
+				path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+				fillColor: '#FFFFFF',
+				strokeColor: '#FFFFFF',
+				strokeWeight: 5,
+				scale: 10,
+				rotation: mrot
+				}
 
-    };
+//    var gpsIcon = {
+//        url: "resources/images/Clustericon.svg", // url
+//        scaledSize: new google.maps.Size(30, 30), // size
+//        origin: new google.maps.Point(0, 0), // origin
+//        anchor: new google.maps.Point(29, 29) // anchor
+//    };
 	console.log("icons loaded");
     startMarker = new google.maps.Marker({
         icon: START_ICON,
         map: mymap
     });
+
     endMarker = new google.maps.Marker({
         icon: END_ICON, map: mymap
     });
     positionMarker = new google.maps.Marker({
         position: position,
         map: mymap,
-        icon: gpsIcon,
+        icon: symicon,
         optimized: false
     });
+
+		
+
 
     tempMarker = new google.maps.Marker();
 	console.log("markers placed");
@@ -91,6 +103,34 @@ console.log("mere");
 
 }
 
+
+function handleOrientation(event) 
+	{
+	var absolute = event.absolute;
+	var alpha    = event.alpha;
+	var beta     = event.beta;
+	var gamma    = event.gamma;
+
+	console.log("alpha: "+alpha+" , heading: "+MyHead);
+	
+	if (MyHead>0)
+		{
+		rotate_marker(MyHead);
+		}
+	else
+		{
+		mrot=360-(alpha-50);
+		if (mrot>360){mrot=mrot-360;}
+		if (mrot<0){mrot=mrot+360;}
+		rotate_marker(mrot);
+		}
+	}
+
+function rotate_marker(kutxe)
+	{
+	symicon={rotation: kutxe}
+	positionMarker.setIcon(symicon);
+	}
 function geocodeOnClick(e) 
 	{
 
