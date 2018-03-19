@@ -131,7 +131,7 @@ var calllong=0;
 var callid=0;
 var txt_addr="";
 var ertxelmainc=0;
-
+var comp=0;
 // powermanagement -ის ფუნქციები
 //window.powermanagement.acquire();
 //window.powermanagement.release();
@@ -157,10 +157,13 @@ function onDeviceReady()
 	window.addEventListener('orientationchange', doOnOrientationChange);
 	console.log("device ready, getting position");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
-	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
-	watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
+	//var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
+	//watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
 	document.addEventListener("resume", onResume, false);
 	window.addEventListener("deviceorientation", handleOrientation, true);
+	var moptions = { frequency: 100 };
+	watchID2 = navigator.compass.watchHeading(onCompassSuccess, onError, moptions);
+	
 	console.log("device ready, dealing with record file");
 	
 	kc=checkIfFileExists("locdata.txt");
@@ -171,6 +174,17 @@ function onDeviceReady()
 	//setmypos();
 	}
 // ------------------------
+
+function onCompassSuccess(heading) 
+	{  
+	console.log(heading);
+	comp=parseInt(heading.magneticHeading*100)/100;
+	//document.getElementById("heading_div").innerHTML=parseInt(heading.magneticHeading);
+	if (MyHead==0)
+		{
+		rotate_marker(comp);
+		}
+    }
 
 
 function MainProg()

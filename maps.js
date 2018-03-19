@@ -104,6 +104,7 @@ console.log("mere");
 }
 
 
+
 function handleOrientation(event) 
 	{
 	var absolute = event.absolute;
@@ -128,6 +129,7 @@ function handleOrientation(event)
 
 function rotate_marker(kutxe)
 	{
+		console.log("rotate marker: "+kutxe);
 	symicon={rotation: kutxe}
 	positionMarker.setIcon(symicon);
 	}
