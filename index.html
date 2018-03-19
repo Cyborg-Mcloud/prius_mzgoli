@@ -141,11 +141,12 @@ var comp=0;
 // --------------------------------------------------------------------
 function onDeviceReady() 
 	{
-AndroidFullScreen.immersiveMode(successFunction, errorFunction);
+	console.log("setting immersive");
+	AndroidFullScreen.immersiveMode(successFunction, errorFunction);
 
 // Custom full screen mode
 // See https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)
-AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCREEN | AndroidFullScreen.SYSTEM_UI_FLAG_LOW_PROFILE, successFunction, errorFunction);
+	AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCREEN, successFunction, errorFunction);
 
 
 	console.log("device ready, checking connection");
@@ -543,7 +544,7 @@ function onResume()
 
 function onSuccess(position) 
 	{
-	console.log("on success");
+	console.log(position);
 		
 	var element = document.getElementById('geopos');
 	element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
