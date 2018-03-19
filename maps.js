@@ -130,7 +130,7 @@ function handleOrientation(event)
 
 function rotate_marker(kutxe)
 	{
-	console.log("rotate marker: "+kutxe);
+	console.log("rotate marker: "+kutxe+" Myhead=" +MyHead);
 symicon={
 	path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
 	fillColor: '#000000',
