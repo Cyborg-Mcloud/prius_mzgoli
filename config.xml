@@ -78,7 +78,7 @@
 	  <param name="android-package" value="com.designge.locage"/>
 	</feature>
 	
-
+	<gap:plugin name="cordova-plugin-fullscreen" source="npm" />
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
    <gap:plugin name="cordova-plugin-request-location-accuracy" source="npm" />
 	<gap:plugin name="cordova-plugin-powermanagement" source="npm" />
