@@ -1320,7 +1320,9 @@ function trace(value)
 }
 
 function calc_bearing(lat1, long1, lat2, long2)
+
 	{
+			console.log(lat1+", "+long1+ " : "+lat2+", "+long2)
 	if (lat1!=lat2 || long1!=long2)
 		{
 
@@ -1341,7 +1343,7 @@ function calc_bearing(lat1, long1, lat2, long2)
 					brng=3.14/2
 				}
 			}
-		console.log("bearing calc: "+brng+" / "+(brng*360/6.28)+" = "+ ( (brng*360/6.28+360) % 360 ) + " x:"+x+" Y:"+y);
+		console.log("bearing calc: "+brng+" / "+(brng*360/6.28)+" = "+ ( (brng*360/6.28+360) % 360 ) + " y:"+y+" x:"+x);
 		return (brng*360/6.28+360) % 360;
 		}
 	else
@@ -1352,11 +1354,12 @@ function calc_bearing(lat1, long1, lat2, long2)
 
 function calc_bearing2(lat1, long1, lat2, long2)
 	{
-
+	console.log(lat1+", "+long1+ " : "+lat2+", "+long2)
 	var y = Math.sin(long2-long1) * Math.cos(lat2);
 	var x = Math.cos(lat1)*Math.sin(lat2) - Math.sin(lat1)*Math.cos(lat2)*Math.cos(long2-long1);
+
 	var brng = Math.atan2(y,x);
-console.log("bearing calc: "+brng+" / "+(brng*360/6.28)+" = "+ ( (brng*360/6.28+360) % 360 ) + " x:"+x+" Y:"+y);
+	console.log("bearing calc: "+brng+" / "+(brng*360/6.28)+" = "+ ( (brng*360/6.28+360) % 360 ) + " x:"+x+" Y:"+y);
 	return (brng*360/6.28+360) % 360;
 
 	}
