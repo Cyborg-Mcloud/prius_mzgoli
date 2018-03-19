@@ -58,9 +58,9 @@ console.log("mere");
 
 	symicon={
 				path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-				fillColor: '#FFFFFF',
-				strokeColor: '#FFFFFF',
-				strokeWeight: 5,
+				fillColor: '#000000',
+				strokeColor: '#000000',
+				strokeWeight: 6,
 				scale: 10,
 				rotation: mrot
 				}
