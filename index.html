@@ -146,11 +146,11 @@ var comp=0;
 function onDeviceReady() 
 	{
 	console.log("setting immersive");
-	AndroidFullScreen.immersiveMode(successFunction, errorFunction);
+//	AndroidFullScreen.immersiveMode(successFunction, errorFunction);
 
 // Custom full screen mode
 // See https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)
-//	AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCREEN, successFunction, errorFunction);
+	AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCREEN, successFunction, errorFunction);
 
 
 	console.log("device ready, checking connection");
