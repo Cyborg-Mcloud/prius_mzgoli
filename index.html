@@ -1319,13 +1319,33 @@ function trace(value)
 
 function calc_bearing(lat1, long1, lat2, long2)
 	{
+	if (lat1!=lat2 || long1!=long2)
+		{
 
-	var y = lat2-lat1;
-	var x = long2-long1;
-	var brng=Math.atan(y/x);
-	console.log("bearing calc: "+brng+" / "+(brng*360/6.28)+" = "+ ( (brng*360/6.28+360) % 360 ) + " x:"+x+" Y:"+y);
-	return (brng*360/6.28+360) % 360;
-
+		var y = lat2-lat1;
+		var x = long2-long1;
+		if (x!=0)
+			{
+			var brng=Math.atan(y/x);
+			}	
+		else
+			{
+			if (lat2<lat1)
+				{
+					brng=3.14+3.14/2
+				}
+			else
+				{
+					brng=3.14/2
+				}
+			}
+		console.log("bearing calc: "+brng+" / "+(brng*360/6.28)+" = "+ ( (brng*360/6.28+360) % 360 ) + " x:"+x+" Y:"+y);
+		return (brng*360/6.28+360) % 360;
+		}
+	else
+		{
+		return MyHead;
+		}
 	}
 
 function calc_bearing2(lat1, long1, lat2, long2)
