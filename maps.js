@@ -131,7 +131,14 @@ function handleOrientation(event)
 function rotate_marker(kutxe)
 	{
 	console.log("rotate marker: "+kutxe);
-	symicon={rotation: kutxe}
+symicon={
+	path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+	fillColor: '#000000',
+	strokeColor: '#000000',
+	strokeWeight: 5,
+	scale: 10,
+	rotation: kutxe
+	}
 	positionMarker.setIcon(symicon);
 	}
 function geocodeOnClick(e) 
