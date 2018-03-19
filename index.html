@@ -169,6 +169,8 @@ AndroidFullScreen.setSystemUiVisibility(AndroidFullScreen.SYSTEM_UI_FLAG_FULLSCR
 	//watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
 	document.addEventListener("resume", onResume, false);
 	window.addEventListener("deviceorientation", handleOrientation, true);
+
+	 navigator.compass.getCurrentHeading(onCompassSuccess, function (compassError) { alert('Compass error: ' + compassError.code); })
 	var moptions = { frequency: 500 };
 	watchID2 = navigator.compass.watchHeading(onCompassSuccess, onError, moptions);
 	
