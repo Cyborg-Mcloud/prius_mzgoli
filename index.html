@@ -1319,7 +1319,7 @@ function calc_bearing(lat1, long1, lat2, long2)
 
 	var y = Math.sin(long2-long1) * Math.cos(lat2);
 	var x = Math.cos(lat1)*Math.sin(lat2) - Math.sin(lat1)*Math.cos(lat2)*Math.cos(long2-long1);
-	var brng = Math.atan2(y, x);
+	var brng = Math.atan2(y/ x);
 console.log("bearing calc: "+brng+" / "+(brng*360/6.28)+" = "+ ( (brng*360/6.28+360) % 360 ) );
 	return (brng*360/6.28+360) % 360;
 
