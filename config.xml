@@ -10,10 +10,6 @@
     <name>Prius Driver</name>
 	<icon src="taxi.png" />
 
-    <platform name="android">
-        <preference name="android-minSdkVersion" value="18" />
-        <allow-intent href="market:*" />
-    </platform>
 
 <platform name="android">
 	<preference name="android-minSdkVersion" value="18"/>
@@ -43,7 +39,15 @@
     <preference name="fullscreen" value="true"/>
     <preference name="keepRunning" value="true"/>
     <preference name="exit-on-suspend" value="false"/>
+	<preference name="stay-in-webview"            value="true" /> 
 	<!--<preference name="Orientation" value="portrait"/>-->
+	<preference name="exit-on-suspend"            value="false" />          
+<preference name="show-splash-screen-spinner" value="false" />    
+<preference name="auto-hide-splash-screen"    value="false" />
+<preference name="disable-cursor"             value="false" />
+<preference name="android-minSdkVersion"      value="11" />         
+<preference name="android-installLocation"    value="auto" />
+<preference name="EnableViewportScale"    value="true" />
 
     <description>
      Prius Taxi Driver App 
