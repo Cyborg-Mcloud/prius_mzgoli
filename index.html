@@ -572,11 +572,14 @@ console.log(MyLat+" | "+MyLong+" | "+MyHead);
 		else
 			{
 				console.log("calculating");
-			MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
-			last_lat=MyLat;
-			last_long=MyLong;
-
-			rotate_marker(MyHead);
+			if (last_lat!=MyLat || last_long!=MyLong)
+				{
+			
+				MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
+				rotate_marker(MyHead);
+				last_lat=MyLat;
+				last_long=MyLong;
+				}
 			}
 
 		//wlon=MyLong;
@@ -624,15 +627,20 @@ function onWatchSuccess(position)
 	MyAcc=position.coords.accuracy  ;
 	if (MyHead!=null && MyHead>0)
 		{
+		console.log("watch heading"+MyHead);
 		rotate_marker(MyHead);
 		}
 	else
 		{
-		MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
-		rotate_marker(MyHead);
+		console.log("watch calculating);
+		if (last_lat!=MyLat || last_long!=MyLong)
+			{
+			
+			MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
+			rotate_marker(MyHead);
 			last_lat=MyLat;
 			last_long=MyLong;
-
+			}
 		}
 
 	if (inpause==0)
