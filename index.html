@@ -563,13 +563,15 @@ function onSuccess(position)
 		MyHead=position.coords.heading ;
 		MySpeed=position.coords.speed ;
 		MyAcc=position.coords.accuracy;
-
-			if (MyHead!=null && MyHead>0)
+console.log(MyLat+" | "+MyLong+" | "+MyHead;
+		if (MyHead!=null && MyHead>0)
 			{
+				console.log("using own");
 			rotate_marker(MyHead);
 			}
 		else
 			{
+				console.log("calculating");
 			MyHead=calc_bearing(last_lat, last_long, MyLat, MyLong);
 			rotate_marker(MyHead);
 			}
