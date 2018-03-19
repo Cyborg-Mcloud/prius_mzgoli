@@ -170,7 +170,7 @@ function onDeviceReady()
 	window.addEventListener('orientationchange', doOnOrientationChange);
 	console.log("device ready, getting position");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
-	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
+	var opts = { timeout: 3000, enableHighAccuracy: true, maximumAge:0};
 	watchID = navigator.geolocation.watchPosition(onSuccess, onError, opts);
 	document.addEventListener("resume", onResume, false);
 	window.addEventListener("deviceorientation", handleOrientation, true);
@@ -530,7 +530,7 @@ function onResume()
 		{
 		checkConnection();
 	
-	var opts = { timeout: 5000, enableHighAccuracy: true, maximumAge:0};
+	var opts = { timeout: 3000, enableHighAccuracy: true, maximumAge:0};
 	watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, opts);
 	
 		if (MyUser!="nouser")	{Start();}
