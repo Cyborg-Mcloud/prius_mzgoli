@@ -120,6 +120,7 @@ var check_complete=1;
 var file_downing=0;
 var LT_finished=0;
 var watchID = null;
+var mrot=0;
 
 
 var userebic=0;
@@ -271,7 +272,7 @@ function update_data()
 					c=b[4];
 					call_meters=b[5];
 					call_tel=b[4];
-					consol.log("call_tel: " +call_tel);
+					console.log("call_tel: " +call_tel);
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 					call_dest_addr=b[8];
