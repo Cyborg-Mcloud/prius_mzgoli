@@ -176,7 +176,7 @@ function onDeviceReady()
 	window.addEventListener("deviceorientation", handleOrientation, true);
 
 	 navigator.compass.getCurrentHeading(onCompassSuccess, function (compassError) { alert('Compass error: ' + compassError.code); })
-	var moptions = { frequency: 500 };
+	var moptions = { frequency: 1000 };
 	watchID2 = navigator.compass.watchHeading(onCompassSuccess, onError, moptions);
 	
 	console.log("device ready, dealing with record file");
@@ -549,7 +549,7 @@ function onResume()
 function onSuccess(position) 
 	{
 	console.log(position);
-	var gaitvaliscine=0;
+	var gaitvaliscine=1;
 	if (gaitvaliscine==1)
 		{
 		
