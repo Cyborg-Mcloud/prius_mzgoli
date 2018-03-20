@@ -134,6 +134,7 @@ function rotate_marker(kutxe)
 		{
 		kutxe=MyHead;
 		}
+	document.getElementById("stat_but").innerHTML=kutxe;
 	console.log("rotate marker: "+kutxe+" Myhead=" +MyHead);
 symicon={
 	path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
