@@ -1361,8 +1361,8 @@ function calc_bearing(lat1, long1, lat2, long2)
 					brng=3.14/2
 				}
 			}
-		console.log("bearing calc: "+brng+" / "+(brng*360/6.28)+" = "+ ( (brng*360/6.28+360) % 360 ) + " y:"+y+" x:"+x);
-		return (brng*360/6.28+360) % 360;
+		console.log("bearing calc: "+brng+" / "+(brng*360/6.28)+" = "+ ( (brng*360/6.28+270) % 360 ) + " y:"+y+" x:"+x);
+		return (brng*360/6.28+270) % 360;
 		}
 	else
 		{
