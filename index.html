@@ -166,7 +166,7 @@ function onDeviceReady()
 //	document.addEventListener("volumedownbutton", onVolumeDown, false);
 //	document.addEventListener("volumeupbutton", onVolumeUp, false);
 
-
+	window.addEventListener("unload", myunload()); 
 	window.addEventListener('orientationchange', doOnOrientationChange);
 	console.log("device ready, getting position");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy: true,  maximumAge:0});
@@ -190,6 +190,20 @@ function onDeviceReady()
 	}
 // ------------------------
 
+function myunload()
+	{
+	 if (watchID2) 
+		{
+        navigator.compass.clearWatch(watchID2);
+        watchID2 = null;
+        }
+
+	if (watchID) 
+		{
+		navigator.geolocation.clearWatch(watchID)
+		watchID = null;
+		}
+	}
 function onCompassSuccess(heading) 
 	{  
 	console.log(heading);
