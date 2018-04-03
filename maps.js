@@ -195,7 +195,7 @@ function getPosition(loc) {
         lng: loc.lng()
     }
 }
-
+var dirsetmap=0;
 function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
     var start = from_loc;
     var end = to_loc;
@@ -213,8 +213,9 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
           //  addMarker(startMarker, mymap, getPosition(route.start_location), mymapgetBounds());
            // addMarker(endMarker, mymap, getPosition(route.end_location), mymapgetBounds());
             directionsDisplay.setDirections(response);
+			if (dirsetmap==0)
+				{directionsDisplay.setMap(mymap); dirsetmap=1;}
 
-            directionsDisplay.setMap(mymap);
         } else {
         //    addMarkers(mymap, [from_loc, to_loc], mymapgetBounds());
         }
