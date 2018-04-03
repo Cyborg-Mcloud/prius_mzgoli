@@ -199,13 +199,14 @@ function getPosition(loc) {
 function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
     var start = from_loc;
     var end = to_loc;
-    var request = {
+	last_route=Date.now()
+	var request = {
         origin: start,
         destination: end,
         travelMode: google.maps.TravelMode.DRIVING
     };
 
-	last_route=Date.now()
+
     directionsService.route(request, function (response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             var route = response.routes[0].legs[0];
@@ -215,7 +216,7 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
 
             directionsDisplay.setMap(mymap);
         } else {
-            addMarkers(mymap, [from_loc, to_loc], mymapgetBounds());
+        //    addMarkers(mymap, [from_loc, to_loc], mymapgetBounds());
         }
     });
 }
@@ -232,7 +233,7 @@ function addMarker(marker, map, position) {
     bounds.extend(position);
     marker.setPosition(position);
     marker.setMap(map);
-    mymapfitBounds(bounds);
+ //   mymapfitBounds(bounds);
 }
 
 function addAndGetMarker(map, position, bounds, label, icon) 
