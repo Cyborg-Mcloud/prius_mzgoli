@@ -175,7 +175,7 @@ function onDeviceReady()
 	document.addEventListener("resume", onResume, false);
 	window.addEventListener("deviceorientation", handleOrientation, true);
 
-	 navigator.compass.getCurrentHeading(onCompassSuccess, function (compassError) { alert('Compass error: ' + compassError.code); })
+	 navigator.compass.getCurrentHeading(onCompassSuccess, function (compassError) { console.log('Compass error: ' + compassError.code); })
 	var moptions = { frequency: 1000 };
 	watchID2 = navigator.compass.watchHeading(onCompassSuccess, onError, moptions);
 	
@@ -417,7 +417,7 @@ function update_data()
 					var metrebi_real=parseInt(metrebi*1.1*10)/10;
 
 					document.getElementById("meters_txt").innerHTML=metrebi+" კმ / "+metrebi_real+" კმ";
-					document.getElementById("price_txt").innerHTML=(sit_price+parseInt(metrebi*kmprice*100)/100 ) +" ლარი";
+					document.getElementById("price_txt").innerHTML=(sit_price+parseInt(metrebi_real*kmprice*100)/100 ) +" ლარი";
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 				//	call_dest_addr=b[8];
