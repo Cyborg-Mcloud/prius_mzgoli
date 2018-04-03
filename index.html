@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+g<!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Security-Policy"
       content="img-src * 'self' data:; default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com; font-src 'self'  https://fonts.googleapis.com;">
@@ -249,6 +249,8 @@ var kmprice=0.75;
 
 var call_tel="";
 var call_meters=0;
+var last_route=0;
+var this_time=0;
 function update_data()
 	{		
 	if(gamehttp.readyState == 4)
@@ -256,6 +258,8 @@ function update_data()
 		mr=gamehttp.responseText;
 		if (mr!="")
 			{
+			var nd = new Date;
+			this_time=nd.now();
 			console.log("-- data received from server: "+mr);
 			if (mr=="register")		
 				{
@@ -290,12 +294,12 @@ function update_data()
 					draw_markers();
 					set_status(101);
 					ertxelmainc=1;
-					if (call_dest_lat>30)
+					if (call_dest_lat>30 && (this_time-last_route)>30)
 						{
 						var startpos = {lat: calllat, lng: calllong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
 						calcRoute(startpos, endpos, dirService, dirRender);
-
+						
 						myself=0;
 						}
 					}
@@ -319,12 +323,13 @@ function update_data()
 
 
 					ertxelmainc=1;
-					if (call_dest_lat>30)
+					if (calllat>30 && (this_time-last_route)>30)
 						{
-						var startpos = {lat: calllat, lng: calllong};
-						var endpos = {lat: call_dest_lat, lng: call_dest_long};
-						//calcRoute(startpos, endpos, dirService, dirRender);
+						var startpos = {lat: MyLat, lng: MyLong};
+						var endpos = {lat: calllat, lng: calllong};
+						calcRoute(startpos, endpos, dirService, dirRender);
 						}
+
 					if (callid!=curid && myself==0)
 						{
 						setme();
@@ -353,11 +358,11 @@ function update_data()
 				//	call_dest_addr=b[8];
 				
 					ertxelmainc=1;
-					if (call_dest_lat>30)
+					if (call_dest_lat>30 && (this_time-last_route)>30)
 						{
 						var startpos = {lat: calllat, lng: calllong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
-						//calcRoute(startpos, endpos, dirService, dirRender);
+						calcRoute(startpos, endpos, dirService, dirRender);
 						}
 					draw_markers();
 					set_status(3);
@@ -384,18 +389,18 @@ function update_data()
 					//call_dest_addr=b[8];
 					
 					ertxelmainc=1;
-					if (call_dest_lat>30)
+					if (call_dest_lat>30 && (this_time-last_route)>30)
 						{
-						var startpos = {lat: calllat, lng: calllong};
+						var startpos = {lat: MyLat, lng: MyLong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
-					//	calcRoute(startpos, endpos, dirService, dirRender);
+						calcRoute(startpos, endpos, dirService, dirRender);
 						}
 					draw_markers();
 					set_status(4);
 					}
 				else if (a[0]=="moving")
 					{
-						callconfirming=0;
+					callconfirming=0;
 					document.getElementById("client_center").style.display="none";
 
 					b=a[1].split(";");
@@ -407,18 +412,22 @@ function update_data()
 					txt_addr=b[3];
 					call_meters=b[5];
 					call_tel=b[4];
-					document.getElementById("meters_txt").innerHTML=parseInt(10*call_meters/1000)/10+" კმ";
-					document.getElementById("price_txt").innerHTML=(sit_price+parseInt((call_meters/1000)*kmprice*100)/100 ) +" ლარი";
+
+					var metrebi=parseInt(10*call_meters/1000)/10;
+					var metrebi_real=parseInt(metrebi*1.1*10)/10;
+
+					document.getElementById("meters_txt").innerHTML=metrebi+" კმ / "+metrebi_real+" კმ";
+					document.getElementById("price_txt").innerHTML=(sit_price+parseInt(metrebi*kmprice*100)/100 ) +" ლარი";
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 				//	call_dest_addr=b[8];
 					
 					ertxelmainc=1;
-					if (call_dest_lat>30)
+					if (call_dest_lat>30 && (this_time-last_route)>30)
 						{
-						var startpos = {lat: calllat, lng: calllong};
+						var startpos = {lat: MyLat, lng: MyLong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
-						//calcRoute(startpos, endpos, dirService, dirRender);
+						calcRoute(startpos, endpos, dirService, dirRender);
 						}
 					if (callid!=curid && myself==0) {setme();}
 					draw_markers();

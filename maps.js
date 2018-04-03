@@ -204,6 +204,8 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
         destination: end,
         travelMode: google.maps.TravelMode.DRIVING
     };
+	var nd = new Date;
+	last_route=nd.now();
     directionsService.route(request, function (response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             var route = response.routes[0].legs[0];
