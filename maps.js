@@ -252,7 +252,7 @@ function addAndGetMarker(map, position, bounds, label, icon)
         mymapsetOptions({zoom: mymapzoom + 2, center: position});
     });
     // Automatically center the map fitting all markers on the screen
-    mymapfitBounds(bounds);
+   // mymapfitBounds(bounds);
 
 }
 
