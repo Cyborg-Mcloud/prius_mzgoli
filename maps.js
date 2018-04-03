@@ -214,7 +214,13 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
            // addMarker(endMarker, mymap, getPosition(route.end_location), mymapgetBounds());
             directionsDisplay.setDirections(response);
 			if (dirsetmap==0)
-				{directionsDisplay.setMap(mymap); dirsetmap=1;}
+				{directionsDisplay.setMap(mymap); dirsetmap=1; 
+				
+				}
+			if (myself==1)
+				{
+				mymap.panTo(positionMarker.getPosition());
+				}
 
         } else {
         //    addMarkers(mymap, [from_loc, to_loc], mymapgetBounds());

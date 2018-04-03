@@ -360,8 +360,8 @@ function update_data()
 					ertxelmainc=1;
 					if (call_dest_lat>30 && (this_time-last_route)>30)
 						{
-						var startpos = {lat: calllat, lng: calllong};
-						var endpos = {lat: call_dest_lat, lng: call_dest_long};
+						var startpos = {lat: MyLat, lng: MyLong};
+						var endpos = {lat: calllat, lng: calllong};
 						calcRoute(startpos, endpos, dirService, dirRender);
 						}
 					draw_markers();
