@@ -298,9 +298,10 @@ function update_data()
 						{
 						var startpos = {lat: calllat, lng: calllong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
+						myself=0;
 						calcRoute(startpos, endpos, dirService, dirRender);
 						
-						myself=0;
+
 						}
 					}
 				else if (a[0]=="yourcall")
@@ -323,7 +324,7 @@ function update_data()
 
 
 					ertxelmainc=1;
-					if (calllat>30 && (this_time-last_route)>30)
+					if (calllat>30 && (this_time-last_route)>30 && (myself==0 || mystatus!=1))
 						{
 						var startpos = {lat: MyLat, lng: MyLong};
 						var endpos = {lat: calllat, lng: calllong};
@@ -358,7 +359,7 @@ function update_data()
 				//	call_dest_addr=b[8];
 				
 					ertxelmainc=1;
-					if (call_dest_lat>30 && (this_time-last_route)>30)
+					if (call_dest_lat>30 && (this_time-last_route)>30  && (myself==0 || mystatus!=3))
 						{
 						var startpos = {lat: MyLat, lng: MyLong};
 						var endpos = {lat: calllat, lng: calllong};
@@ -389,7 +390,7 @@ function update_data()
 					//call_dest_addr=b[8];
 					
 					ertxelmainc=1;
-					if (call_dest_lat>30 && (this_time-last_route)>30)
+					if (call_dest_lat>30 && (this_time-last_route)>30  && (myself==0 || mystatus!=4))
 						{
 						var startpos = {lat: MyLat, lng: MyLong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
@@ -423,7 +424,7 @@ function update_data()
 				//	call_dest_addr=b[8];
 					
 					ertxelmainc=1;
-					if (call_dest_lat>30 && (this_time-last_route)>30)
+					if (call_dest_lat>30 && (this_time-last_route)>30 && (myself==0 || mystatus!=5))
 						{
 						var startpos = {lat: MyLat, lng: MyLong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
