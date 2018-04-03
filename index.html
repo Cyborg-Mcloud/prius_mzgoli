@@ -258,8 +258,8 @@ function update_data()
 		mr=gamehttp.responseText;
 		if (mr!="")
 			{
-			var nd = new Date;
-			this_time=nd.now();
+
+			this_time=Date.now()
 			console.log("-- data received from server: "+mr);
 			if (mr=="register")		
 				{
