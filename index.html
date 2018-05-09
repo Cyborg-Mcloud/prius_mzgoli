@@ -415,10 +415,11 @@ function update_data()
 					call_tel=b[4];
 
 					var metrebi=parseInt(10*call_meters/1000)/10;
-					var metrebi_real=parseInt(metrebi*1.1*10)/10;
+					var metrebi_real=parseInt(metrebi*1.12*100)/100;
+					var	tanxa=datvale_pussy(metrebi_real);
 
 					document.getElementById("meters_txt").innerHTML=metrebi+" კმ / "+metrebi_real+" კმ";
-					document.getElementById("price_txt").innerHTML=(sit_price+parseInt(metrebi_real*kmprice*100)/100 ) +" ლარი";
+					document.getElementById("price_txt").innerHTML=tanxa +" ლარი";
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 				//	call_dest_addr=b[8];
@@ -882,7 +883,13 @@ function userpay(pmethod)
 		{
 		//tanxa=document.getElementById("mytanxa").value;
 		//document.getElementById("mytanxa").value="";
-		tanxa=1+parseInt((call_meters/1000)*0.75*100)/100;
+
+		var metrebi=parseInt((call_meters/1000)*100)/100;
+		var metrebi_real=parseInt(metrebi*1.12*100)/100;
+		var	tanxa=datvale_pussy(metrebi_real);
+
+
+//		tanxa=1+parseInt((call_meters/1000)*0.75*100)/100;
 		url="http://taxiprius.com.ge/pay.php?uname="+MyUser+"&pass="+MyPass+"&id="+callid+"&pmethod="+pmethod+"&amount="+tanxa;
 			
 		console.log("usermet upload: "+url);
