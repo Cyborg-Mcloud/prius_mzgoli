@@ -796,7 +796,7 @@ function doOnOrientationChange()
 	<div id='infodiv' style='float:right; width:250px; color:Black; z-index:212;'></div>
 </div>-->
 		<!-- MAIN MAP width:365px; height:600px;  -->
-	<div id='charcho' style='position:absolute; left:1px; top:70px; width:100%; height:100%;z-index:1;' >
+	<div id='charcho' style='position:absolute; left:1px; top:110px; width:100%; height:100%;z-index:1;' >
 		<div id='mainw' style='position:absolute; left:0px; top:0px; height:100%; width:100%; z-index:2;' >
 			<div id="gmap"  style='position:absolute; left:0px; top:0px; height:100%; width:100%; display:block;'></div>
 		</div>
@@ -825,7 +825,7 @@ function doOnOrientationChange()
     <Center>ჩართეთ ინტერნეტ კავშირი</center>
   </div>
 
-		<div id="bottom_menu" style='width:100%; position:fixed; top:0px; padding-top:5px; left:0px; height:120px; padding-left:20px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.5; -khtml-opacity: 0.5;  opacity: 0.5; width:100%; text-align:left;'>
+		<div id="bottom_menu" style='width:100%; position:fixed; top:0px; padding-top:5px; left:0px; height:120px; padding-left:20px; z-index:251; background-color:#3f3f3f; width:100%; text-align:left; background-color:rgba(0, 0, 0, 0.5);'><!-- filter: alpha(opacity=90);	-moz-opacity: 0.5; -khtml-opacity: 0.5;  opacity: 0.5;-->
 			<Br>
 			<div style=' text-align:left; font-size:18px; font-weight:Bold; ' id='qucha_txt'></div>
 
@@ -873,7 +873,7 @@ function doOnOrientationChange()
 
 			</div>
 
-			<div id='delivered_div' style='position:fixed; bottom:200px; left:0px; height:100px;background-color:white; width:100%; display:none; color:black;'>
+			<div id='delivered_div' style='position:fixed; bottom:200px; left:0px; height:120px;background-color:white; width:100%; display:none; color:black;'>
 			<Br>
 
 				<table width=100%>
@@ -882,7 +882,7 @@ function doOnOrientationChange()
 				</td>
 				</tr>
 				<Tr><td style=' font-size:24px;' align=center>
-				მანძილი: <span name='meters_deliv_txt' id='meters_deliv_txt' style=' font-size:24px; color:black;'></span> თანხა: <span style=' font-size:24px; color:black;'  name='price_deliv_txt' id='price_deliv_txt'></span> 
+				მანძ.: <span name='meters_deliv_txt' id='meters_deliv_txt' style=' font-size:24px; color:black;'></span> თანხა: <span style=' font-size:24px; color:black;'  name='price_deliv_txt' id='price_deliv_txt'></span> 
 				</td></tr>
 				</table>
 				
@@ -1060,8 +1060,8 @@ function set_status(newstat)
 		if (ertxelmainc==1)
 			{	
 			document.getElementById("bottom_menu").style.height='90px';
-			document.getElementById("bottom_menu").style.opacity = "0.9";
-			document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
+//			document.getElementById("bottom_menu").style.opacity = "0.9";
+//			document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
 			
 			document.getElementById("no_call_screen").style.display="inline";
 			document.getElementById("new_call_screen").style.display="none";
@@ -1079,8 +1079,8 @@ function set_status(newstat)
 		{
 		curdisp=101;
 		document.getElementById("bottom_menu").style.height='100%';
-		document.getElementById("bottom_menu").style.opacity = "0.4";
-			document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=40)';
+//		document.getElementById("bottom_menu").style.opacity = "0.4";
+//			document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=40)';
 			
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="inline";
@@ -1096,8 +1096,8 @@ function set_status(newstat)
 	else if (newstat==1 && curdisp!=1)
 		{
 		document.getElementById("bottom_menu").style.height='180px';
-		document.getElementById("bottom_menu").style.opacity = "0.9";
-		document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
+//		document.getElementById("bottom_menu").style.opacity = "0.9";
+//		document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
 			
 		myaudio.pause();
 		myaudio.currentTime = 0;
@@ -1118,8 +1118,8 @@ function set_status(newstat)
 		myaudio.currentTime = 0;
 		curdisp=3;
 		document.getElementById("bottom_menu").style.height='180px';
-		document.getElementById("bottom_menu").style.opacity = "0.9";
-		document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
+//		document.getElementById("bottom_menu").style.opacity = "0.9";
+//		document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
 			
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
@@ -1136,8 +1136,8 @@ function set_status(newstat)
 		myaudio.currentTime = 0;
 		curdisp=4;
 		document.getElementById("bottom_menu").style.height='180px';
-		document.getElementById("bottom_menu").style.opacity = "0.9";
-		document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
+//		document.getElementById("bottom_menu").style.opacity = "0.9";
+//		document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
 			
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
@@ -1154,8 +1154,8 @@ function set_status(newstat)
 		myaudio.currentTime = 0;
 		curdisp=5;
 		document.getElementById("bottom_menu").style.height='180px';
-		document.getElementById("bottom_menu").style.opacity = "0.9";
-		document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
+//		document.getElementById("bottom_menu").style.opacity = "0.9";
+//		document.getElementById("bottom_menu").style.filter  = 'alpha(opacity=90)';
 			
 		document.getElementById("no_call_screen").style.display="none";
 		document.getElementById("new_call_screen").style.display="none";
