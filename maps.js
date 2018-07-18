@@ -87,23 +87,15 @@ console.log("mere");
         optimized: false
     });
 
-		
-
-
     tempMarker = new google.maps.Marker();
 	console.log("markers placed");
 
-
-   dirRender = new google.maps.DirectionsRenderer({suppressMarkers: true});
-    dirService = new google.maps.DirectionsService();
+	dirRender = new google.maps.DirectionsRenderer({suppressMarkers: true});
+	dirService = new google.maps.DirectionsService();
 
     var strictBounds = document.getElementById('strict-bounds-selector');
 
-   
-
-}
-
-
+	}
 
 function handleOrientation(event) 
 	{
@@ -136,14 +128,14 @@ function rotate_marker(kutxe)
 		}
 	//document.getElementById("stat_but").innerHTML=kutxe;
 	console.log("rotate marker: "+kutxe+" Myhead=" +MyHead);
-symicon={
-	path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-	fillColor: '#000000',
-	strokeColor: '#000000',
-	strokeWeight: 5,
-	scale: 10,
-	rotation: kutxe
-	}
+	symicon={
+		path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+		fillColor: '#000000',
+		strokeColor: '#000000',
+		strokeWeight: 5,
+		scale: 10,
+		rotation: kutxe
+		}
 	positionMarker.setIcon(symicon);
 	}
 function geocodeOnClick(e) 
@@ -196,7 +188,7 @@ function getPosition(loc) {
     }
 }
 var dirsetmap=0;
-function calcRoute(from_loc, to_loc, directionsService, directionsDisplay, jumpto) 
+function calcRoute(from_loc, to_loc, directionsService, directionsDisplay, jumpto=0) 
 	{
     var start = from_loc;
     var end = to_loc;
@@ -205,7 +197,7 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay, jumpt
         origin: start,
         destination: end,
         travelMode: google.maps.TravelMode.DRIVING
-    };
+		};
 
 
     directionsService.route(request, function (response, status) 
@@ -215,6 +207,11 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay, jumpt
             var route = response.routes[0].legs[0];
           //  addMarker(startMarker, mymap, getPosition(route.start_location), mymapgetBounds());
            // addMarker(endMarker, mymap, getPosition(route.end_location), mymapgetBounds());
+			if (jumpto==0)
+				{
+	   			directionsDisplay.setOptions({ preserveViewport: true });
+				}
+
             directionsDisplay.setDirections(response);
 			if (dirsetmap==0)
 				{
@@ -224,7 +221,7 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay, jumpt
 
 			if (myself==1)
 				{
-				mymap.panTo(positionMarker.getPosition());
+			//	mymap.panTo(positionMarker.getPosition());
 				}
 
         } else {
@@ -237,33 +234,33 @@ function addMarkers(map, markers, bounds)
 	{
     // Loop through our array of markers & place each one on the map
 
-    addAndGetMarker(map, markers[0], bounds, 'A');
-    addAndGetMarker(map, markers[1], bounds, 'B');
+   // addAndGetMarker(map, markers[0], bounds, 'A');
+    //addAndGetMarker(map, markers[1], bounds, 'B');
 	}
 
 function addMarker(marker, map, position) 
 	{
-    var bounds = mymapgetBounds();
-    bounds.extend(position);
-    marker.setPosition(position);
-    marker.setMap(map);
+   // var bounds = mymapgetBounds();
+    //bounds.extend(position);
+    //marker.setPosition(position);
+    //marker.setMap(map);
  //   mymapfitBounds(bounds);
 	}
 
 function addAndGetMarker(map, position, bounds, label, icon) 
 	{
-    console.log("addAndGetMarker: "+position);
-    bounds.extend(position);
-    var marker = new google.maps.Marker({
-        position: {lat: position['lat'], lng: position['lng']},
-        map: map
-    });
-    if (label !== undefined) marker.setLabel(label);
-    if (icon !== undefined) marker.setIcon(icon);
-    console.log("addAndGetMarker: "+marker.position);
-    marker.addListener('click', function () {
-        mymapsetOptions({zoom: mymapzoom + 2, center: position});
-    });
+//    console.log("addAndGetMarker: "+position);
+//    bounds.extend(position);
+//    var marker = new google.maps.Marker({
+//        position: {lat: position['lat'], lng: position['lng']},
+//        map: map
+//    });
+//    if (label !== undefined) marker.setLabel(label);
+//    if (icon !== undefined) marker.setIcon(icon);
+//    console.log("addAndGetMarker: "+marker.position);
+//    marker.addListener('click', function () {
+//        mymapsetOptions({zoom: mymapzoom + 2, center: position});
+//    });
     // Automatically center the map fitting all markers on the screen
    // mymapfitBounds(bounds);
 

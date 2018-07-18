@@ -306,7 +306,7 @@ function update_data()
 						var startpos = {lat: calllat, lng: calllong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
 						myself=0;
-						calcRoute(startpos, endpos, dirService, dirRender);
+						calcRoute(startpos, endpos, dirService, dirRender,1);
 						
 
 						}
@@ -796,15 +796,12 @@ function doOnOrientationChange()
 	<div id='infodiv' style='float:right; width:250px; color:Black; z-index:212;'></div>
 </div>-->
 		<!-- MAIN MAP width:365px; height:600px;  -->
-<div id='charcho' style='position:absolute; left:1px; top:1px; width:100%; height:100%;z-index:1;' >
+	<div id='charcho' style='position:absolute; left:1px; top:70px; width:100%; height:100%;z-index:1;' >
 		<div id='mainw' style='position:absolute; left:0px; top:0px; height:100%; width:100%; z-index:2;' >
-			
-
-			  <div id="gmap"  style='position:absolute; left:0px; top:0px; height:100%; width:100%; display:block;'></div>
+			<div id="gmap"  style='position:absolute; left:0px; top:0px; height:100%; width:100%; display:block;'></div>
 		</div>
-		 <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFY47FE__z9AvRLBoYG0T2XeOTiHdwzOQ&callback=initMap&language=ka&libraries=places"></script>
-</div>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFY47FE__z9AvRLBoYG0T2XeOTiHdwzOQ&callback=initMap&language=ka&libraries=places"></script>
+	</div>
 	
 
 			
@@ -828,9 +825,9 @@ function doOnOrientationChange()
     <Center>ჩართეთ ინტერნეტ კავშირი</center>
   </div>
 
-<div id="bottom_menu" style='width:100%; position:fixed; top:0px; padding-top:10px; left:0px; height:120px; padding-left:20px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.5; -khtml-opacity: 0.5;  opacity: 0.5; width:100%; text-align:left;'>
-		<Br>
-		<div style=' text-align:left; font-size:26px; font-weight:Bold; ' id='qucha_txt'></div>
+		<div id="bottom_menu" style='width:100%; position:fixed; top:0px; padding-top:5px; left:0px; height:120px; padding-left:20px; z-index:251; background-color:#3f3f3f; filter: alpha(opacity=90);	-moz-opacity: 0.5; -khtml-opacity: 0.5;  opacity: 0.5; width:100%; text-align:left;'>
+			<Br>
+			<div style=' text-align:left; font-size:18px; font-weight:Bold; ' id='qucha_txt'></div>
 
 			<div id='no_call_screen' style='display:inline;'>
 				<center>
