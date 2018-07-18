@@ -29,7 +29,9 @@ var myid=0;
 
 var last_lat=41.7089554;
 var last_long=44.7689831;
-
+var cur_price=0;
+var appr_price=0;
+var depoz=0;
 
 var wlon=44.7689831;
 var wlat=41.7089554;
@@ -291,10 +293,15 @@ function update_data()
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
 					call_dest_addr=b[8];
+
+					cur_price=b[9];
+					appr_price=parseInt(b[10]);
+					depoz=parseFloat(b[11]);
+
 					draw_markers();
 					set_status(101);
 					ertxelmainc=1;
-					if (call_dest_lat>30 && (this_time-last_route)>30)
+					if (call_dest_lat>30 && (this_time-last_route)>10)
 						{
 						var startpos = {lat: calllat, lng: calllong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
@@ -322,9 +329,13 @@ function update_data()
 					call_dest_long=parseFloat(b[7]);
 					call_dest_addr=b[8];
 
+					cur_price=b[9];
+					appr_price=parseInt(b[10]);
+					depoz=parseFloat(b[11]);
+
 
 					ertxelmainc=1;
-					if (calllat>30 && (this_time-last_route)>30 && (myself==0 || mystatus!=1))
+					if (calllat>30 && (this_time-last_route)>10 && (myself==0 || mystatus!=1))
 						{
 						var startpos = {lat: MyLat, lng: MyLong};
 						var endpos = {lat: calllat, lng: calllong};
@@ -356,10 +367,15 @@ function update_data()
 					call_meters=b[5];
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
-				//	call_dest_addr=b[8];
+					call_dest_addr=b[8];
+
+					cur_price=b[9];
+					appr_price=parseInt(b[10]);
+					depoz=parseFloat(b[11]);
+
 				
 					ertxelmainc=1;
-					if (call_dest_lat>30 && (this_time-last_route)>30  && (myself==0 || mystatus!=3))
+					if (call_dest_lat>30 && (this_time-last_route)>10) //  && (myself==0 || mystatus!=3))
 						{
 						var startpos = {lat: MyLat, lng: MyLong};
 						var endpos = {lat: calllat, lng: calllong};
@@ -387,10 +403,15 @@ function update_data()
 
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
-					//call_dest_addr=b[8];
-					
+					call_dest_addr=b[8];
+
+					cur_price=b[9];
+					appr_price=parseInt(b[10]);
+					depoz=parseFloat(b[11]);
+
+
 					ertxelmainc=1;
-					if (call_dest_lat>30 && (this_time-last_route)>30  && (myself==0 || mystatus!=4))
+					if (call_dest_lat>30 && (this_time-last_route)>10) //  && (myself==0 || mystatus!=4))
 						{
 						var startpos = {lat: MyLat, lng: MyLong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
@@ -418,25 +439,66 @@ function update_data()
 					var metrebi_real=parseInt(metrebi*1.12*100)/100;
 					var	tanxa=datvale_pussy(metrebi_real);
 
-					document.getElementById("meters_txt").innerHTML=metrebi+" კმ / "+metrebi_real+" კმ";
-					document.getElementById("price_txt").innerHTML=tanxa +" ლარი";
+					
 					call_dest_lat=parseFloat(b[6]);
 					call_dest_long=parseFloat(b[7]);
-				//	call_dest_addr=b[8];
-					
+					call_dest_addr=b[8];
+
+					cur_price=b[9];
+					appr_price=parseInt(b[10]);
+					depoz=parseFloat(b[11]);
+					document.getElementById("meters_txt").innerHTML=metrebi_real+" კმ";
+					document.getElementById("price_txt").innerHTML=cur_price +" ლარი";
+
 					ertxelmainc=1;
-					if (call_dest_lat>30 && (this_time-last_route)>30 && (myself==0 || mystatus!=5))
+					if (call_dest_lat>30 && (this_time-last_route)>10) // && (myself==0 || mystatus!=5))
 						{
 						var startpos = {lat: MyLat, lng: MyLong};
 						var endpos = {lat: call_dest_lat, lng: call_dest_long};
 						calcRoute(startpos, endpos, dirService, dirRender);
 						}
-					if (callid!=curid && myself==0) {setme();}
+					if (callid!=curid && myself==0)
+						{
+						//setme();
+						}
 					draw_markers();
 					set_status(5);
 					}
+				else if (a[0]=="delivered")
+					{
+					callconfirming=0;
+					b=a[1].split(";");
+					curid=b[0];
+
+					callid=curid;
+					calllat=parseFloat(b[1]);
+					calllong=parseFloat(b[2]);	
+					txt_addr=b[3];
+					call_meters=b[5];
+					call_tel=b[4];
+
+					var metrebi=parseInt(10*call_meters/1000)/10;
+					var metrebi_real=parseInt(metrebi*1.12*100)/100;
+					var	tanxa=datvale_pussy(metrebi_real);
+
+					
+					call_dest_lat=parseFloat(b[6]);
+					call_dest_long=parseFloat(b[7]);
+					call_dest_addr=b[8];
+
+					cur_price=b[9];
+					appr_price=parseInt(b[10]);
+					depoz=parseFloat(b[11]);
+					document.getElementById("meters_deliv_txt").innerHTML=metrebi_real+" კმ";
+					document.getElementById("price_deliv_txt").innerHTML=cur_price +" ლარი";
+					document.getElementById("delivered_div").style.display="block;
+
+					ertxelmainc=1;
+
+					}
 				else
 					{
+					depoz=parseFloat(a[1]);
 					callconfirming=0;
 					document.getElementById("client_center").style.display="none";
 					if (curdisp!=0)	{set_status(0);}
@@ -450,6 +512,10 @@ function update_data()
 					call_dest_lat=0;
 					call_dest_long=0;
 					call_dest_addr="";
+
+					cur_price=0;
+					appr_price=0;
+
 					startMarker.setMap(null);
 					endMarker.setMap(null);
 					dirRender.setMap(null);
@@ -805,7 +871,23 @@ function doOnOrientationChange()
 				<Tr><td style=' font-size:24px;' align=center>
 				მანძილი: <span name='meters_txt' id='meters_txt' style=' font-size:24px; color:black;'></span> თანხა: <span style=' font-size:24px; color:black;'  name='price_txt' id='price_txt'></span> <!--<input type='number' id='mytanxa' size=4 style=' font-size:16px;'>-->
 				</td></tr>
-</table>
+				</table>
+				
+
+			</div>
+
+			<div id='delivered_div' style='position:fixed; bottom:200px; left:0px; height:100px;background-color:white; width:100%; display:none; color:black;'>
+			<Br>
+
+				<table width=100%>
+				<tr><td align=center>
+				<a href='Javascript: close_deliver();' style=' border:1px solid gray; padding:5px; display:block; background-color:green; color:white; font-size:24px;'>დახურვა</a>
+				</td>
+				</tr>
+				<Tr><td style=' font-size:24px;' align=center>
+				მანძილი: <span name='meters_deliv_txt' id='meters_deliv_txt' style=' font-size:24px; color:black;'></span> თანხა: <span style=' font-size:24px; color:black;'  name='price_deliv_txt' id='price_deliv_txt'></span> 
+				</td></tr>
+				</table>
 				
 
 			</div>
@@ -945,6 +1027,11 @@ function call_confirm()
 		gamehttp.open('GET',url,true);
 		gamehttp.send(null);
 		}
+	}
+
+function close_deliver()
+	{
+	document.getElementById("delivered_div").style.display="none;
 	}
 
 function status_change(newstat)

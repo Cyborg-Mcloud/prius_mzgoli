@@ -196,7 +196,8 @@ function getPosition(loc) {
     }
 }
 var dirsetmap=0;
-function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
+function calcRoute(from_loc, to_loc, directionsService, directionsDisplay, jumpto) 
+	{
     var start = from_loc;
     var end = to_loc;
 	last_route=Date.now()
@@ -207,16 +208,20 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
     };
 
 
-    directionsService.route(request, function (response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
+    directionsService.route(request, function (response, status) 
+		{
+        if (status === google.maps.DirectionsStatus.OK) 
+			{
             var route = response.routes[0].legs[0];
           //  addMarker(startMarker, mymap, getPosition(route.start_location), mymapgetBounds());
            // addMarker(endMarker, mymap, getPosition(route.end_location), mymapgetBounds());
             directionsDisplay.setDirections(response);
 			if (dirsetmap==0)
-				{directionsDisplay.setMap(mymap); dirsetmap=1; 
-				
+				{
+				directionsDisplay.setMap(mymap); 
+				dirsetmap=1; 
 				}
+
 			if (myself==1)
 				{
 				mymap.panTo(positionMarker.getPosition());
@@ -228,20 +233,22 @@ function calcRoute(from_loc, to_loc, directionsService, directionsDisplay) {
     });
 }
 
-function addMarkers(map, markers, bounds) {
+function addMarkers(map, markers, bounds) 
+	{
     // Loop through our array of markers & place each one on the map
 
     addAndGetMarker(map, markers[0], bounds, 'A');
     addAndGetMarker(map, markers[1], bounds, 'B');
-}
+	}
 
-function addMarker(marker, map, position) {
+function addMarker(marker, map, position) 
+	{
     var bounds = mymapgetBounds();
     bounds.extend(position);
     marker.setPosition(position);
     marker.setMap(map);
  //   mymapfitBounds(bounds);
-}
+	}
 
 function addAndGetMarker(map, position, bounds, label, icon) 
 	{
