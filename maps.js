@@ -188,7 +188,7 @@ function getPosition(loc) {
     }
 }
 var dirsetmap=0;
-function calcRoute(from_loc, to_loc, directionsService, directionsDisplay, jumpto=0) 
+function calcRoute(from_loc, to_loc, directionsService, directionsDisplay, jumpto) 
 	{
     var start = from_loc;
     var end = to_loc;
